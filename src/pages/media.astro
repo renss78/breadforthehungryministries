@@ -8,16 +8,16 @@ import CTA from '../components/CTA.astro';
 const all = import.meta.glob<{ default: ImageMetadata }>('../assets/images/*.{png,jpg,jpeg,webp}', { eager: true });
 const img = (name: string) => all[`../assets/images/${name}`].default;
 
-const ugandaPhotos = ['2025-10-5.png', '2025-10-4.png', '2025-10-3.png', '2025-10-2.png', '2025-10-1.png', '2025-09-6.png', '2025-09-5.png', '2025-09-1748360707052_il570xn.2325703937j008.webp', '2025-09-4.png', '2025-09-3.png', '2025-09-2.png', '2025-09-1.png'];
+const oegandaPhotos = ['2025-10-5.png', '2025-10-4.png', '2025-10-3.png', '2025-10-2.png', '2025-10-1.png', '2025-09-6.png', '2025-09-5.png', '2025-09-1748360707052_il570xn.2325703937j008.webp', '2025-09-4.png', '2025-09-3.png', '2025-09-2.png', '2025-09-1.png'];
 const keniaPhotos = ['2025-10-5.png', '2025-10-4.png', '2025-10-3.png', '2025-10-2.png', '2025-10-1.png', '2025-09-6.png', '2025-09-5.png', '2025-09-1748360707052_il570xn.2325703937j008.webp'];
-const ugandaVideos = ['WhatsApp-Video-2026-01-14-at-22.54.34.mp4', 'WhatsApp-Video-2026-01-14-at-22.53.39.mp4'];
+const oegandaVideos = ['WhatsApp-Video-2026-01-14-at-22.54.34.mp4', 'WhatsApp-Video-2026-01-14-at-22.53.39.mp4'];
 const keniaVideos = ['WhatsApp-Video-2025-11-09-at-15.24.2891.mp4', 'WhatsApp-Video-2025-11-09-at-15.24.28.mp4', 'WhatsApp-Video-2025-11-09-at-15.24.29.mp4', 'WhatsApp-Video-2025-11-09-at-15.24.27.mp4'];
 
 const withFull = async (names: string[]) =>
   Promise.all(names.map(async (n) => ({ src: img(n), full: (await getImage({ src: img(n), width: 1600 })).src })));
 const sections = [
-  { id: 'fotos-oeganda', title: "Foto's Oeganda", photos: await withFull(ugandaPhotos) },
-  { id: 'videos-oeganda', title: "Video's Oeganda", videos: ugandaVideos },
+  { id: 'fotos-oeganda', title: "Foto's Oeganda", photos: await withFull(oegandaPhotos) },
+  { id: 'videos-oeganda', title: "Video's Oeganda", videos: oegandaVideos },
   { id: 'fotos-kenia', title: "Foto's Kenia", photos: await withFull(keniaPhotos) },
   { id: 'videos-kenia', title: "Video's Kenia", videos: keniaVideos },
 ];

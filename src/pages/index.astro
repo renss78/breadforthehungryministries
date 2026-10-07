@@ -8,7 +8,7 @@ import ProjectCard from '../components/ProjectCard.astro';
 import CTA from '../components/CTA.astro';
 import Wave from '../components/Wave.astro';
 import hero from '../assets/images/2025-10-News-Posts-2.png';
-import flagUganda from '../assets/images/2025-09-1748360707052_il570xn.2325703937j008.webp';
+import flagOeganda from '../assets/images/2025-09-1748360707052_il570xn.2325703937j008.webp';
 import flagKenya from '../assets/images/2025-09-kenia.png';
 import team from '../assets/images/hero-sitefile.jpg';
 
@@ -48,7 +48,7 @@ const latest = (await getCollection('news')).sort((a, b) => b.data.date.valueOf(
     <div class="container-page section">
       <h2 id="projecten-titel">Projecten</h2>
       <div class="mt-10 grid gap-6 lg:grid-cols-2">
-        <ProjectCard title="Oeganda" href="/oeganda/" image={flagUganda} imageAlt="Vlag van Oeganda" position="50% 40%">
+        <ProjectCard title="Oeganda" href="/oeganda/" image={flagOeganda} imageAlt="Vlag van Oeganda" position="50% 40%">
           Drie jaar geleden kwamen we in contact met een groepje gelovigen diep in het binnenland van Oost Oeganda. Een plek zonder licht, water en volledig onder de claim van witch craft. Er waren slechts 20 gelovigen die moedeloos en uitgeblust waren en eigenlijk wilde opgeven. De boodschap die Gerard van Amerongen toen bracht deed iets bij de toehoorders en vele omstanders gaven hun leven aan Jezus.
         </ProjectCard>
         {/* NB: tekst hieronder staat zo op de oude site (gaat over Oeganda) — zie MIGRATION_NOTES.md. */}
