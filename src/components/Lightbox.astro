@@ -256,6 +256,7 @@
     if (img.hasAttribute('data-no-zoom')) return;
     img.setAttribute('data-zoomable', '');
     if (!img.closest('a')) {
+      if (!img.alt) img.alt = 'Foto';
       img.setAttribute('role', 'button');
       img.tabIndex = 0;
       img.setAttribute('aria-label', img.alt ? `Vergroot foto: ${img.alt}` : 'Vergroot foto');
