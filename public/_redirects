@@ -29,3 +29,7 @@
 /donation-failed/        /sponsoring/ 301
 /donation-confirmation   /sponsoring/ 301
 /donation-confirmation/  /sponsoring/ 301
+
+# Hernoemd bericht
+/verslag-van-de-afgelopen-dagen    /verslag-van-onze-laatste-missietrip-naar-oeganda/ 301
+/verslag-van-de-afgelopen-dagen/   /verslag-van-onze-laatste-missietrip-naar-oeganda/ 301
