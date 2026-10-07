@@ -15,7 +15,7 @@ import team from '../assets/images/hero-sitefile.jpg';
 const latest = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 4);
 ---
 
-<Layout title="Home" image={hero}>
+<Layout title="Home" seoTitle="Zendingswerk in Oeganda & Kenia | Bread for the Hungry" description="ANBI-stichting voor zendingswerk in Oeganda en Kenia: bijbelscholen, nieuwe gemeenten, Bijbels en waterputten. Steun een student voor €35 per maand." image={hero}>
   <Hero title="Zij hoeven niet weg te gaan, Geef gij hun te eten" eyebrow="Jezus zei:" image={hero} imageAlt="Een grote menigte onder tenten in Oeganda" size="full" position="50% 30%">
     <Fragment slot="title">
       '<span class="whitespace-normal">Zij hoeven niet weg te gaan, Geef gij hun te eten</span>'

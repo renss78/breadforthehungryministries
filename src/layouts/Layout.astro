@@ -4,6 +4,8 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Lightbox from '../components/Lightbox.astro';
 import { site } from '../data/site';
+import { metaDescription } from '../utils/format';
+import { organizationGraph, breadcrumbList, type Crumb } from '../data/schema';
 import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
 import figtreeUrl from '@fontsource-variable/figtree/files/figtree-latin-wght-normal.woff2?url';
@@ -12,6 +14,12 @@ import defaultOg from '../assets/images/2025-10-News-Posts-2.png';
 
 interface Props {
   title: string;
+  /** Full <title> text (max ±60 characters). Defaults to "<title> | Bread for the Hungry". */
+  seoTitle?: string;
+  /** Extra schema.org nodes (e.g. NewsArticle). */
+  jsonLd?: object[];
+  /** Breadcrumb trail after Home. Defaults to the page title. */
+  crumbs?: Crumb[];
   description?: string;
   image?: ImageMetadata;
   type?: 'website' | 'article';
@@ -19,11 +27,16 @@ interface Props {
   noindex?: boolean;
 }
 
-const { title, description = site.description, image = defaultOg, type = 'website', publishedTime, noindex = false } = Astro.props;
-const fullTitle = Astro.url.pathname === '/' ? `${site.name} — Jezus zichtbaar maken in woord en daad` : `${title} | ${site.name}`;
+const { title, seoTitle, jsonLd = [], crumbs, description = site.description, image = defaultOg, type = 'website', publishedTime, noindex = false } = Astro.props;
+const desc = metaDescription(description);
+const isHome = Astro.url.pathname === '/';
+const fullTitle = seoTitle ?? `${title} | ${site.shortName}`;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const og = await getImage({ src: image, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
 const ogUrl = new URL(og.src, site.url).href;
+const trail: Crumb[] = [{ name: 'Home', path: '/' }, ...(crumbs ?? [{ name: title, path: Astro.url.pathname }])];
+const graph = [...(isHome ? organizationGraph() : [breadcrumbList(trail)]), ...jsonLd];
+const verification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 ---
 
 <!doctype html>
@@ -32,29 +45,34 @@ const ogUrl = new URL(og.src, site.url).href;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={desc} />
     <meta name="theme-color" content="#fbf6ec" />
     <link rel="preload" as="font" type="font/woff2" href={figtreeUrl} crossorigin />
     <link rel="preload" as="font" type="font/woff2" href={frauncesUrl} crossorigin />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title={`Nieuws — ${site.name}`} href="/feed.xml" />
+    <link rel="alternate" hreflang="nl-NL" href={canonical} />
+    {verification && <meta name="google-site-verification" content={verification} />}
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    {noindex && <meta name="robots" content="noindex" />}
+    {noindex ? <meta name="robots" content="noindex" /> : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}
 
     <meta property="og:site_name" content={site.name} />
     <meta property="og:locale" content={site.locale} />
     <meta property="og:type" content={type} />
     <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={desc} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
     {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={desc} />
     <meta name="twitter:image" content={ogUrl} />
+    <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })} />
     <slot name="head" />
   </head>
   <body class="min-h-dvh flex flex-col">

@@ -106,6 +106,26 @@ Bij het koppelen van een e-mail-API (bijv. Resend) en Cloudflare Turnstile:
 Zet ze in Cloudflare onder *Settings → Variables and Secrets* (secrets als *Secret*) en lokaal in `.dev.vars`.
 Verruim daarnaast de CSP in `public/_headers` voor Turnstile (`https://challenges.cloudflare.com` bij `script-src`, `frame-src` en `connect-src`).
 
+## Vindbaarheid (SEO)
+
+Wat de site automatisch doet:
+
+- Per pagina een zoekwoordgerichte `<title>` (≤ 60 tekens) en meta description (≤ 155 tekens), `seoTitle`/`description` in de `<Layout>`-aanroep van elke pagina. Nieuwsberichten gebruiken hun eigen titel en een ingekorte samenvatting.
+- Gestructureerde data (JSON-LD): `NGO`/`Organization` (met ANBI-gegevens, werkgebied Oeganda en Kenia, contactgegevens, `DonateAction`) en `WebSite` op de homepage, `BreadcrumbList` op elke pagina en `NewsArticle` bij elk nieuwsbericht (`src/data/schema.ts`).
+- `sitemap-index.xml` (met `lastmod` voor nieuwsberichten), `robots.txt`, canonical-URL's, `hreflang="nl-NL"`, Open Graph/Twitter-kaarten, RSS-feed op `/feed.xml` (oude `/feed/` verwijst hiernaartoe).
+- Snelle pagina's (Lighthouse ≥ 96), semantische koppen, `lang="nl"` en alt-teksten op afbeeldingen.
+
+**Wat jij nog moet doen** (kan ik niet vanuit de code regelen):
+
+1. **Google Search Console**: voeg `https://breadforthehungryministries.nl` toe als *domein*-eigenschap (DNS-verificatie via Cloudflare) of als URL-prefix. Wil je de meta-tag-methode: zet `PUBLIC_GOOGLE_SITE_VERIFICATION=<code>` als build-variabele in Cloudflare Pages en herbouw.
+2. Dien in Search Console `https://breadforthehungryministries.nl/sitemap-index.xml` in. Doe hetzelfde in **Bing Webmaster Tools** (voedt ook DuckDuckGo en Ecosia).
+3. Laat na livegang in Search Console de belangrijkste pagina's (`/`, `/oeganda/`, `/kenia/`, `/sponsoring/`) indexeren (*URL-inspectie → Indexering aanvragen*).
+4. Controleer na livegang de gestructureerde data met <https://search.google.com/test/rich-results> en <https://validator.schema.org>.
+5. Zorg dat `www.breadforthehungryministries.nl` (301) naar het domein zonder `www` verwijst en dat alle oude WordPress-URL's blijven werken (`public/_redirects`).
+6. **Backlinks** zijn voor een kleine stichting de grootste zoekwinst: vraag links aan van bevriende kerken en organisaties, vermeld de site op ANBI/giftenaftrek-overzichten, zendingsplatforms en in sociale profielen, en verwijs vanuit nieuwsbrieven en socials naar de nieuwsberichten.
+7. Publiceer regelmatig nieuwsberichten (dat doen jullie al): verse, inhoudelijke pagina's met zoektermen als "zendingswerk Oeganda", "bijbelschool Kenia" en "opwekking Oeganda" leveren de meeste vindbaarheid op.
+8. Maak (eventueel) een Google Bedrijfsprofiel aan als er een postadres of ontmoetingsplek is.
+
 ## Ontwerp
 
 - Kleuren afgeleid van het logo: leisteen `#2b3a4a`, teal `#0f6b63`/`#10a090`, goud `#c99a4e`, klei `#b4532a` (donatieknop), crème `#fbf6ec`.

@@ -13,8 +13,8 @@
 # WordPress-archieven (categorieën, auteurs, feeds) bestaan niet meer
 /category/*        /nieuws/    301
 /author/*          /nieuws/    301
-/feed              /nieuws/    301
-/feed/             /nieuws/    301
+/feed              /feed.xml   301
+/feed/             /feed.xml   301
 /comments/feed     /nieuws/    301
 /comments/feed/    /nieuws/    301
 

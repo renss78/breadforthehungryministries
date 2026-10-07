@@ -1,5 +1,6 @@
 export const site = {
   name: 'Bread for the Hungry Ministries',
+  shortName: 'Bread for the Hungry',
   url: 'https://breadforthehungryministries.nl',
   description:
     'Bread for the Hungry Ministries zet zich in voor bijbelscholen, seminars en pastorconferenties in Kenia en Oeganda en steunt kansarme gemeenschappen met waterputten en agrarische projecten.',

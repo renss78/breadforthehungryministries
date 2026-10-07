@@ -7,6 +7,9 @@ import CTA from '../components/CTA.astro';
 import Wave from '../components/Wave.astro';
 import NewsCard from '../components/NewsCard.astro';
 import { formatDate } from '../utils/format';
+import { site } from '../data/site';
+import { newsArticle } from '../data/schema';
+import { getImage } from 'astro:assets';
 
 // Nieuwsberichten staan op dezelfde URL's als op de oude WordPress-site (/<slug>/).
 export const getStaticPaths = (async () => {
@@ -20,9 +23,20 @@ export const getStaticPaths = (async () => {
 const { post, related } = Astro.props;
 const { Content } = await render(post);
 const { title, date, cover, coverAlt, excerpt } = post.data;
+const ogImage = await getImage({ src: cover, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
+const articleLd = newsArticle({ title, description: excerpt, path: `/${post.id}/`, image: new URL(ogImage.src, Astro.site).href, published: date });
 ---
 
-<Layout title={title} description={excerpt} image={cover} type="article" publishedTime={date}>
+<Layout
+  title={title}
+  seoTitle={`${title} | ${site.shortName}`}
+  description={excerpt}
+  image={cover}
+  type="article"
+  publishedTime={date}
+  jsonLd={[articleLd]}
+  crumbs={[{ name: 'Nieuws', path: '/nieuws/' }, { name: title, path: `/${post.id}/` }]}
+>
   <article>
     <header class="bg-sand">
       <div class="container-prose pb-10 pt-12 sm:pt-16">
@@ -34,7 +48,7 @@ const { title, date, cover, coverAlt, excerpt } = post.data;
     <div class="container-page -mt-0 pt-8">
       <Image
         src={cover}
-        alt={coverAlt}
+        alt={coverAlt || title}
         widths={[640, 1024, 1400]}
         sizes="(min-width: 1152px) 72rem, 100vw"
         loading="eager"

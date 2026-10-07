@@ -17,7 +17,11 @@ const pageHref = (n: number) => (n === 1 ? '/nieuws/' : `/nieuws/${n}/`);
 const pages = Array.from({ length: page.lastPage }, (_, i) => i + 1);
 ---
 
-<Layout title={title} description="Het laatste nieuws en de nieuwsupdates vanuit Oeganda en Kenia.">
+<Layout
+  title={title}
+  seoTitle={page.currentPage > 1 ? `Nieuws uit Oeganda en Kenia — pagina ${page.currentPage} | Bread for the Hungry` : 'Nieuws uit Oeganda en Kenia | Bread for the Hungry'}
+  description="Het laatste nieuws en de nieuwsupdates van het zendingswerk in Oeganda en Kenia: bekeringen, doopdiensten, bijbelscholen en Bijbeluitdeling."
+>
   <Hero title="Nieuws" eyebrow="Laatste nieuws" />
   <section class="container-page section" aria-labelledby="berichten">
     <h2 id="berichten" class="sr-only">Nieuwsberichten</h2>
