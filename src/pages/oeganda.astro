@@ -3,6 +3,8 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import CTA from '../components/CTA.astro';
+import Wave from '../components/Wave.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import hero from '../assets/images/2025-10-News-Posts-2.png';
 import flag from '../assets/images/2025-09-1748360707052_il570xn.2325703937j008.webp';
 import g1 from '../assets/images/2025-10-3.png';
@@ -11,7 +13,16 @@ import g3 from '../assets/images/2025-10-4.png';
 import g4 from '../assets/images/2025-10-5.png';
 import g5 from '../assets/images/2025-10-6.png';
 import g6 from '../assets/images/2025-09-1.png';
+import v1 from '../assets/images/video-Qt1-PqSqAcU-maxresdefault.jpg';
+import v2 from '../assets/images/video-PfAjuLxkHcA-maxresdefault.jpg';
+import v3 from '../assets/images/video-vVUW2dvHUcw-sddefault.jpg';
 const gallery = [g1, g2, g3, g4, g5, g6];
+// Volgorde zoals gevraagd; titels komen van YouTube.
+const videos = [
+  { id: 'Qt1-PqSqAcU', title: 'Oeganda 2026 in september', poster: v1 },
+  { id: 'PfAjuLxkHcA', title: 'Oeganda 2026 in februari', poster: v2 },
+  { id: 'vVUW2dvHUcw', title: 'Oeganda 2025', poster: v3 },
+];
 ---
 
 <Layout title="Oeganda" seoTitle="Zendingswerk in Oeganda | Bread for the Hungry Ministries" description="Zendingswerk in Oeganda: een opwekking in Oost Oeganda met nieuwe gemeenten, bijbelscholen en Bijbeluitdeling. Lees het verhaal en steun het werk." image={hero}>
@@ -57,6 +68,20 @@ const gallery = [g1, g2, g3, g4, g5, g6];
       ))}
     </ul>
     <p class="mt-6 text-center"><a href="/media/" class="link-arrow">Meer foto's en video's</a></p>
+  </section>
+  <section class="relative bg-sand" aria-labelledby="videos-titel">
+    <Wave class="absolute inset-x-0 bottom-full -mb-px text-sand" flip />
+    <div class="container-page section">
+      <p class="eyebrow">Zie het met eigen ogen</p>
+      <h2 id="videos-titel" class="mt-2">Video's Oeganda</h2>
+      <div class="mt-10 grid gap-8 md:grid-cols-2">
+        <div class="md:col-span-2 md:mx-auto md:w-full md:max-w-4xl">
+          <YouTubeEmbed {...videos[0]} featured />
+        </div>
+        <YouTubeEmbed {...videos[1]} />
+        <YouTubeEmbed {...videos[2]} />
+      </div>
+    </div>
   </section>
   <CTA />
 </Layout>

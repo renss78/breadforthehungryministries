@@ -87,6 +87,15 @@ npm run cf:dev        # = astro build && wrangler pages dev dist
 Open <http://localhost:8788>. Geheime variabelen zet je lokaal in `.dev.vars` (staat in `.gitignore`, nooit committen).
 Configuratie: [wrangler.toml](wrangler.toml).
 
+## YouTube-video's toevoegen
+
+Op de Oeganda-pagina staat een video-sectie (`src/pages/oeganda.astro`, lijst `videos`). Een video toevoegen of herschikken:
+
+1. Download de miniatuur naar `src/assets/images/` (`https://i.ytimg.com/vi/<ID>/maxresdefault.jpg`; bestaat die niet, gebruik `sddefault.jpg`).
+2. Voeg `{ id: '<ID>', title: '<titel>', poster }` toe aan de lijst. De volgorde in de lijst is de volgorde op de pagina.
+
+De miniatuur staat lokaal, dus er gaat pas een verzoek naar YouTube als iemand op afspelen klikt; dan laadt `youtube-nocookie.com` (toegestaan via `frame-src` in `public/_headers`).
+
 ## Contactformulier
 
 Het formulier op `/contact/` is nu een **dummy**: het POST naar `/api/contact`, maar
