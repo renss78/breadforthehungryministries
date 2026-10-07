@@ -1,0 +1,29 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import CTA from '../components/CTA.astro';
+import hero from '../assets/images/hero-sitefile.jpg';
+import bert from '../assets/images/2025-10-Foto-Bert-2019.jpg';
+---
+
+<Layout title="Over ons" description="Als Bread for the Hungry Ministries voelen wij ons geroepen om uit te reiken naar mensen die verlangen naar een hoopvolle toekomst." image={hero}>
+  <Hero title="Over ons" eyebrow="Bread for the Hungry Ministries" image={hero} imageAlt="Het team van Bread for the Hungry Ministries in Oeganda" position="50% 30%">
+    Gegrepen door Gods liefde en gedreven door het voorbeeld van Jezus.
+  </Hero>
+  <article class="container-prose prose section">
+    <p>Als Bread for the Hungry Ministries voelen wij ons geroepen om uit te reiken naar mensen die verlangen naar een hoopvolle toekomst. Gedreven door de liefde van God en geïnspireerd door het leven van de Here Jezus, willen wij Hem zichtbaar maken – in woord én in daad. Wij zetten ons in voor bijbelscholen, seminars en pastorconferenties. We bieden diepgaand bijbels onderwijs en praktische training, zowel in Nederland als internationaal met een focus op Kenia, Oeganda, het Caribisch gebied en Suriname.</p>
+    <p>Ook bieden wij ondersteuning van kansarme gemeenschappen door het opzetten van agrarische projecten en het aanleggen van waterputten helpen we mensen in derdewereldlanden om in hun eigen levensonderhoud te voorzien. Hiermee bouwen we samen aan duurzame verandering en hoop. Onze missie is helder: Jezus zichtbaar maken door praktische hulp en geestelijke opbouw.</p>
+    <p>Wil jij deel uitmaken van deze missie? We nodigen je van harte uit om mee te doen – als partner, sponsor of vrijwilliger.</p>
+  </article>
+  <section class="container-prose pb-16" aria-label="Oprichter">
+    <figure class="grid items-center gap-6 rounded-3xl bg-sand p-6 sm:grid-cols-[10rem_1fr] sm:p-8">
+      <Image src={bert} alt="Bert de Haan" widths={[240, 400]} sizes="10rem" class="mx-auto aspect-[3/4] w-40 rounded-2xl object-cover" loading="lazy" />
+      <blockquote>
+        <p class="font-display text-xl italic leading-snug">In de zomer van 1996 riep God mij op een bijzondere manier tot fulltime bediening. Tijdens een gebedsmoment in een park in Frankrijk ervoer ik intens de heerlijkheid van God en hoorde Zijn stem mij vragen mijn succesvolle carrière op te geven.</p>
+        <figcaption class="mt-4"><a href="/bestuur/#bertdehaan" class="font-bold text-teal-700">Bert de Haan</a><span class="block text-ink-soft">Oprichter en directeur</span></figcaption>
+      </blockquote>
+    </figure>
+  </section>
+  <CTA />
+</Layout>

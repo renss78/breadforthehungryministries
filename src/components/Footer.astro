@@ -1,0 +1,60 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo.png';
+import { site, nav } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-ink text-white/85">
+  <div class="container-page grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+    <div>
+      <a href="/" aria-label="Naar de homepage" class="inline-block rounded-xl bg-cream p-3">
+        <Image src={logo} alt="Bread for the Hungry" width={150} height={50} class="h-10 w-auto" loading="lazy" />
+      </a>
+      <p class="mt-5 max-w-xs text-[0.95rem]">Jezus zichtbaar maken in woord en daad, gedreven door Gods liefde.</p>
+    </div>
+
+    <nav aria-label="Footermenu">
+      <h2 class="text-sm font-bold uppercase tracking-[0.14em] !text-gold-300 !font-sans">Navigatie</h2>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/" class="foot-link">Home</a></li>
+        {nav.flatMap((i) => i.children ?? [i]).map((i) => <li><a href={i.href} class="foot-link">{i.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="text-sm font-bold uppercase tracking-[0.14em] !text-gold-300 !font-sans">Contact</h2>
+      <ul class="mt-4 space-y-2">
+        <li><a href={`mailto:${site.email}`} class="foot-link break-all">{site.email}</a></li>
+        <li><a href={`tel:${site.phone}`} class="foot-link">{site.phone}</a></li>
+      </ul>
+      <a href="/sponsoring/" class="btn btn-clay mt-6">Steun ons</a>
+    </div>
+
+    <div>
+      <h2 class="text-sm font-bold uppercase tracking-[0.14em] !text-gold-300 !font-sans">ANBI</h2>
+      <dl class="mt-4 space-y-1 text-[0.95rem]">
+        <div class="flex gap-2"><dt class="text-white/70">KvK</dt><dd>{site.kvk}</dd></div>
+        <div class="flex gap-2"><dt class="text-white/70">RSIN</dt><dd>{site.rsin}</dd></div>
+        <div class="flex gap-2"><dt class="text-white/70">IBAN</dt><dd>{site.iban}</dd></div>
+      </dl>
+      <a href="/anbi-profiel/" class="foot-link mt-3 inline-block">ANBI Profiel</a>
+    </div>
+  </div>
+  <div class="border-t border-white/15">
+    <p class="container-page py-5 text-sm text-white/70">© {year} {site.name}. Alle rechten voorbehouden.</p>
+  </div>
+</footer>
+
+<style>
+  .foot-link {
+    color: rgb(255 255 255 / 0.9);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .foot-link:hover {
+    color: #fff;
+    border-bottom-color: var(--color-gold-300);
+  }
+</style>

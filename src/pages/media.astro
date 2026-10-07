@@ -1,0 +1,61 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import CTA from '../components/CTA.astro';
+
+const all = import.meta.glob<{ default: ImageMetadata }>('../assets/images/*.{png,jpg,jpeg,webp}', { eager: true });
+const img = (name: string) => all[`../assets/images/${name}`].default;
+
+const ugandaPhotos = ['2025-10-5.png', '2025-10-4.png', '2025-10-3.png', '2025-10-2.png', '2025-10-1.png', '2025-09-6.png', '2025-09-5.png', '2025-09-1748360707052_il570xn.2325703937j008.webp', '2025-09-4.png', '2025-09-3.png', '2025-09-2.png', '2025-09-1.png'];
+const keniaPhotos = ['2025-10-5.png', '2025-10-4.png', '2025-10-3.png', '2025-10-2.png', '2025-10-1.png', '2025-09-6.png', '2025-09-5.png', '2025-09-1748360707052_il570xn.2325703937j008.webp'];
+const ugandaVideos = ['WhatsApp-Video-2026-01-14-at-22.54.34.mp4', 'WhatsApp-Video-2026-01-14-at-22.53.39.mp4'];
+const keniaVideos = ['WhatsApp-Video-2025-11-09-at-15.24.2891.mp4', 'WhatsApp-Video-2025-11-09-at-15.24.28.mp4', 'WhatsApp-Video-2025-11-09-at-15.24.29.mp4', 'WhatsApp-Video-2025-11-09-at-15.24.27.mp4'];
+
+const withFull = async (names: string[]) =>
+  Promise.all(names.map(async (n) => ({ src: img(n), full: (await getImage({ src: img(n), width: 1600 })).src })));
+const sections = [
+  { id: 'fotos-oeganda', title: "Foto's Oeganda", photos: await withFull(ugandaPhotos) },
+  { id: 'videos-oeganda', title: "Video's Oeganda", videos: ugandaVideos },
+  { id: 'fotos-kenia', title: "Foto's Kenia", photos: await withFull(keniaPhotos) },
+  { id: 'videos-kenia', title: "Video's Kenia", videos: keniaVideos },
+];
+const hero = img('2025-09-1.png');
+---
+
+<Layout title="Media" description="Foto's en video's uit Oeganda en Kenia." image={hero}>
+  <Hero title="Media" eyebrow="Foto's en video's" image={hero} imageAlt="Studenten in toga's tijdens een diploma-uitreiking" position="50% 40%" />
+
+  <div class="container-page section space-y-20">
+    {
+      sections.map((s) => (
+        <section aria-labelledby={s.id}>
+          <h2 id={s.id}>{s.title}</h2>
+          {s.photos && (
+            <ul class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+              {s.photos.map((p) => (
+                <li>
+                  <a href={p.full} target="_blank" rel="noopener" class="group block overflow-hidden rounded-xl bg-sand shadow-card">
+                    <Image src={p.src} alt="" widths={[240, 360, 480]} sizes="(min-width: 1024px) 17rem, (min-width: 640px) 30vw, 45vw" class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none" loading="lazy" />
+                    <span class="sr-only">Foto vergroten (opent in nieuw tabblad)</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+          {s.videos && (
+            <ul class="mt-8 grid gap-4 sm:grid-cols-2">
+              {s.videos.map((v) => (
+                <li>
+                  <video controls preload="metadata" playsinline class="aspect-video w-full rounded-xl bg-ink shadow-card" src={`/media/video/${v}`} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ))
+    }
+  </div>
+  <CTA photos={false} />
+</Layout>

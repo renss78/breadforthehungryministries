@@ -1,0 +1,7 @@
+name = "breadforthehungryministries"
+compatibility_date = "2026-10-01"
+pages_build_output_dir = "./dist"
+
+# Geheime sleutels (bijv. e-mail-API en Turnstile) staan NIET hier:
+#  - lokaal: in .dev.vars (staat in .gitignore)
+#  - productie: Cloudflare Pages → Settings → Variables and Secrets

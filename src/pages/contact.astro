@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import { site } from '../data/site';
+---
+
+<Layout title="Contact" description="Neem contact op met Bread for the Hungry Ministries via het contactformulier, e-mail of telefoon.">
+  <Hero title="Contact" eyebrow="Neem contact op" />
+
+  <div class="container-page section grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
+    <!-- Dummy-formulier: functions/api/contact.ts is nog een stub (zie README). -->
+    <form action="/api/contact" method="post" class="grid gap-5" aria-labelledby="form-titel">
+      <h2 id="form-titel" class="sr-only">Contactformulier</h2>
+      <label class="field">
+        <span>Naam</span>
+        <input type="text" name="naam" autocomplete="name" maxlength="400" required />
+      </label>
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email" autocomplete="email" maxlength="400" required />
+      </label>
+      <label class="field">
+        <span>Onderwerp</span>
+        <input type="text" name="onderwerp" maxlength="400" required />
+      </label>
+      <label class="field">
+        <span>Bericht</span>
+        <textarea name="bericht" rows="8" maxlength="2000" required></textarea>
+      </label>
+      <!-- Honeypot tegen spam: echte bezoekers zien en vullen dit veld niet in. -->
+      <div class="absolute -left-[9999px]" aria-hidden="true">
+        <label>Laat dit veld leeg <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+      </div>
+      <div><button type="submit" class="btn btn-teal">Verzenden</button></div>
+    </form>
+
+    <aside aria-labelledby="adres-titel" class="self-start rounded-3xl bg-sand p-7 sm:p-9">
+      <h2 id="adres-titel" class="!text-2xl">Adresgegevens</h2>
+      <dl class="mt-6 space-y-5">
+        <div>
+          <dt class="eyebrow">Email</dt>
+          <dd class="mt-1 break-all text-lg"><a href={`mailto:${site.email}`} class="font-semibold text-teal-700">{site.email}</a></dd>
+        </div>
+        <div>
+          <dt class="eyebrow">Telefoon</dt>
+          <dd class="mt-1 text-lg"><a href={`tel:${site.phone}`} class="font-semibold text-teal-700">{site.phone}</a></dd>
+        </div>
+      </dl>
+    </aside>
+  </div>
+</Layout>
+
+<style>
+  .field {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .field > span {
+    font-weight: 700;
+  }
+  input:not([type='submit']),
+  textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid rgb(43 58 74 / 0.25);
+    border-radius: 0.75rem;
+    background: #fff;
+    font: inherit;
+    color: var(--color-ink);
+    transition: border-color 0.2s;
+  }
+  input:hover,
+  textarea:hover {
+    border-color: var(--color-ink-soft);
+  }
+  input:focus,
+  textarea:focus {
+    outline: 3px solid var(--color-teal-500);
+    outline-offset: 1px;
+    border-color: var(--color-teal-700);
+  }
+</style>

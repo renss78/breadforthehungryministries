@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import NewsCard from '../components/NewsCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import CTA from '../components/CTA.astro';
+import hero from '../assets/images/2025-10-News-Posts-2.png';
+import flagUganda from '../assets/images/2025-09-1748360707052_il570xn.2325703937j008.webp';
+import flagKenya from '../assets/images/2025-09-kenia.png';
+import team from '../assets/images/hero-sitefile.jpg';
+
+const latest = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 4);
+---
+
+<Layout title="Home" image={hero}>
+  <Hero title="Zij hoeven niet weg te gaan, Geef gij hun te eten" eyebrow="Jezus zei:" image={hero} imageAlt="Een grote menigte onder tenten in Oeganda" size="full" position="50% 30%">
+    <Fragment slot="title">
+      '<span class="whitespace-normal">Zij hoeven niet weg te gaan, Geef gij hun te eten</span>'
+    </Fragment>
+    <Fragment slot="actions">
+      <a href="/sponsoring/" class="btn btn-clay">Steun ons</a>
+      <a href="/nieuws/" class="btn btn-ghost">Lees ons nieuws</a>
+    </Fragment>
+  </Hero>
+
+  <section class="bg-gold-100" aria-label="Missie">
+    <div class="container-page flex flex-col items-start justify-between gap-4 py-8 sm:flex-row sm:items-center">
+      <p class="max-w-3xl font-display text-xl leading-snug sm:text-2xl">Onze missie is helder: Jezus zichtbaar maken door praktische hulp en geestelijke opbouw.</p>
+      <a href="/over/" class="link-arrow shrink-0">Over ons →</a>
+    </div>
+  </section>
+
+  <section class="container-page section" aria-labelledby="nieuws-titel">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <h2 id="nieuws-titel">Laatste nieuws</h2>
+      <a href="/nieuws/" class="link-arrow">Alle nieuws →</a>
+    </div>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {latest.map((post) => <NewsCard post={post} />)}
+    </div>
+  </section>
+
+  <section class="bg-sand" aria-labelledby="projecten-titel">
+    <div class="container-page section">
+      <h2 id="projecten-titel">Projecten</h2>
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
+        <ProjectCard title="Oeganda" href="/oeganda/" image={flagUganda} imageAlt="Vlag van Oeganda" position="50% 40%">
+          Drie jaar geleden kwamen we in contact met een groepje gelovigen diep in het binnenland van Oost Oeganda. Een plek zonder licht, water en volledig onder de claim van witch craft. Er waren slechts 20 gelovigen die moedeloos en uitgeblust waren en eigenlijk wilde opgeven. De boodschap die Gerard van Amerongen toen bracht deed iets bij de toehoorders en vele omstanders gaven hun leven aan Jezus.
+        </ProjectCard>
+        {/* NB: tekst hieronder staat zo op de oude site (gaat over Oeganda) — zie MIGRATION_NOTES.md. */}
+        <ProjectCard title="Kenia" href="/kenia/" image={flagKenya} imageAlt="Vlaggen van Kenia" position="50% 40%">
+          In Oostelijk Oeganda, rondom Bukobo, is door evangelisatie en bekeringen van diverse toverdokters een krachtige opwekking ontstaan; na een periode van wanhoop en dominantie van witchcraft groeide het aantal gelovigen in twee jaar van 20 naar meer dan 15.000, waarbij elke week nieuwe mensen tot het geloof komen en zich laten dopen.
+        </ProjectCard>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page section grid items-center gap-10 lg:grid-cols-2 lg:gap-16" aria-labelledby="team-titel">
+    <Image src={team} alt="Het leidersteam in Oeganda" widths={[480, 768, 1000]} sizes="(min-width: 1024px) 34rem, 100vw" class="aspect-[4/3] w-full rounded-3xl object-cover shadow-card" loading="lazy" />
+    <div>
+      <h2 id="team-titel">Leidersteam</h2>
+      <div class="prose mt-6">
+        <p>Het leidersteam bestaat uit een driemanschap waar twee een gemeente leiden. Daarnaast worden zij ondersteunt door een team van 35 krachtige werkers. Dit aantal moet worden uitgebreid naar minimaal 100 om overal celgroepen te starten, kerken te planeten en de opwekking verder invulling te geven.De tijd dringt en de oogst is mega. We danken de Here dat we letterlijk zien dat het boek Handelingen nog steeds actueel is en de heilige Geest meewerkt met wonderen en tekenen zodat Zijn woord wast, discipelen opstaan en de oogst wordt binnengehaald. Heerlijk om dit samen met vele gelovigen te mogen doen.</p>
+      </div>
+      <a href="/bestuur/" class="btn btn-teal mt-8">Meer info</a>
+    </div>
+  </section>
+
+  <CTA />
+</Layout>

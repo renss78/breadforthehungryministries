@@ -1,0 +1,34 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import CTA from '../components/CTA.astro';
+import hero from '../assets/images/2025-10-DSCN0113.jpg';
+import flags from '../assets/images/2025-09-kenia.png';
+import school1 from '../assets/images/2025-10-Bible-school-01.jpg';
+import school2 from '../assets/images/2025-10-DSCN0113.jpg';
+---
+
+<Layout title="Kenia" description="In Kenia (Webuye) is 15 jaar geleden een complete full time Bijbelschool opgericht waar inmiddels vele honderden studenten zijn opgeleid." image={hero}>
+  <Hero title="Kenia" eyebrow="Projecten" image={hero} imageAlt="Studenten in toga's bij de bijbelschool in Kenia" position="50% 45%" />
+  <article class="container-prose prose section">
+    <h2>Full time bijbelschool</h2>
+    <p>In Kenia (Webuye) is 15 jaar geleden een complete full time Bijbelschool opgericht waar inmiddels vele honderden studenten zijn opgeleid. Velen van hen zijn nu pastor van een gemeente en door de jaren heen zijn er al meer dan 100 kerken uit de school tot stand gekomen. Niet alleen in Kenia maar ook in Sudan, Kongo en Burundi.Jaarlijks worden zo’n 35 studenten opgeleid na te zijn uitgeselecteerd door hun lokale pastor en de school board. De samenwerking van de diverse bisshops en senior pastors in de regio heeft gezorgd voor een sterk en solide bolwerk van training en opleiding. Jaarlijks vind een groot event plaats rondom de diploma uitreiking.</p>
+    <Image src={flags} alt="Vlaggen van Kenia" widths={[480, 768]} sizes="(min-width: 768px) 46rem, 100vw" />
+    <h2>Kenia in 2025</h2>
+    <p>Begin november vond een bijzonder feestelijke gebeurtenis plaats: de graduation van maar liefst 65 studenten die het fulltime programma hebben afgerond. Tijdens dezelfde bijeenkomst werd ook het 15‑jarig bestaan van de School for Harvest gevierd – een indrukwekkende mijlpaal die laat zien hoe God deze school door de jaren heen heeft gezegend.</p>
+    <p>De impact van de school is duidelijk zichtbaar. In de afgelopen jaren zijn er meer dan 100 gemeenten gesticht door oud‑studenten en teams die vanuit de school zijn uitgezonden. De vele getuigenissen die we mochten horen van voormalige studenten gaven een krachtig en ontroerend beeld van wat God door hun levens heen heeft gedaan.</p>
+    <p>Bert, Dick en Vincent hadden het voorrecht om met Gods genade aanwezig te zijn bij deze bijzondere viering. Het was een moment van dankbaarheid, verbondenheid en hoop voor de toekomst.</p>
+    <p>Ook is op de campus in Kenia is onlangs de maisoogst succesvol binnengehaald! Deze oogst blijft een belangrijke voorziening voor de Bijbelschool en draagt direct bij aan de dagelijkse voedselvoorziening voor studenten en medewerkers.</p>
+    <p><a href="/bezoek-kenia-november-2025/">Klik hier voor meer foto’s</a></p>
+    <p><a href="/media/">Klik hier voor meer filmpjes</a></p>
+  </article>
+  <section class="container-page pb-16" aria-labelledby="school-titel">
+    <h2 id="school-titel" class="text-center">School for Harvest and Ministry</h2>
+    <ul class="mt-8 grid gap-4 sm:grid-cols-2">
+      <li><Image src={school1} alt="Ingang van de School for Harvest and Ministry" widths={[480, 768, 1024]} sizes="(min-width: 1152px) 34rem, 100vw" class="aspect-[4/3] w-full rounded-xl object-cover shadow-card" loading="lazy" /></li>
+      <li><Image src={school2} alt="Afgestudeerden voor het schoolgebouw" widths={[480, 768, 1024]} sizes="(min-width: 1152px) 34rem, 100vw" class="aspect-[4/3] w-full rounded-xl object-cover shadow-card" loading="lazy" /></li>
+    </ul>
+  </section>
+  <CTA />
+</Layout>

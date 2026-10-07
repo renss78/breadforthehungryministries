@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  title: string;
+  eyebrow?: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
+  /** "full" is the homepage hero, "page" a shorter banner for inner pages. */
+  size?: 'full' | 'page';
+  /** Focal point for object-position, e.g. "50% 30%". */
+  position?: string;
+}
+
+const { title, eyebrow, image, imageAlt = '', size = 'page', position = '50% 40%' } = Astro.props;
+const full = size === 'full';
+---
+
+<section class:list={['relative isolate overflow-hidden bg-ink text-white', full ? 'min-h-[min(88svh,52rem)]' : 'min-h-[22rem] sm:min-h-[26rem]']}>
+  {image ? (
+  <>
+  <Image
+    src={image}
+    alt={imageAlt}
+    widths={[640, 1024, 1600, 2000]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    class="absolute inset-0 -z-10 h-full w-full object-cover"
+    style={`object-position:${position}`}
+  />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/55 to-ink/20"></div>
+  </>
+  ) : (
+  <div class="absolute inset-0 -z-10 bg-gradient-to-br from-teal-900 to-teal-700"></div>
+  )}
+  <div class:list={['container-page flex h-full flex-col justify-end', full ? 'min-h-[min(88svh,52rem)] pb-14 pt-32 sm:pb-20' : 'min-h-[22rem] pb-10 pt-24 sm:min-h-[26rem] sm:pb-14']}>
+    <div class="reveal max-w-3xl">
+      {eyebrow && <p class="eyebrow !text-gold-300">{eyebrow}</p>}
+      <h1 class:list={['mt-3 !text-white', full && 'font-medium italic']}>
+        <slot name="title">{title}</slot>
+      </h1>
+      <div class="mt-5 max-w-2xl text-lg text-white/90 sm:text-xl"><slot /></div>
+      <div class="mt-8 flex flex-wrap gap-3"><slot name="actions" /></div>
+    </div>
+  </div>
+</section>

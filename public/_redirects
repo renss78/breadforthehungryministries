@@ -1,0 +1,31 @@
+# Oude WordPress-URL's die veranderd zijn of niet meer bestaan.
+# Formaat: <van> <naar> <status>. Eerste match wint.
+
+# Engelse / alternatieve spelling
+/uganda            /oeganda/   301
+/uganda/*          /oeganda/   301
+/kenya             /kenia/     301
+/kenya/*           /kenia/     301
+/over-ons          /over/      301
+/home              /           301
+/home/             /           301
+
+# WordPress-archieven (categorieën, auteurs, feeds) bestaan niet meer
+/category/*        /nieuws/    301
+/author/*          /nieuws/    301
+/feed              /nieuws/    301
+/feed/             /nieuws/    301
+/comments/feed     /nieuws/    301
+/comments/feed/    /nieuws/    301
+
+# WordPress-paginering → Astro-paginering
+/nieuws/page/:n    /nieuws/:n/ 301
+/nieuws/page/:n/   /nieuws/:n/ 301
+
+# Restanten van de donatieplugin
+/donor-dashboard         /sponsoring/ 301
+/donor-dashboard/        /sponsoring/ 301
+/donation-failed         /sponsoring/ 301
+/donation-failed/        /sponsoring/ 301
+/donation-confirmation   /sponsoring/ 301
+/donation-confirmation/  /sponsoring/ 301

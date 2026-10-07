@@ -1,0 +1,275 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo.png';
+import { nav } from '../data/site';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => href !== '#' && (path === href || (href !== '/' && path.startsWith(href)));
+---
+
+<header class="sticky top-0 z-50 border-b border-ink/10 bg-cream/95 backdrop-blur">
+  <div class="container-page flex items-center justify-between gap-4 py-3">
+    <a href="/" class="shrink-0" aria-label="Bread for the Hungry Ministries — naar de homepage">
+      <Image src={logo} alt="" width={168} height={56} loading="eager" class="h-11 w-auto sm:h-12" />
+    </a>
+
+    <nav aria-label="Hoofdmenu" class="hidden lg:block">
+      <ul class="flex items-center gap-1">
+        {
+          nav.map((item) => (
+            <li class="relative" data-dropdown={item.children ? '' : undefined}>
+              {item.children ? (
+                <>
+                  <button
+                    type="button"
+                    class="nav-link inline-flex items-center gap-1.5"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    data-active={item.children.some((c) => isActive(c.href)) || undefined}
+                  >
+                    {item.label}
+                    <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+                      <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </button>
+                  <ul class="dropdown" hidden>
+                    {item.children.map((c) => (
+                      <li>
+                        <a href={c.href} aria-current={isActive(c.href) ? 'page' : undefined}>
+                          {c.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <a href={item.href} class="nav-link" aria-current={isActive(item.href) ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href="/sponsoring/" class="btn btn-clay !px-5 !py-2.5 text-[0.95rem]">Steun ons</a>
+      <button type="button" class="menu-toggle lg:hidden" aria-expanded="false" aria-controls="mobiel-menu" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" class="icon-open">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"></path>
+        </svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" class="icon-close">
+          <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobiel-menu" aria-label="Mobiel menu" class="mobile-panel lg:hidden" hidden>
+    <ul class="container-page py-4">
+      <li><a href="/" class="m-link" aria-current={path === '/' ? 'page' : undefined}>Home</a></li>
+      {
+        nav.map((item) =>
+          item.children ? (
+            <li>
+              <p class="m-group">{item.label}</p>
+              <ul>
+                {item.children.map((c) => (
+                  <li>
+                    <a href={c.href} class="m-link m-sub" aria-current={isActive(c.href) ? 'page' : undefined}>
+                      {c.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ) : (
+            <li>
+              <a href={item.href} class="m-link" aria-current={isActive(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ),
+        )
+      }
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    white-space: nowrap;
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    font-weight: 600;
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+  .nav-link:hover,
+  .nav-link[aria-expanded='true'] {
+    background: var(--color-sand);
+  }
+  .nav-link[aria-current='page'],
+  .nav-link[data-active] {
+    color: var(--color-teal-700);
+    box-shadow: inset 0 -2px 0 var(--color-gold-500);
+    border-radius: 0;
+  }
+  .dropdown {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    min-width: 13rem;
+    padding: 0.5rem;
+    margin-top: 0.1rem;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgb(43 58 74 / 0.08);
+    animation: pop 0.16s ease-out;
+  }
+  .dropdown[hidden] {
+    display: none;
+  }
+  .dropdown a {
+    display: block;
+    padding: 0.55rem 0.9rem;
+    border-radius: 0.6rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+  .dropdown a:hover {
+    background: var(--color-cream);
+    color: var(--color-teal-700);
+  }
+  .dropdown a[aria-current='page'] {
+    color: var(--color-teal-700);
+    background: var(--color-teal-100);
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
+  .menu-toggle {
+    display: none;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    color: var(--color-ink);
+  }
+  @media (max-width: 1023.98px) {
+    .menu-toggle {
+      display: inline-grid;
+    }
+  }
+  .menu-toggle .icon-close,
+  .menu-toggle[aria-expanded='true'] .icon-open {
+    display: none;
+  }
+  .menu-toggle[aria-expanded='true'] .icon-close {
+    display: block;
+  }
+  .menu-toggle:hover {
+    background: var(--color-sand);
+  }
+  .mobile-panel {
+    border-top: 1px solid rgb(43 58 74 / 0.1);
+    background: var(--color-cream);
+    max-height: calc(100dvh - 4.5rem);
+    overflow-y: auto;
+  }
+  .mobile-panel[hidden] {
+    display: none;
+  }
+  .m-link {
+    display: block;
+    padding: 0.7rem 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .m-link[aria-current='page'] {
+    color: var(--color-teal-700);
+  }
+  .m-sub {
+    padding-left: 1rem;
+    font-weight: 500;
+    border-left: 2px solid var(--color-gold-300);
+  }
+  .m-group {
+    margin-top: 0.6rem;
+    padding: 0.7rem 0 0.2rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dropdown {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  // Menu: dropdowns (desktop) and mobile panel. Everything else on the site works without JS.
+  const header = document.querySelector('header')!;
+  const dropdowns = [...header.querySelectorAll<HTMLElement>('[data-dropdown]')];
+  const toggle = header.querySelector<HTMLButtonElement>('.menu-toggle')!;
+  const panel = header.querySelector<HTMLElement>('#mobiel-menu')!;
+
+  const setDropdown = (li: HTMLElement, open: boolean) => {
+    li.querySelector('button')!.setAttribute('aria-expanded', String(open));
+    li.querySelector<HTMLElement>('.dropdown')!.hidden = !open;
+  };
+  const closeAll = (except?: HTMLElement) => dropdowns.forEach((li) => li !== except && setDropdown(li, false));
+
+  const canHover = matchMedia('(hover: hover)').matches;
+  dropdowns.forEach((li) => {
+    const btn = li.querySelector('button')!;
+    btn.addEventListener('click', () => {
+      // On hover devices the dropdown is already open from mouseenter; a click must not close it again.
+      const open = canHover && btn.matches(':hover') ? true : btn.getAttribute('aria-expanded') !== 'true';
+      closeAll(li);
+      setDropdown(li, open);
+    });
+    if (canHover) {
+      li.addEventListener('mouseenter', () => {
+        closeAll(li);
+        setDropdown(li, true);
+      });
+      li.addEventListener('mouseleave', () => setDropdown(li, false));
+    }
+  });
+
+  const setPanel = (open: boolean) => {
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Menu sluiten' : 'Menu');
+    panel.hidden = !open;
+  };
+  toggle.addEventListener('click', () => setPanel(toggle.getAttribute('aria-expanded') !== 'true'));
+
+  document.addEventListener('click', (e) => {
+    if (!(e.target as Element).closest('[data-dropdown]')) closeAll();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    closeAll();
+    if (toggle.getAttribute('aria-expanded') === 'true') {
+      setPanel(false);
+      toggle.focus();
+    }
+  });
+  matchMedia('(min-width: 1024px)').addEventListener('change', (e) => e.matches && setPanel(false));
+</script>

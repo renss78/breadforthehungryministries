@@ -1,0 +1,156 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import CTA from '../components/CTA.astro';
+
+const algemeen: [string, string][] = [
+  ['Rechtsvorm', 'Stichting'],
+  ['Statutaire naam', 'Stichting Bread for the Hungry Ministries'],
+  ['Statutaire zetel', 'Zwijndrecht'],
+  ['Land', 'Nederland'],
+  ['KvK nummer', '68179901'],
+  ['RSIN', '857334591'],
+  ['Eerste inschrijving handelsregister', '28-02-2017'],
+  ['Datum akte van oprichting', '24-02-2017'],
+];
+const activiteiten: [string, string][] = [
+  ['Activiteiten', 'Die stichting met name gericht op het ondersteunen van NGO’s (non-gouvernementele organisatie) in Kenia en Oeganda.'],
+  ['Duidelijke beschrijving van doelstellingen', 'De stichting heeft als doel: een bron van inspiratie te zijn op het gebied van geestelijke en praktische ondersteuning aan mensen in de armste regionen in deze wereld en het verrichten van al wat hiermee verband houdt of daartoe bevorderlijk kan zijn.'],
+  ['Subcategorie I', 'Godsdienstig'],
+  ['Subcategorie II', 'Ontwikkelingswerk'],
+  ['Subcategorie III', 'Volksgezondheid'],
+];
+const organisatie: [string, string][] = [
+  ['Is er een directie / dagelijks bestuur', 'Nee'],
+  ['Is er een persoon in dienst?', 'Nee'],
+  ['Is er een raad van commissarissen/toezicht?', 'Nee'],
+];
+const bestuurders = [
+  ['Bert de Haan', 'Voorzitter'],
+  ['Vincent van Geerestein', 'Penningmeester'],
+  ['Dick Pieterman', 'Secretaris'],
+].map(([naam, functie]) => ({ naam, functie, beloning: 'Beloning beperkt tot onkostenvergoeding' }));
+const contact: [string, string, string?][] = [
+  ['E-mailadres', 'info@breadforthehungryministries.nl', 'mailto:info@breadforthehungryministries.nl'],
+  ['WWW adres', 'https://breadforthehungryministries.nl', 'https://breadforthehungryministries.nl'],
+  ['Contactpersoon', 'Vincent van Geerestein'],
+  ['IBAN rekeningnummer', 'NL11RABO0317228463'],
+];
+const publicaties = [
+  ['2026', 'Hoofdlijnen beleidsplan', '2026-Beleidsplan-Bread-for-the-Hungry', '2026-Beleidsplan-Bread-for-the-Hungry-Ministries-1.pdf'],
+  ['2025', 'Standaardformulier publicatieplicht', '2025-Standaard-Rapportage-Bread-for-the-Hungry', '2025-Standaard-Rapportage-Bread-for-the-Hungry-publicatie-1.3_printed.pdf'],
+  ['2025', 'Actueel verslag activiteiten', '2025-Actueel-Verslag-Activiteiten-Bread-for-the-Hungry', '2025-Stichting-Bread-for-the-Hungry-Ministries-verslag.pdf'],
+  ['2024', 'Standaardformulier publicatieplicht', '2024-Standaard-Rapportage-Bread-for-the-Hungry', '2024-Standaard-Rapportage-Bread-for-the-Hungry-publicatie-1.1.pdf'],
+  ['2024', 'Actueel verslag activiteiten', '2024-Actueel-Verslag-Activiteiten-Bread-for-the-Hungry', '2024-Verslag-Bread-for-the-Hungry-Ministries.pdf'],
+  ['2024', 'Hoofdlijnen beleidsplan', '2024-Beleidsplan-Bread-for-the-Hungry', '2024-Beleidsplan-Bread-for-the-Hungry-Ministries.pdf'],
+];
+---
+
+<Layout title="ANBI Profiel" description="ANBI-profiel van Stichting Bread for the Hungry Ministries: algemene informatie, doelstellingen, bestuurders en publicatieplicht.">
+  <Hero title="ANBI Profiel" eyebrow="Over ons" />
+
+  <div class="container-prose section space-y-14">
+    <section aria-labelledby="algemeen">
+      <h2 id="algemeen">Algemene informatie</h2>
+      <dl class="rows mt-6">
+        {algemeen.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+      </dl>
+    </section>
+
+    <section aria-labelledby="activiteiten">
+      <h2 id="activiteiten">Activiteiten</h2>
+      <dl class="rows mt-6">
+        {activiteiten.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+      </dl>
+    </section>
+
+    <section aria-labelledby="organisatie">
+      <h2 id="organisatie">Organisatie / Bestuurders</h2>
+      <dl class="rows mt-6">
+        {organisatie.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+      </dl>
+      <div class="table-wrap mt-6">
+        <table>
+          <thead><tr><th scope="col">Naam</th><th scope="col">Titel / Functie</th><th scope="col">Beloning</th></tr></thead>
+          <tbody>
+            {bestuurders.map((b) => <tr><th scope="row">{b.naam}</th><td>{b.functie}</td><td>{b.beloning}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="contact-info">
+      <h2 id="contact-info">Contact informatie</h2>
+      <dl class="rows mt-6">
+        {contact.map(([k, v, href]) => <div><dt>{k}</dt><dd>{href ? <a href={href}>{v}</a> : v}</dd></div>)}
+      </dl>
+    </section>
+
+    <section aria-labelledby="publicatie">
+      <h2 id="publicatie">Publicatieplicht</h2>
+      <div class="table-wrap mt-6">
+        <table>
+          <thead><tr><th scope="col">Jaar</th><th scope="col">Type document</th><th scope="col">Link</th></tr></thead>
+          <tbody>
+            {publicaties.map(([jaar, type, label, file]) => <tr><td>{jaar}</td><td>{type}</td><td><a href={`/documenten/${file}`}>{label}</a></td></tr>)}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+  <CTA photos={false} />
+</Layout>
+
+<style>
+  .rows > div {
+    display: grid;
+    gap: 0.15rem 1.5rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid rgb(43 58 74 / 0.12);
+  }
+  @media (min-width: 640px) {
+    .rows > div {
+      grid-template-columns: 16rem 1fr;
+    }
+  }
+  dt {
+    font-weight: 700;
+  }
+  dd {
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+  }
+  a {
+    color: var(--color-teal-700);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-card);
+    background: #fff;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 34rem;
+  }
+  th,
+  td {
+    padding: 0.85rem 1.1rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgb(43 58 74 / 0.1);
+  }
+  thead th {
+    background: var(--color-teal-700);
+    color: #fff;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+</style>

@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import NewsCard from '../../components/NewsCard.astro';
+import CTA from '../../components/CTA.astro';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return paginate(posts, { pageSize: 6 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const title = page.currentPage > 1 ? `Nieuws — pagina ${page.currentPage}` : 'Nieuws';
+const pageHref = (n: number) => (n === 1 ? '/nieuws/' : `/nieuws/${n}/`);
+const pages = Array.from({ length: page.lastPage }, (_, i) => i + 1);
+---
+
+<Layout title={title} description="Het laatste nieuws en de nieuwsupdates vanuit Oeganda en Kenia.">
+  <Hero title="Nieuws" eyebrow="Laatste nieuws" />
+  <section class="container-page section" aria-label="Nieuwsberichten">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {page.data.map((post) => <NewsCard post={post} />)}
+    </div>
+
+    {
+      page.lastPage > 1 && (
+        <nav aria-label="Paginering" class="mt-14 flex flex-wrap items-center justify-center gap-2">
+          {page.url.prev ? <a href={page.url.prev} rel="prev" class="pager">← Vorige</a> : <span class="pager pager-off" aria-hidden="true">← Vorige</span>}
+          {pages.map((n) => (
+            <a href={pageHref(n)} class="pager" aria-current={n === page.currentPage ? 'page' : undefined} aria-label={`Pagina ${n}`}>{n}</a>
+          ))}
+          {page.url.next ? <a href={page.url.next} rel="next" class="pager">Volgende →</a> : <span class="pager pager-off" aria-hidden="true">Volgende →</span>}
+        </nav>
+      )
+    }
+  </section>
+  <CTA photos={false} />
+</Layout>
+
+<style>
+  .pager {
+    display: inline-flex;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    border-radius: 999px;
+    font-weight: 700;
+    color: var(--color-ink);
+    text-decoration: none;
+    background: #fff;
+    box-shadow: var(--shadow-card);
+  }
+  a.pager:hover {
+    background: var(--color-teal-100);
+  }
+  .pager[aria-current='page'] {
+    background: var(--color-teal-700);
+    color: #fff;
+  }
+  .pager-off {
+    opacity: 0.45;
+    box-shadow: none;
+    background: transparent;
+  }
+</style>

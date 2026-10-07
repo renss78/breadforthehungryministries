@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import img1 from '../assets/images/2025-09-5.png';
+import img2 from '../assets/images/2025-09-6.png';
+import img3 from '../assets/images/2025-09-2.png';
+import img4 from '../assets/images/2025-09-3.png';
+
+interface Props {
+  /** Show the little photo strip (home and sponsoring use it, inner pages stay calm). */
+  photos?: boolean;
+}
+const { photos = true } = Astro.props;
+const strip = [img1, img2, img3, img4];
+---
+
+<section class="bg-teal-700 text-white" aria-labelledby="cta-titel">
+  <div class="container-page section grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
+    <div>
+      <p class="inline-flex items-baseline gap-2 rounded-full bg-gold-300 px-5 py-2 font-display text-ink" aria-hidden="true">
+        <span class="text-3xl font-semibold">€35</span><span class="text-sm font-bold">per maand · tien maanden</span>
+      </p>
+      <h2 id="cta-titel" class="mt-5 !text-white">Sponsoring</h2>
+      <p class="mt-5 max-w-xl text-lg text-white/95">
+        Wij zoeken donateurs om dit waardevolle werk voort te zetten. U kunt een student of aankomend pastor steunen met €35
+        per maand (tien maanden). Ook sponsors voor onze pastorconferentie en projecten zijn van harte welkom — elke euro
+        wordt goed besteed!
+      </p>
+      <a href="/sponsoring/" class="btn btn-clay mt-8 !bg-gold-300 !text-ink hover:!bg-white">Steun onze missie</a>
+    </div>
+    {
+      photos && (
+        <ul class="grid grid-cols-2 gap-3" aria-hidden="true">
+          {strip.map((src, i) => (
+            <li class:list={['overflow-hidden rounded-2xl', i % 2 ? 'translate-y-4' : '']}>
+              <Image src={src} alt="" widths={[240, 400]} sizes="(min-width: 1024px) 20vw, 45vw" class="aspect-[4/3] w-full object-cover" loading="lazy" />
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</section>
