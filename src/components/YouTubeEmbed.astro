@@ -22,7 +22,7 @@ const { id, title, poster, featured = false } = Astro.props;
       alt=""
       widths={featured ? [640, 960, 1280] : [480, 640, 960]}
       sizes={featured ? '(min-width: 1152px) 72rem, 100vw' : '(min-width: 1152px) 35rem, (min-width: 640px) 45vw, 100vw'}
-      loading="lazy"
+      loading={featured ? 'eager' : 'lazy'}
       class="yt-poster"
     />
     <span class="yt-shade" aria-hidden="true"></span>

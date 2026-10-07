@@ -26,7 +26,22 @@ const videos = [
 ---
 
 <Layout title="Oeganda" seoTitle="Zendingswerk in Oeganda | Bread for the Hungry Ministries" description="Zendingswerk in Oeganda: een opwekking in Oost Oeganda met nieuwe gemeenten, bijbelscholen en Bijbeluitdeling. Lees het verhaal en steun het werk." image={hero}>
-  <Hero title="Oeganda" eyebrow="Zendingswerk" image={hero} imageAlt="Een grote menigte onder tenten in Oeganda" position="50% 35%" />
+  <Hero title="Oeganda" eyebrow="Zendingswerk" image={hero} imageAlt="Een grote menigte onder tenten in Oeganda" position="50% 35%" wave="text-sand" />
+  <section class="relative bg-sand" aria-labelledby="videos-titel">
+    <div class="container-page pb-16 pt-6 sm:pb-24">
+      <p class="eyebrow">Zie het met eigen ogen</p>
+      <h2 id="videos-titel" class="mt-2">Video's Oeganda</h2>
+      <div class="mt-10 grid gap-8 md:grid-cols-2">
+        <div class="md:col-span-2 md:mx-auto md:w-full md:max-w-4xl">
+          <YouTubeEmbed {...videos[0]} featured />
+        </div>
+        <YouTubeEmbed {...videos[1]} />
+        <YouTubeEmbed {...videos[2]} />
+      </div>
+    </div>
+  </section>
+  <div class="relative">
+    <Wave class="absolute inset-x-0 bottom-full -mb-px text-cream" />
   <article class="container-prose prose section">
     <p>Drie jaar geleden kwamen we in contact met een groepje gelovigen diep in het binnenland van Oost Oeganda. Een plek zonder licht, water en volledig onder de claim van witch craft. Er waren slechts 20 gelovigen die moedeloos en uitgeblust waren en eigenlijk wilde opgeven. De boodschap die Gerard van Amerongen toen bracht deed iets bij de toehoorders en vele omstanders gaven hun leven aan Jezus. Enkele van hen waren toverdokters die zich bekeerden tot de Here Jezus en hun occulte praktijk letterlijk verbrandden.</p>
     <Image src={flag} alt="Vlag van Oeganda" widths={[480, 768]} sizes="(min-width: 768px) 46rem, 100vw" />
@@ -61,6 +76,7 @@ const videos = [
     <p>In Oeganda is gekozen voor een andere aanpak, daar komen 125 uitgeselecteerde kandidaten elke maand gedurende een hele week naar school voor een intensieve training. Dit programma bestaat uit 2 jaar. Er worden dus jaarlijks 250 studenten getraind.</p>
     <p>Gezien de enorme opwekking in het gebied is de urgentie hoog om zoveel mogelijk werkers te training voor het Koninkrijk van God. Uit de tweede jaarsopleiding worden kandidaten geselecteerd om deel uit te maken van het ministry team. Zij worden uitgezonden om overal in de huisgroepen de fundamenten van het Christelijke geloof te onderwijzen.</p>
   </article>
+  </div>
   <section class="container-page pb-16" aria-label="Foto's">
     <ul data-gallery class="grid grid-cols-2 gap-3 sm:grid-cols-3">
       {gallery.map((img) => (
@@ -68,20 +84,6 @@ const videos = [
       ))}
     </ul>
     <p class="mt-6 text-center"><a href="/media/" class="link-arrow">Meer foto's en video's</a></p>
-  </section>
-  <section class="relative bg-sand" aria-labelledby="videos-titel">
-    <Wave class="absolute inset-x-0 bottom-full -mb-px text-sand" flip />
-    <div class="container-page section">
-      <p class="eyebrow">Zie het met eigen ogen</p>
-      <h2 id="videos-titel" class="mt-2">Video's Oeganda</h2>
-      <div class="mt-10 grid gap-8 md:grid-cols-2">
-        <div class="md:col-span-2 md:mx-auto md:w-full md:max-w-4xl">
-          <YouTubeEmbed {...videos[0]} featured />
-        </div>
-        <YouTubeEmbed {...videos[1]} />
-        <YouTubeEmbed {...videos[2]} />
-      </div>
-    </div>
   </section>
   <CTA />
 </Layout>
