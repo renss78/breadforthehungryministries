@@ -6,6 +6,7 @@ import Hero from '../components/Hero.astro';
 import NewsCard from '../components/NewsCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import CTA from '../components/CTA.astro';
+import Wave from '../components/Wave.astro';
 import hero from '../assets/images/2025-10-News-Posts-2.png';
 import flagUganda from '../assets/images/2025-09-1748360707052_il570xn.2325703937j008.webp';
 import flagKenya from '../assets/images/2025-09-kenia.png';
@@ -25,8 +26,8 @@ const latest = (await getCollection('news')).sort((a, b) => b.data.date.valueOf(
     </Fragment>
   </Hero>
 
-  <section class="bg-gold-100" aria-label="Missie">
-    <div class="container-page flex flex-col items-start justify-between gap-4 py-8 sm:flex-row sm:items-center">
+  <section class="container-page relative z-10 -mt-12 sm:-mt-16" aria-label="Missie">
+    <div class="rise flex flex-col items-start justify-between gap-4 rounded-[2rem] bg-white p-7 shadow-lift sm:flex-row sm:items-center sm:p-10">
       <p class="max-w-3xl font-display text-xl leading-snug sm:text-2xl">Onze missie is helder: Jezus zichtbaar maken door praktische hulp en geestelijke opbouw.</p>
       <a href="/over/" class="link-arrow shrink-0">Over ons →</a>
     </div>
@@ -42,7 +43,8 @@ const latest = (await getCollection('news')).sort((a, b) => b.data.date.valueOf(
     </div>
   </section>
 
-  <section class="bg-sand" aria-labelledby="projecten-titel">
+  <section class="relative mt-8 bg-sand" aria-labelledby="projecten-titel">
+    <Wave class="absolute inset-x-0 bottom-full -mb-px text-sand" flip />
     <div class="container-page section">
       <h2 id="projecten-titel">Projecten</h2>
       <div class="mt-10 grid gap-6 lg:grid-cols-2">
@@ -57,9 +59,11 @@ const latest = (await getCollection('news')).sort((a, b) => b.data.date.valueOf(
     </div>
   </section>
 
+  <div class="relative">
+  <Wave class="absolute inset-x-0 bottom-full -mb-px text-cream" />
   <section class="container-page section grid items-center gap-10 lg:grid-cols-2 lg:gap-16" aria-labelledby="team-titel">
-    <Image src={team} alt="Het leidersteam in Oeganda" widths={[480, 768, 1000]} sizes="(min-width: 1024px) 34rem, 100vw" class="aspect-[4/3] w-full rounded-3xl object-cover shadow-card" loading="lazy" />
-    <div>
+    <Image src={team} alt="Het leidersteam in Oeganda" widths={[480, 768, 1000]} sizes="(min-width: 1024px) 34rem, 100vw" class="rise aspect-[4/3] w-full rounded-[2rem] object-cover shadow-lift" loading="lazy" />
+    <div class="rise">
       <h2 id="team-titel">Leidersteam</h2>
       <div class="prose mt-6">
         <p>Het leidersteam bestaat uit een driemanschap waar twee een gemeente leiden. Daarnaast worden zij ondersteunt door een team van 35 krachtige werkers. Dit aantal moet worden uitgebreid naar minimaal 100 om overal celgroepen te starten, kerken te planeten en de opwekking verder invulling te geven.De tijd dringt en de oogst is mega. We danken de Here dat we letterlijk zien dat het boek Handelingen nog steeds actueel is en de heilige Geest meewerkt met wonderen en tekenen zodat Zijn woord wast, discipelen opstaan en de oogst wordt binnengehaald. Heerlijk om dit samen met vele gelovigen te mogen doen.</p>
@@ -67,6 +71,7 @@ const latest = (await getCollection('news')).sort((a, b) => b.data.date.valueOf(
       <a href="/bestuur/" class="btn btn-teal mt-8">Meer info</a>
     </div>
   </section>
+  </div>
 
   <CTA />
 </Layout>

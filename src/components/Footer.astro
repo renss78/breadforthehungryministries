@@ -2,11 +2,13 @@
 import { Image } from 'astro:assets';
 import logo from '../assets/images/logo.png';
 import { site, nav } from '../data/site';
+import Wave from './Wave.astro';
 
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-ink text-white/85">
+<footer class="relative bg-ink text-white/85">
+  <Wave class="absolute inset-x-0 bottom-full -mb-px text-ink" />
   <div class="container-page grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
     <div>
       <a href="/" aria-label="Naar de homepage" class="inline-block rounded-xl bg-cream p-3">

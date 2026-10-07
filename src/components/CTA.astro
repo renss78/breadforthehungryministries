@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import Wave from './Wave.astro';
 import img1 from '../assets/images/2025-09-5.png';
 import img2 from '../assets/images/2025-09-6.png';
 import img3 from '../assets/images/2025-09-2.png';
@@ -13,7 +14,8 @@ const { photos = true } = Astro.props;
 const strip = [img1, img2, img3, img4];
 ---
 
-<section class="bg-teal-700 text-white" aria-labelledby="cta-titel">
+<section class="relative bg-teal-700 text-white" aria-labelledby="cta-titel">
+  <Wave class="absolute inset-x-0 bottom-full -mb-px text-teal-700" flip />
   <div class="container-page section grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
     <div>
       <p class="inline-flex items-baseline gap-2 rounded-full bg-gold-300 px-5 py-2 font-display text-ink" aria-hidden="true">
@@ -31,7 +33,7 @@ const strip = [img1, img2, img3, img4];
       photos && (
         <ul class="grid grid-cols-2 gap-3" aria-hidden="true">
           {strip.map((src, i) => (
-            <li class:list={['overflow-hidden rounded-2xl', i % 2 ? 'translate-y-4' : '']}>
+            <li class:list={['rise overflow-hidden rounded-[1.75rem] shadow-lift', i % 2 ? 'translate-y-5' : '']}>
               <Image src={src} alt="" widths={[240, 400]} sizes="(min-width: 1024px) 20vw, 45vw" class="aspect-[4/3] w-full object-cover" loading="lazy" />
             </li>
           ))}

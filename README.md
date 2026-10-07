@@ -109,6 +109,9 @@ Verruim daarnaast de CSP in `public/_headers` voor Turnstile (`https://challenge
 ## Ontwerp
 
 - Kleuren afgeleid van het logo: leisteen `#2b3a4a`, teal `#0f6b63`/`#10a090`, goud `#c99a4e`, klei `#b4532a` (donatieknop), crème `#fbf6ec`.
-- Lettertypen (zelf gehost via Fontsource): Fraunces (koppen) en Figtree (tekst).
-- Alleen het menu gebruikt JavaScript (±1 kB); de rest werkt zonder JS. Bewegingen respecteren `prefers-reduced-motion`.
+- Lettertypen (zelf gehost, alleen Latin-subset): Fraunces met de zachte "SOFT"-as voor koppen, Figtree voor tekst. De `@font-face`-regels staan in `src/styles/global.css`.
+- "Soepele" uitstraling: golvende sectie-overgangen (`Wave.astro`), grote ronde hoeken, warme gelaagde schaduwen, glazen header met schaduw bij scrollen.
+- Beweging, volledig in CSS en alleen zonder `prefers-reduced-motion: reduce`: crossfade tussen pagina's (cross-document view transitions), kaarten die zacht in beeld komen (scroll-gestuurde `.rise`-animatie), een rustige zoom op hero-foto's en soepele hover-effecten. Browsers zonder ondersteuning tonen alles gewoon statisch.
+- Alleen het menu gebruikt JavaScript (±1 kB); de rest werkt zonder JS.
+- `astro.config.mjs` zet `cssMinify: 'esbuild'`: de standaard-minifier voegt `animation-timeline` samen met `animation`, wat sommige browsers laten vallen.
 - Het jaartal in de footer wordt tijdens de build bepaald; een build in het nieuwe jaar werkt het bij.

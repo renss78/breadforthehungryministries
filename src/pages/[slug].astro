@@ -4,6 +4,7 @@ import type { GetStaticPaths } from 'astro';
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import CTA from '../components/CTA.astro';
+import Wave from '../components/Wave.astro';
 import NewsCard from '../components/NewsCard.astro';
 import { formatDate } from '../utils/format';
 
@@ -38,7 +39,7 @@ const { title, date, cover, coverAlt, excerpt } = post.data;
         sizes="(min-width: 1152px) 72rem, 100vw"
         loading="eager"
         fetchpriority="high"
-        class="mx-auto max-h-[34rem] w-full max-w-4xl rounded-3xl object-cover shadow-card"
+        class="mx-auto max-h-[34rem] w-full max-w-4xl rounded-[2rem] object-cover shadow-lift"
       />
     </div>
     <div class="container-prose prose section">
@@ -46,7 +47,8 @@ const { title, date, cover, coverAlt, excerpt } = post.data;
     </div>
   </article>
 
-  <section class="bg-sand" aria-labelledby="meer-nieuws">
+  <section class="relative mt-8 bg-sand" aria-labelledby="meer-nieuws">
+    <Wave class="absolute inset-x-0 bottom-full -mb-px text-sand" flip />
     <div class="container-page section">
       <h2 id="meer-nieuws">Meer nieuws</h2>
       <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -11,14 +11,14 @@ const { post } = Astro.props;
 const { title, date, cover, coverAlt, excerpt } = post.data;
 ---
 
-<article class:list={['group flex flex-col overflow-hidden rounded-2xl bg-white shadow-card transition-transform duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0']}>
+<article class="soft-card rise group flex flex-col overflow-hidden motion-reduce:!transform-none">
   <a href={`/${post.id}/`} class="block overflow-hidden bg-sand" tabindex="-1" aria-hidden="true">
     <Image
       src={cover}
       alt={coverAlt}
       widths={[320, 480, 640]}
       sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 100vw"
-      class="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+      class="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
       loading="lazy"
     />
   </a>

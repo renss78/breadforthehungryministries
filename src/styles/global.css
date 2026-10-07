@@ -1,6 +1,27 @@
 @import 'tailwindcss';
-@import '@fontsource-variable/fraunces/opsz.css';
-@import '@fontsource-variable/figtree';
+
+/* Only the Latin subset is needed for Dutch; the stock Fontsource CSS ships every script. */
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('../../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-soft-normal.woff2') format('woff2-variations');
+}
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('../../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-soft-italic.woff2') format('woff2-variations');
+}
+@font-face {
+  font-family: 'Figtree Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 900;
+  src: url('../../node_modules/@fontsource-variable/figtree/files/figtree-latin-wght-normal.woff2') format('woff2-variations');
+}
 
 @theme {
   --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
@@ -20,7 +41,9 @@
   --color-clay: #b4532a;
   --color-clay-dark: #98421d;
 
-  --shadow-card: 0 1px 2px rgb(43 58 74 / 0.06), 0 8px 24px -8px rgb(43 58 74 / 0.18);
+  --shadow-card: 0 1px 1px rgb(60 45 25 / 0.04), 0 4px 10px -2px rgb(60 45 25 / 0.06), 0 22px 44px -18px rgb(60 45 25 / 0.22);
+  --shadow-lift: 0 2px 2px rgb(60 45 25 / 0.05), 0 12px 24px -6px rgb(60 45 25 / 0.12), 0 36px 64px -20px rgb(60 45 25 / 0.3);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @layer base {
@@ -35,7 +58,11 @@
     }
   }
   body {
-    background: var(--color-cream);
+    background:
+      radial-gradient(60rem 36rem at 100% 0%, rgb(246 235 211 / 0.9), transparent 70%),
+      radial-gradient(50rem 30rem at 0% 40%, rgb(217 239 236 / 0.45), transparent 70%),
+      var(--color-cream);
+    background-attachment: fixed;
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
@@ -47,9 +74,10 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 600;
+    font-weight: 500;
+    font-variation-settings: 'SOFT' 100;
     line-height: 1.15;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
     color: var(--color-ink);
     text-wrap: balance;
   }
@@ -85,7 +113,7 @@
     margin-inline: auto;
   }
   .section {
-    padding-block: clamp(3.5rem, 2rem + 6vw, 7rem);
+    padding-block: clamp(4rem, 2rem + 7vw, 8rem);
   }
   .eyebrow {
     font-size: 0.8125rem;
@@ -106,17 +134,25 @@
     text-decoration: none;
     border: 2px solid transparent;
     transition:
-      background-color 0.2s,
-      color 0.2s,
-      border-color 0.2s,
-      transform 0.2s;
+      background-color 0.35s var(--ease-smooth),
+      color 0.35s var(--ease-smooth),
+      border-color 0.35s var(--ease-smooth),
+      box-shadow 0.35s var(--ease-smooth),
+      transform 0.35s var(--ease-smooth);
   }
   .btn:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+  }
+  .btn:active {
+    transform: translateY(0) scale(0.98);
   }
   .btn-clay {
     background: var(--color-clay);
     color: #fff;
+    box-shadow: 0 8px 20px -8px rgb(180 83 42 / 0.65);
+  }
+  .btn-clay:hover {
+    box-shadow: 0 14px 28px -8px rgb(180 83 42 / 0.6);
   }
   .btn-clay:hover {
     background: var(--color-clay-dark);
@@ -178,7 +214,7 @@
   .prose video {
     width: 100%;
     height: auto;
-    border-radius: 0.75rem;
+    border-radius: 1.25rem;
     box-shadow: var(--shadow-card);
     background: var(--color-sand);
   }
@@ -195,9 +231,23 @@
     object-fit: cover;
   }
 
+  /* Soft cards */
+  .soft-card {
+    border-radius: 1.75rem;
+    background: #fff;
+    box-shadow: var(--shadow-card);
+    transition:
+      transform 0.5s var(--ease-smooth),
+      box-shadow 0.5s var(--ease-smooth);
+  }
+  .soft-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lift);
+  }
+
   /* Subtle entrance motion */
   .reveal {
-    animation: reveal 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation: reveal 1s var(--ease-smooth) both;
   }
   @keyframes reveal {
     from {
@@ -205,7 +255,57 @@
       transform: translateY(14px);
     }
   }
+  /* Scroll-linked reveal (progressive enhancement; no JS). */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .rise {
+        animation: rise linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 40%;
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(32px) scale(0.985);
+        }
+      }
+      .kenburns {
+        animation: kenburns 28s ease-in-out infinite alternate;
+      }
+      @keyframes kenburns {
+        to {
+          transform: scale(1.07) translate3d(-0.8%, -0.6%, 0);
+        }
+      }
+    }
+  }
+
+  /* Page-to-page crossfade (cross-document view transitions) */
+  ::view-transition-old(root) {
+    animation: 0.28s ease-in both vt-out;
+  }
+  ::view-transition-new(root) {
+    animation: 0.45s var(--ease-smooth) both vt-in;
+  }
+  @keyframes vt-out {
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes vt-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+  ::view-transition-group(site-header) {
+    animation-duration: 0s;
+  }
   @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none;
+    }
     .reveal {
       animation: none;
     }
@@ -215,4 +315,8 @@
       transform: none;
     }
   }
+}
+
+@view-transition {
+  navigation: auto;
 }

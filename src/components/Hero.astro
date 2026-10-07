@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import Wave from './Wave.astro';
 
 interface Props {
   title: string;
@@ -11,9 +12,11 @@ interface Props {
   size?: 'full' | 'page';
   /** Focal point for object-position, e.g. "50% 30%". */
   position?: string;
+  /** Fill colour of the wave at the bottom = background of whatever follows. */
+  wave?: string;
 }
 
-const { title, eyebrow, image, imageAlt = '', size = 'page', position = '50% 40%' } = Astro.props;
+const { title, eyebrow, image, imageAlt = '', size = 'page', position = '50% 40%', wave = 'text-cream' } = Astro.props;
 const full = size === 'full';
 ---
 
@@ -23,19 +26,21 @@ const full = size === 'full';
   <Image
     src={image}
     alt={imageAlt}
-    widths={[640, 1024, 1600, 2000]}
+    widths={[480, 768, 1024, 1600, 2000]}
+    quality={70}
     sizes="100vw"
     loading="eager"
     fetchpriority="high"
-    class="absolute inset-0 -z-10 h-full w-full object-cover"
+    class="kenburns absolute inset-0 -z-10 h-full w-full object-cover will-change-transform"
     style={`object-position:${position}`}
   />
-  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/55 to-ink/20"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink/90 via-ink/45 to-ink/10"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-br from-teal-900/35 via-transparent to-transparent"></div>
   </>
   ) : (
   <div class="absolute inset-0 -z-10 bg-gradient-to-br from-teal-900 to-teal-700"></div>
   )}
-  <div class:list={['container-page flex h-full flex-col justify-end', full ? 'min-h-[min(88svh,52rem)] pb-14 pt-32 sm:pb-20' : 'min-h-[22rem] pb-10 pt-24 sm:min-h-[26rem] sm:pb-14']}>
+  <div class:list={['container-page flex h-full flex-col justify-end', full ? 'min-h-[min(88svh,52rem)] pb-24 pt-32 sm:pb-32' : 'min-h-[22rem] pb-16 pt-24 sm:min-h-[26rem] sm:pb-24']}>
     <div class="reveal max-w-3xl">
       {eyebrow && <p class="eyebrow !text-gold-300">{eyebrow}</p>}
       <h1 class:list={['mt-3 !text-white', full && 'font-medium italic']}>
@@ -45,4 +50,5 @@ const full = size === 'full';
       <div class="mt-8 flex flex-wrap gap-3"><slot name="actions" /></div>
     </div>
   </div>
+  <Wave class:list={['absolute inset-x-0 -bottom-px', wave]} />
 </section>

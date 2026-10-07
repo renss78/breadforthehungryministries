@@ -36,7 +36,7 @@ const hero = img('2025-09-1.png');
             <ul class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
               {s.photos.map((p) => (
                 <li>
-                  <a href={p.full} target="_blank" rel="noopener" class="group block overflow-hidden rounded-xl bg-sand shadow-card">
+                  <a href={p.full} target="_blank" rel="noopener" class="rise group block overflow-hidden rounded-2xl bg-sand shadow-card">
                     <Image src={p.src} alt="" widths={[240, 360, 480]} sizes="(min-width: 1024px) 17rem, (min-width: 640px) 30vw, 45vw" class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none" loading="lazy" />
                     <span class="sr-only">Foto vergroten (opent in nieuw tabblad)</span>
                   </a>
@@ -48,7 +48,7 @@ const hero = img('2025-09-1.png');
             <ul class="mt-8 grid gap-4 sm:grid-cols-2">
               {s.videos.map((v) => (
                 <li>
-                  <video controls preload="metadata" playsinline class="aspect-video w-full rounded-xl bg-ink shadow-card" src={`/media/video/${v}`} />
+                  <video controls preload="metadata" playsinline class="rise aspect-video w-full rounded-2xl bg-ink shadow-card" src={`/media/video/${v}`} />
                 </li>
               ))}
             </ul>

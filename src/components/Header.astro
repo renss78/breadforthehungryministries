@@ -7,7 +7,7 @@ const path = Astro.url.pathname;
 const isActive = (href: string) => href !== '#' && (path === href || (href !== '/' && path.startsWith(href)));
 ---
 
-<header class="sticky top-0 z-50 border-b border-ink/10 bg-cream/95 backdrop-blur">
+<header class="site-header sticky top-0 z-50 bg-cream/75 backdrop-blur-xl backdrop-saturate-150">
   <div class="container-page flex items-center justify-between gap-4 py-3">
     <a href="/" class="shrink-0" aria-label="Bread for the Hungry Ministries — naar de homepage">
       <Image src={logo} alt="" width={168} height={56} loading="eager" class="h-11 w-auto sm:h-12" />
@@ -98,6 +98,25 @@ const isActive = (href: string) => href !== '#' && (path === href || (href !== '
 </header>
 
 <style>
+  .site-header {
+    view-transition-name: site-header;
+    border-bottom: 1px solid rgb(43 58 74 / 0.06);
+  }
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .site-header {
+        animation: header-shadow linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0 120px;
+      }
+      @keyframes header-shadow {
+        to {
+          box-shadow: 0 10px 30px -14px rgb(60 45 25 / 0.28);
+          background-color: rgb(251 246 236 / 0.9);
+        }
+      }
+    }
+  }
   .nav-link {
     display: inline-flex;
     align-items: center;
@@ -108,7 +127,9 @@ const isActive = (href: string) => href !== '#' && (path === href || (href !== '
     font-weight: 600;
     color: var(--color-ink);
     text-decoration: none;
-    transition: background-color 0.2s;
+    transition:
+      background-color 0.3s var(--ease-smooth),
+      color 0.3s var(--ease-smooth);
   }
   .nav-link:hover,
   .nav-link[aria-expanded='true'] {
@@ -128,10 +149,10 @@ const isActive = (href: string) => href !== '#' && (path === href || (href !== '
     padding: 0.5rem;
     margin-top: 0.1rem;
     background: #fff;
-    border-radius: 1rem;
-    box-shadow: var(--shadow-card);
-    border: 1px solid rgb(43 58 74 / 0.08);
-    animation: pop 0.16s ease-out;
+    border-radius: 1.4rem;
+    box-shadow: var(--shadow-lift);
+    border: 1px solid rgb(43 58 74 / 0.06);
+    animation: pop 0.3s var(--ease-smooth);
   }
   .dropdown[hidden] {
     display: none;
@@ -155,7 +176,7 @@ const isActive = (href: string) => href !== '#' && (path === href || (href !== '
   @keyframes pop {
     from {
       opacity: 0;
-      transform: translateY(-4px);
+      transform: translateY(-8px) scale(0.98);
     }
   }
   .menu-toggle {

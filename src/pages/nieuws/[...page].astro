@@ -19,7 +19,8 @@ const pages = Array.from({ length: page.lastPage }, (_, i) => i + 1);
 
 <Layout title={title} description="Het laatste nieuws en de nieuwsupdates vanuit Oeganda en Kenia.">
   <Hero title="Nieuws" eyebrow="Laatste nieuws" />
-  <section class="container-page section" aria-label="Nieuwsberichten">
+  <section class="container-page section" aria-labelledby="berichten">
+    <h2 id="berichten" class="sr-only">Nieuwsberichten</h2>
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {page.data.map((post) => <NewsCard post={post} />)}
     </div>

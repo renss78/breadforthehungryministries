@@ -33,7 +33,7 @@ const projects = [
   </section>
 
   <section class="container-page pb-16" aria-labelledby="bank">
-    <div class="mx-auto grid max-w-4xl items-center gap-8 rounded-3xl bg-teal-700 p-7 text-white shadow-card sm:p-10 md:grid-cols-[1fr_auto]">
+    <div class="mx-auto grid max-w-4xl items-center gap-8 rise rounded-[2rem] bg-teal-700 p-7 text-white shadow-lift sm:p-10 md:grid-cols-[1fr_auto]">
       <div>
         <h2 id="bank" class="!text-white !text-3xl">Bankgegevens Bread for The Hungry Ministries:</h2>
         <dl class="mt-6 space-y-3">
@@ -54,7 +54,7 @@ const projects = [
       <ul class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {
           projects.map((p) => (
-            <li class="overflow-hidden rounded-2xl bg-white shadow-card">
+            <li class="soft-card rise overflow-hidden">
               <Image src={p.src} alt={p.alt} widths={[320, 506]} sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 100vw" class="aspect-[506/497] w-full object-cover" loading="lazy" />
             </li>
           ))
