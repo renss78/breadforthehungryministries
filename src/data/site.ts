@@ -6,6 +6,8 @@ export const site = {
     'Bread for the Hungry Ministries zet zich in voor bijbelscholen, seminars en pastorconferenties in Kenia en Oeganda en steunt kansarme gemeenschappen met waterputten en agrarische projecten.',
   email: 'info@breadforthehungryministries.nl',
   phone: '0655750601',
+  /** Internationaal formaat voor wa.me-links (zonder +). */
+  whatsapp: '31655750601',
   iban: 'NL11RABO 0317 2284 63',
   kvk: '68179901',
   rsin: '857334591',
@@ -22,9 +24,9 @@ export const nav: NavItem[] = [
     children: [
       { label: 'Oeganda', href: '/oeganda/' },
       { label: 'Kenia', href: '/kenia/' },
-      { label: 'Media', href: '/media/' },
     ],
   },
+  { label: 'Media', href: '/media/' },
   { label: 'Sponsoring', href: '/sponsoring/' },
   {
     label: 'Over ons',

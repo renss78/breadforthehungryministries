@@ -20,7 +20,7 @@ const { title, eyebrow, image, imageAlt = '', size = 'page', position = '50% 40%
 const full = size === 'full';
 ---
 
-<section class:list={['relative isolate overflow-hidden bg-ink text-white', full ? 'min-h-[min(88svh,52rem)]' : 'min-h-[22rem] sm:min-h-[26rem]']}>
+<section class:list={['relative isolate overflow-hidden bg-ink text-white', full ? 'min-h-[min(58svh,32rem)]' : 'min-h-[22rem] sm:min-h-[26rem]']}>
   {image ? (
   <>
   <Image
@@ -34,14 +34,14 @@ const full = size === 'full';
     class="kenburns absolute inset-0 -z-10 h-full w-full object-cover will-change-transform"
     style={`object-position:${position}`}
   />
-  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink/90 via-ink/45 to-ink/10"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink/90 via-ink/60 to-ink/25"></div>
   <div class="absolute inset-0 -z-10 bg-gradient-to-br from-teal-900/35 via-transparent to-transparent"></div>
   </>
   ) : (
   <div class="absolute inset-0 -z-10 bg-gradient-to-br from-teal-900 to-teal-700"></div>
   )}
-  <div class:list={['container-page flex h-full flex-col justify-end', full ? 'min-h-[min(88svh,52rem)] pb-24 pt-32 sm:pb-32' : 'min-h-[22rem] pb-16 pt-24 sm:min-h-[26rem] sm:pb-24']}>
-    <div class="reveal max-w-3xl">
+  <div class:list={['container-page flex h-full flex-col justify-end', full ? 'min-h-[min(58svh,32rem)] pb-20 pt-24 sm:pb-28' : 'min-h-[22rem] pb-16 pt-24 sm:min-h-[26rem] sm:pb-24']}>
+    <div class="reveal max-w-3xl [text-shadow:0_2px_18px_rgb(20_28_36/0.5)]">
       {eyebrow && <p class="eyebrow !text-gold-300">{eyebrow}</p>}
       <h1 class:list={['mt-3 !text-white', full && 'font-medium italic']}>
         <slot name="title">{title}</slot>

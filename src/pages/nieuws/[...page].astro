@@ -5,6 +5,7 @@ import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import NewsCard from '../../components/NewsCard.astro';
 import CTA from '../../components/CTA.astro';
+import hero from '../../assets/images/2026-01-WhatsApp-Image-2026-01-21-at-22.18.09-3.jpeg';
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -22,7 +23,7 @@ const pages = Array.from({ length: page.lastPage }, (_, i) => i + 1);
   seoTitle={page.currentPage > 1 ? `Nieuws uit Oeganda en Kenia — pagina ${page.currentPage} | Bread for the Hungry` : 'Nieuws uit Oeganda en Kenia | Bread for the Hungry'}
   description="Het laatste nieuws en de nieuwsupdates van het zendingswerk in Oeganda en Kenia: bekeringen, doopdiensten, bijbelscholen en Bijbeluitdeling."
 >
-  <Hero title="Nieuws" eyebrow="Laatste nieuws" />
+  <Hero title="Nieuws" eyebrow="Laatste nieuws" image={hero} imageAlt="Gelovigen met hun Bijbel en certificaat in Oeganda" position="50% 40%" />
   <section class="container-page section" aria-labelledby="berichten">
     <h2 id="berichten" class="sr-only">Nieuwsberichten</h2>
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

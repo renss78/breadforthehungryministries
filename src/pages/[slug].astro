@@ -1,9 +1,9 @@
 ---
 import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
-import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import CTA from '../components/CTA.astro';
+import Hero from '../components/Hero.astro';
 import Wave from '../components/Wave.astro';
 import NewsCard from '../components/NewsCard.astro';
 import { formatDate } from '../utils/format';
@@ -37,25 +37,11 @@ const articleLd = newsArticle({ title, description: excerpt, path: `/${post.id}/
   jsonLd={[articleLd]}
   crumbs={[{ name: 'Nieuws', path: '/nieuws/' }, { name: title, path: `/${post.id}/` }]}
 >
+  <Hero title={title} eyebrow={formatDate(date)} image={cover} imageAlt={coverAlt}>
+    <Fragment slot="title"><span class="block text-[clamp(1.75rem,1.2rem+2.4vw,3rem)] leading-tight">{title}</span></Fragment>
+    <a href="/nieuws/" class="link-arrow !border-gold-300 !text-white text-base">← Alle nieuws</a>
+  </Hero>
   <article>
-    <header class="bg-sand">
-      <div class="container-prose pb-10 pt-12 sm:pt-16">
-        <a href="/nieuws/" class="link-arrow text-sm">← Alle nieuws</a>
-        <time datetime={date.toISOString()} class="mt-6 block text-sm font-bold uppercase tracking-[0.14em] text-teal-700">{formatDate(date)}</time>
-        <h1 class="mt-3 !text-[clamp(2rem,1.4rem+2.6vw,3.25rem)]">{title}</h1>
-      </div>
-    </header>
-    <div class="container-page -mt-0 pt-8">
-      <Image
-        src={cover}
-        alt={coverAlt || title}
-        widths={[640, 1024, 1400]}
-        sizes="(min-width: 1152px) 72rem, 100vw"
-        loading="eager"
-        fetchpriority="high"
-        class="mx-auto max-h-[34rem] w-full max-w-4xl rounded-[2rem] object-cover shadow-lift"
-      />
-    </div>
     <div class="container-prose prose section">
       <Content />
     </div>

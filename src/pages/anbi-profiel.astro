@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import CTA from '../components/CTA.astro';
+import hero from '../assets/images/2025-09-5.png';
 
 const algemeen: [string, string][] = [
   ['Rechtsvorm', 'Stichting'],
@@ -47,7 +48,7 @@ const publicaties = [
 ---
 
 <Layout title="ANBI Profiel" seoTitle="ANBI Profiel | Stichting Bread for the Hungry Ministries" description="ANBI-profiel van Stichting Bread for the Hungry Ministries (KvK 68179901, RSIN 857334591): doelstelling, bestuur, beleidsplannen en jaarverslagen.">
-  <Hero title="ANBI Profiel" eyebrow="Over ons" />
+  <Hero title="ANBI Profiel" eyebrow="Over ons" image={hero} imageAlt="Gestapelde Bijbels voor de studenten" position="50% 50%" />
 
   <div class="container-prose section space-y-14">
     <section aria-labelledby="algemeen">
