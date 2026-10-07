@@ -24,6 +24,16 @@ Onze lichamen werden maximaal belast, en we zijn dankbaar voor de kracht die we 
 
 ![Foto 3 bij het verslag van de afgelopen dagen](../../assets/images/oeganda-2026-sept-03.jpeg)
 
+![Foto 4 bij het verslag van de afgelopen dagen](../../assets/images/oeganda-2026-sept/IMG20260911120647.jpg)
+
+![Foto 5 bij het verslag van de afgelopen dagen](../../assets/images/oeganda-2026-sept/IMG20260911144447.jpg)
+
+![Foto 6 bij het verslag van de afgelopen dagen](../../assets/images/oeganda-2026-sept/IMG20260913123336.jpg)
+
+![Foto 7 bij het verslag van de afgelopen dagen](../../assets/images/oeganda-2026-sept/IMG20260913124250.jpg)
+
+![Foto 8 bij het verslag van de afgelopen dagen](../../assets/images/oeganda-2026-sept/IMG20260913133708.jpg)
+
 </div>
 
 Tot slot reizen we naar Entebbe. Om 21.00 uur vliegen we van Entebbe naar Nairobi en om 23.59 uur van Nairobi naar Amsterdam, waar we donderdag om 7.45 uur landen.
