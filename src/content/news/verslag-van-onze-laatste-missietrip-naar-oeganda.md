@@ -3,6 +3,10 @@ title: "Verslag van onze laatste missietrip naar Oeganda"
 date: 2026-09-15T12:00:00
 cover: "../../assets/images/oeganda-2026-sept-04.jpeg"
 coverAlt: "Een gezelschap rond een lange houten tafel onder een rieten dak in Oeganda"
+videos:
+  - id: "Qt1-PqSqAcU"
+    title: "Oeganda 2026 in september"
+    poster: "../../assets/images/video-Qt1-PqSqAcU-maxresdefault.jpg"
 excerpt: "We kijken dankbaar terug op de dagen van onze missietrip naar Oeganda: dagen met een open hemel, waarin van alles gebeurde. Elke dienst en elk seminar was impactvol en de notitiebladen werden volgeschreven."
 ---
 

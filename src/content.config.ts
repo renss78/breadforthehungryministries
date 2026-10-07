@@ -11,6 +11,10 @@ const news = defineCollection({
       cover: image(),
       coverAlt: z.string().default(''),
       excerpt: z.string(),
+      /** Optional YouTube videos, shown under the header (click-to-play). */
+      videos: z
+        .array(z.object({ id: z.string(), title: z.string(), poster: image() }))
+        .default([]),
     }),
 });
 

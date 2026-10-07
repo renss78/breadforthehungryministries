@@ -111,7 +111,8 @@ const { id, title, poster, featured = false } = Astro.props;
   .yt-frame.is-playing {
     transform: none;
   }
-  .yt-frame iframe {
+  /* De iframe wordt pas bij een klik aangemaakt en heeft dus geen Astro-scope: daarom :global. */
+  .yt-frame :global(iframe) {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -128,7 +129,7 @@ const { id, title, poster, featured = false } = Astro.props;
     .yt-frame,
     .yt-poster,
     .yt-play,
-    .yt-frame iframe {
+    .yt-frame :global(iframe) {
       transition: none;
       animation: none;
     }

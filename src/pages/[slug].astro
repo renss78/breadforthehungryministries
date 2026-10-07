@@ -4,6 +4,7 @@ import type { GetStaticPaths } from 'astro';
 import Layout from '../layouts/Layout.astro';
 import CTA from '../components/CTA.astro';
 import Hero from '../components/Hero.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import Wave from '../components/Wave.astro';
 import NewsCard from '../components/NewsCard.astro';
 import { formatDate } from '../utils/format';
@@ -22,7 +23,7 @@ export const getStaticPaths = (async () => {
 
 const { post, related } = Astro.props;
 const { Content } = await render(post);
-const { title, date, cover, coverAlt, excerpt } = post.data;
+const { title, date, cover, coverAlt, excerpt, videos } = post.data;
 const ogImage = await getImage({ src: cover, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
 const articleLd = newsArticle({ title, description: excerpt, path: `/${post.id}/`, image: new URL(ogImage.src, Astro.site).href, published: date });
 ---
@@ -41,6 +42,17 @@ const articleLd = newsArticle({ title, description: excerpt, path: `/${post.id}/
     <Fragment slot="title"><span class="block text-[clamp(1.75rem,1.2rem+2.4vw,3rem)] leading-tight">{title}</span></Fragment>
     <a href="/nieuws/" class="link-arrow !border-gold-300 !text-white text-base">← Alle nieuws</a>
   </Hero>
+  {
+    videos.length > 0 && (
+      <section class="container-page pt-12 sm:pt-16" aria-label="Video's">
+        <div class="mx-auto grid max-w-4xl gap-8">
+          {videos.map((v, i) => (
+            <YouTubeEmbed id={v.id} title={v.title} poster={v.poster} featured={i === 0} />
+          ))}
+        </div>
+      </section>
+    )
+  }
   <article>
     <div class="container-prose prose section">
       <Content />
