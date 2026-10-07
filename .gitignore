@@ -8,3 +8,6 @@ dist/
 !.env.example
 *.log
 .DS_Store
+
+# Bronbestanden (nieuwsbrief-PDF) horen niet in de repo
+src/content/*.pdf
