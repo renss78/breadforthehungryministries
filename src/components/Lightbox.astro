@@ -1,0 +1,308 @@
+---
+// Fotoviewer: klik op een foto in een galerij (`[data-gallery]`) of in een nieuwsbericht (`.prose`)
+// om te vergroten; bladeren met pijlen, toetsenbord of swipe. Zonder JS blijven fotolinks gewoon werken.
+---
+
+<dialog class="lightbox" aria-label="Fotoviewer">
+  <div class="lb-top">
+    <p class="lb-count" aria-live="polite"></p>
+    <button type="button" class="lb-btn lb-close" aria-label="Sluiten">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"></path></svg>
+    </button>
+  </div>
+  <button type="button" class="lb-btn lb-prev" aria-label="Vorige foto">
+    <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+  </button>
+  <figure class="lb-stage">
+    <img class="lb-img" alt="" />
+    <figcaption class="lb-caption" hidden></figcaption>
+  </figure>
+  <button type="button" class="lb-btn lb-next" aria-label="Volgende foto">
+    <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+  </button>
+</dialog>
+
+<style is:global>
+  img[data-zoomable] {
+    cursor: zoom-in;
+  }
+  body:has(dialog.lightbox[open]) {
+    overflow: hidden;
+  }
+  dialog.lightbox {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: rgb(20 28 36 / 0.94);
+    color: #fff;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      opacity 0.3s var(--ease-smooth),
+      overlay 0.3s allow-discrete,
+      display 0.3s allow-discrete;
+  }
+  dialog.lightbox[open] {
+    opacity: 1;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto 1fr;
+    align-items: center;
+  }
+  @starting-style {
+    dialog.lightbox[open] {
+      opacity: 0;
+    }
+  }
+  dialog.lightbox::backdrop {
+    background: transparent;
+  }
+  .lb-top {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+  }
+  .lb-count {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: rgb(255 255 255 / 0.85);
+  }
+  .lb-stage {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    padding-bottom: 1rem;
+    touch-action: pan-y pinch-zoom;
+  }
+  .lb-img {
+    max-width: 100%;
+    max-height: calc(100% - 2.5rem);
+    flex: 0 1 auto;
+    min-height: 0;
+    object-fit: contain;
+    border-radius: 0.75rem;
+    box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.6);
+    transition:
+      opacity 0.35s var(--ease-smooth),
+      transform 0.35s var(--ease-smooth);
+  }
+  .lb-img.is-swapping {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  .lb-caption {
+    max-width: 40rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: rgb(255 255 255 / 0.85);
+  }
+  .lb-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.12);
+    color: #fff;
+    transition:
+      background-color 0.25s,
+      transform 0.25s var(--ease-smooth);
+  }
+  .lb-btn:hover {
+    background: rgb(255 255 255 / 0.25);
+  }
+  .lb-btn:active {
+    transform: scale(0.94);
+  }
+  .lb-btn:focus-visible {
+    outline-color: #fff;
+  }
+  .lb-prev {
+    grid-column: 1;
+    grid-row: 2;
+    margin-inline: 0.75rem;
+  }
+  .lb-next {
+    grid-column: 3;
+    grid-row: 2;
+    margin-inline: 0.75rem;
+  }
+  dialog.lightbox[data-single] .lb-prev,
+  dialog.lightbox[data-single] .lb-next,
+  dialog.lightbox[data-single] .lb-count {
+    visibility: hidden;
+  }
+  @media (max-width: 640px) {
+    dialog.lightbox[open] {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr auto;
+    }
+    .lb-stage {
+      grid-column: 1;
+      padding-inline: 0.75rem;
+    }
+    .lb-prev,
+    .lb-next {
+      grid-row: 3;
+      margin: 0 0 1rem;
+    }
+    .lb-prev {
+      grid-column: 1;
+      justify-self: start;
+      margin-left: 1rem;
+    }
+    .lb-next {
+      grid-column: 1;
+      justify-self: end;
+      margin-right: 1rem;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    dialog.lightbox,
+    .lb-img {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('dialog.lightbox')!;
+  const imgEl = dialog.querySelector<HTMLImageElement>('.lb-img')!;
+  const countEl = dialog.querySelector<HTMLElement>('.lb-count')!;
+  const captionEl = dialog.querySelector<HTMLElement>('.lb-caption')!;
+
+  type Item = { thumb: HTMLImageElement; full: string; alt: string };
+  let items: Item[] = [];
+  let index = 0;
+  let opener: HTMLElement | null = null;
+
+  /** Largest candidate from srcset, falling back to src. */
+  const biggest = (img: HTMLImageElement) => {
+    const set = img.getAttribute('srcset');
+    if (!set) return img.currentSrc || img.src;
+    const best = set
+      .split(',')
+      .map((s) => s.trim().split(/\s+/))
+      .map(([url, w]) => ({ url, w: parseInt(w ?? '0', 10) }))
+      .sort((a, b) => b.w - a.w)[0];
+    return new URL(best.url, location.href).href;
+  };
+
+  const fullUrl = (img: HTMLImageElement) => {
+    const link = img.closest<HTMLAnchorElement>('a[href]');
+    return link && /\.(png|jpe?g|webp|avif)(\?|$)/i.test(link.href) ? link.href : biggest(img);
+  };
+
+  const groupOf = (img: HTMLImageElement) => img.closest<HTMLElement>('[data-gallery], .prose');
+  const collect = (group: HTMLElement): Item[] =>
+    [...group.querySelectorAll<HTMLImageElement>('img')]
+      .filter((i) => !i.hasAttribute('data-no-zoom'))
+      .map((thumb) => ({ thumb, full: fullUrl(thumb), alt: thumb.alt }));
+
+  const show = (i: number, animate = true) => {
+    index = (i + items.length) % items.length;
+    const item = items[index];
+    const apply = () => {
+      imgEl.src = item.full;
+      imgEl.alt = item.alt;
+      const caption = item.alt && !item.alt.startsWith('Foto bij') ? item.alt : '';
+      captionEl.textContent = caption;
+      captionEl.hidden = !caption;
+      countEl.textContent = `${index + 1} / ${items.length}`;
+      imgEl.classList.remove('is-swapping');
+    };
+    if (animate && dialog.open && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      imgEl.classList.add('is-swapping');
+      setTimeout(apply, 160);
+    } else apply();
+    // Preload neighbours so browsing feels instant.
+    [index + 1, index - 1].forEach((n) => {
+      const it = items[(n + items.length) % items.length];
+      if (it) new Image().src = it.full;
+    });
+  };
+
+  const open = (img: HTMLImageElement) => {
+    const group = groupOf(img) ?? img.parentElement!;
+    items = collect(group);
+    const start = items.findIndex((it) => it.thumb === img);
+    if (start < 0) return;
+    opener = img.closest<HTMLElement>('a, [role=button]') ?? img;
+    dialog.toggleAttribute('data-single', items.length < 2);
+    show(start, false);
+    dialog.showModal();
+    dialog.querySelector<HTMLElement>('.lb-close')!.focus({ preventScroll: true });
+  };
+
+  const step = (d: number) => items.length > 1 && show(index + d);
+
+  // Make eligible images interactive.
+  document.querySelectorAll<HTMLImageElement>('[data-gallery] img, .prose img').forEach((img) => {
+    if (img.hasAttribute('data-no-zoom')) return;
+    img.setAttribute('data-zoomable', '');
+    if (!img.closest('a')) {
+      img.setAttribute('role', 'button');
+      img.tabIndex = 0;
+      img.setAttribute('aria-label', img.alt ? `Vergroot foto: ${img.alt}` : 'Vergroot foto');
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    const img = (e.target as Element).closest<HTMLImageElement>('img[data-zoomable]');
+    if (!img || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    e.preventDefault();
+    open(img);
+  });
+  document.addEventListener('keydown', (e) => {
+    const t = e.target as HTMLElement;
+    if (t.matches?.('img[data-zoomable][role=button]') && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      open(t as HTMLImageElement);
+    }
+  });
+
+  dialog.querySelector('.lb-prev')!.addEventListener('click', () => step(-1));
+  dialog.querySelector('.lb-next')!.addEventListener('click', () => step(1));
+  dialog.querySelector('.lb-close')!.addEventListener('click', () => dialog.close());
+  dialog.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+  });
+  // Click on the dark area (not on the photo or a button) closes.
+  dialog.addEventListener('click', (e) => {
+    const t = e.target as Element;
+    if (t === dialog || t.classList.contains('lb-stage') || t.classList.contains('lb-top')) dialog.close();
+  });
+  dialog.addEventListener('close', () => {
+    imgEl.removeAttribute('src');
+    opener?.focus({ preventScroll: true });
+  });
+
+  // Swipe left/right on touch screens.
+  let startX = 0;
+  let startY = 0;
+  const stage = dialog.querySelector<HTMLElement>('.lb-stage')!;
+  stage.addEventListener('pointerdown', (e) => {
+    startX = e.clientX;
+    startY = e.clientY;
+  });
+  stage.addEventListener('pointerup', (e) => {
+    const dx = e.clientX - startX;
+    if (e.pointerType !== 'mouse' && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(e.clientY - startY)) step(dx < 0 ? 1 : -1);
+  });
+</script>

@@ -51,9 +51,9 @@ const gallery = [g1, g2, g3, g4, g5, g6];
     <p>Gezien de enorme opwekking in het gebied is de urgentie hoog om zoveel mogelijk werkers te training voor het Koninkrijk van God. Uit de tweede jaarsopleiding worden kandidaten geselecteerd om deel uit te maken van het ministry team. Zij worden uitgezonden om overal in de huisgroepen de fundamenten van het Christelijke geloof te onderwijzen.</p>
   </article>
   <section class="container-page pb-16" aria-label="Foto's">
-    <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+    <ul data-gallery class="grid grid-cols-2 gap-3 sm:grid-cols-3">
       {gallery.map((img) => (
-        <li><Image src={img} alt="" widths={[320, 480, 640]} sizes="(min-width: 1152px) 22rem, 45vw" class="aspect-[4/3] w-full rounded-xl object-cover shadow-card" loading="lazy" /></li>
+        <li><Image src={img} alt="" widths={[320, 480, 640, 1024]} sizes="(min-width: 1152px) 22rem, 45vw" class="aspect-[4/3] w-full rounded-xl object-cover shadow-card" loading="lazy" /></li>
       ))}
     </ul>
     <p class="mt-6 text-center"><a href="/media/" class="link-arrow">Meer foto's en video's</a></p>
