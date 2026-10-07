@@ -96,6 +96,15 @@ Op de Oeganda-pagina staat een video-sectie (`src/pages/oeganda.astro`, lijst `v
 
 De miniatuur staat lokaal, dus er gaat pas een verzoek naar YouTube als iemand op afspelen klikt; dan laadt `youtube-nocookie.com` (toegestaan via `frame-src` in `public/_headers`).
 
+**In een nieuwsbericht:** voeg bovenaan in de frontmatter van het bericht toe (de video's staan dan onder de kop, boven de tekst):
+
+```yaml
+videos:
+  - id: "Qt1-PqSqAcU"
+    title: "Titel van de video"
+    poster: "../../assets/images/video-Qt1-PqSqAcU-maxresdefault.jpg"
+```
+
 ## Contactformulier
 
 Het formulier op `/contact/` is nu een **dummy**: het POST naar `/api/contact`, maar
