@@ -51,6 +51,15 @@ Nederlands staat op de root (`/oeganda/`), Engels onder `/en/` (`/en/uganda/`). 
 - **Het contactformulier** stuurt een verborgen veld `lang` mee; de antwoordpagina's van de Function volgen die taal. De e-mail zelf blijft Nederlands.
 - **Niet vertaald:** de prijsafbeeldingen op Sponsoring (de tekst zit in de plaatjes; alleen de alt-teksten zijn vertaald), de ANBI-pdf's in `public/documenten/` en de tekst in de video's.
 
+## Licht en donker thema
+
+De site volgt standaard het systeem (`prefers-color-scheme`); de maan/zon-knop in de header (mobiel: in het menu) wisselt en onthoudt de keuze in `localStorage`.
+Een klein inline script in `<head>` (`Layout.astro`) zet `data-theme` op `<html>` vóór de eerste paint, zodat er geen flits is.
+
+- De kleuren wisselen via CSS `light-dark()` op tokens in `src/styles/global.css` (blok onder `@supports`); de lichte waarden staan in `@theme`.
+- Gebruik voor nieuwe stukken **semantische** kleuren: `text-fg`/`text-fg-soft` (tekst), `bg-card` (kaarten, invoervelden), `text-link` (links/accenttekst), `bg-cream`/`bg-sand` (paginavlakken), `--color-line` (randjes). `ink`, `teal-*`, `gold-*` en `clay` zijn merkkleuren die in beide thema's vast blijven (knoppen, hero, footer).
+- Het logo heeft donkere letters en staat in donker op een lichte plaat (`--logo-bg`). Afbeeldingen met transparante achtergrond en donkere tekst (bijv. de prijsplaatjes op Sponsoring) kunnen in donker minder leesbaar zijn.
+
 ## Een nieuwsbericht toevoegen
 
 1. Zet de omslagfoto in `src/assets/images/` (bij voorkeur ≥ 1200 px breed).

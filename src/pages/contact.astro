@@ -59,11 +59,11 @@ const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(wh
       <dl class="mt-6 space-y-5">
         <div>
           <dt class="eyebrow">Email</dt>
-          <dd class="mt-1 break-all text-lg"><a href={`mailto:${site.email}`} class="font-semibold text-teal-700">{site.email}</a></dd>
+          <dd class="mt-1 break-all text-lg"><a href={`mailto:${site.email}`} class="font-semibold text-link">{site.email}</a></dd>
         </div>
         <div>
           <dt class="eyebrow">{l('Telefoon', 'Phone')}</dt>
-          <dd class="mt-1 text-lg"><a href={`tel:${site.phone}`} class="font-semibold text-teal-700">{site.phone}</a></dd>
+          <dd class="mt-1 text-lg"><a href={`tel:${site.phone}`} class="font-semibold text-link">{site.phone}</a></dd>
         </div>
       </dl>
       <a href={whatsappUrl} target="_blank" rel="noopener" class="btn btn-wa mt-7">
@@ -94,21 +94,21 @@ const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(wh
   textarea {
     width: 100%;
     padding: 0.8rem 1rem;
-    border: 2px solid rgb(43 58 74 / 0.25);
+    border: 2px solid var(--color-line-strong);
     border-radius: 0.75rem;
-    background: #fff;
+    background: var(--color-card);
     font: inherit;
-    color: var(--color-ink);
+    color: var(--color-fg);
     transition: border-color 0.2s;
   }
   input:hover,
   textarea:hover {
-    border-color: var(--color-ink-soft);
+    border-color: var(--color-fg-soft);
   }
   input:focus,
   textarea:focus {
     outline: 3px solid var(--color-teal-500);
     outline-offset: 1px;
-    border-color: var(--color-teal-700);
+    border-color: var(--color-link);
   }
 </style>

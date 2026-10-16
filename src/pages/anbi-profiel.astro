@@ -105,7 +105,7 @@ const typeLabel: Record<string, string> = {
 
     <section aria-labelledby="publicatie">
       <h2 id="publicatie">{l('Publicatieplicht', 'Publication duty')}</h2>
-      {lang === 'en' && <p class="mt-3 text-ink-soft">The linked documents are published in Dutch.</p>}
+      {lang === 'en' && <p class="mt-3 text-fg-soft">The linked documents are published in Dutch.</p>}
       <div class="table-wrap mt-6">
         <table>
           <thead><tr><th scope="col">{l('Jaar', 'Year')}</th><th scope="col">{l('Type document', 'Document type')}</th><th scope="col">Link</th></tr></thead>
@@ -124,7 +124,7 @@ const typeLabel: Record<string, string> = {
     display: grid;
     gap: 0.15rem 1.5rem;
     padding: 0.85rem 0;
-    border-bottom: 1px solid rgb(43 58 74 / 0.12);
+    border-bottom: 1px solid var(--color-line);
   }
   @media (min-width: 640px) {
     .rows > div {
@@ -135,11 +135,11 @@ const typeLabel: Record<string, string> = {
     font-weight: 700;
   }
   dd {
-    color: var(--color-ink);
+    color: var(--color-fg);
     overflow-wrap: anywhere;
   }
   a {
-    color: var(--color-teal-700);
+    color: var(--color-link);
     font-weight: 600;
     overflow-wrap: anywhere;
   }
@@ -147,7 +147,7 @@ const typeLabel: Record<string, string> = {
     overflow-x: auto;
     border-radius: 1rem;
     box-shadow: var(--shadow-card);
-    background: #fff;
+    background: var(--color-card);
   }
   table {
     width: 100%;
@@ -159,7 +159,7 @@ const typeLabel: Record<string, string> = {
     padding: 0.85rem 1.1rem;
     text-align: left;
     vertical-align: top;
-    border-bottom: 1px solid rgb(43 58 74 / 0.1);
+    border-bottom: 1px solid var(--color-line);
   }
   thead th {
     background: var(--color-teal-700);

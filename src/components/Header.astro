@@ -15,7 +15,7 @@ const languages = langs.map((l) => ({ lang: l, short: l.toUpperCase(), name: l =
 
 <header class="site-header sticky top-0 z-50 bg-cream/75 backdrop-blur-xl backdrop-saturate-150">
   <div class="container-page flex items-center justify-between gap-4 py-4">
-    <a href={homeHref} class="shrink-0" aria-label={t.homeLabel}>
+    <a href={homeHref} class="logo-link shrink-0" aria-label={t.homeLabel}>
       <Image src={logo} alt="" width={228} height={76} loading="eager" class="h-11 w-auto sm:h-[3.75rem]" />
     </a>
 
@@ -77,6 +77,10 @@ const languages = langs.map((l) => ({ lang: l, short: l.toUpperCase(), name: l =
           ))
         }
       </ul>
+      <button type="button" class="theme-toggle bar-theme" hidden data-label-dark={t.themeToDark} data-label-light={t.themeToLight} aria-label={t.themeToDark}>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z"></path></svg>
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
       <a href={route('sponsorship', lang)} class="btn btn-clay whitespace-nowrap !px-5 !py-2.5 text-base sm:!px-6 sm:!py-3 sm:text-[1.05rem]">{t.support}</a>
       <button type="button" class="menu-toggle xl:hidden" aria-expanded="false" aria-controls="mobiel-menu" aria-label={t.menu} data-label-open={t.menu} data-label-close={t.menuClose}>
         <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" class="icon-open">
@@ -142,7 +146,7 @@ const languages = langs.map((l) => ({ lang: l, short: l.toUpperCase(), name: l =
 <style>
   .site-header {
     view-transition-name: site-header;
-    border-bottom: 1px solid rgb(43 58 74 / 0.06);
+    border-bottom: 1px solid var(--color-line);
   }
   @supports (animation-timeline: scroll()) {
     @media (prefers-reduced-motion: no-preference) {
@@ -154,7 +158,7 @@ const languages = langs.map((l) => ({ lang: l, short: l.toUpperCase(), name: l =
       @keyframes header-shadow {
         to {
           box-shadow: 0 10px 30px -14px rgb(60 45 25 / 0.28);
-          background-color: rgb(251 246 236 / 0.9);
+          background-color: color-mix(in srgb, var(--color-cream) 90%, transparent);
         }
       }
     }
@@ -168,7 +172,7 @@ const languages = langs.map((l) => ({ lang: l, short: l.toUpperCase(), name: l =
     border-radius: 999px;
     font-size: 1.075rem;
     font-weight: 600;
-    color: var(--color-ink);
+    color: var(--color-fg);
     text-decoration: none;
     transition:
       background-color 0.3s var(--ease-smooth),
@@ -180,7 +184,7 @@ const languages = langs.map((l) => ({ lang: l, short: l.toUpperCase(), name: l =
   }
   .nav-link[aria-current='page'],
   .nav-link[data-active] {
-    color: var(--color-teal-700);
+    color: var(--color-link);
     box-shadow: inset 0 -2px 0 var(--color-gold-500);
     border-radius: 0;
   }
@@ -191,10 +195,10 @@ const languages = langs.map((l) => ({ lang: l, short: l.toUpperCase(), name: l =
     min-width: 13rem;
     padding: 0.5rem;
     margin-top: 0.1rem;
-    background: #fff;
+    background: var(--color-card);
     border-radius: 1.4rem;
     box-shadow: var(--shadow-lift);
-    border: 1px solid rgb(43 58 74 / 0.06);
+    border: 1px solid var(--color-line);
     animation: pop 0.3s var(--ease-smooth);
   }
   .dropdown[hidden] {
@@ -206,14 +210,14 @@ const languages = langs.map((l) => ({ lang: l, short: l.toUpperCase(), name: l =
     border-radius: 0.6rem;
     font-weight: 600;
     text-decoration: none;
-    color: var(--color-ink);
+    color: var(--color-fg);
   }
   .dropdown a:hover {
     background: var(--color-cream);
-    color: var(--color-teal-700);
+    color: var(--color-link);
   }
   .dropdown a[aria-current='page'] {
-    color: var(--color-teal-700);
+    color: var(--color-link);
     background: var(--color-teal-100);
   }
   @keyframes pop {
@@ -228,7 +232,7 @@ const languages = langs.map((l) => ({ lang: l, short: l.toUpperCase(), name: l =
     width: 3rem;
     height: 3rem;
     border-radius: 999px;
-    color: var(--color-ink);
+    color: var(--color-fg);
   }
   @media (max-width: 1279.98px) {
     .menu-toggle {
@@ -246,7 +250,7 @@ const languages = langs.map((l) => ({ lang: l, short: l.toUpperCase(), name: l =
     background: var(--color-sand);
   }
   .mobile-panel {
-    border-top: 1px solid rgb(43 58 74 / 0.1);
+    border-top: 1px solid var(--color-line);
     background: var(--color-cream);
     max-height: calc(100dvh - 5.5rem);
     overflow-y: auto;
@@ -259,11 +263,11 @@ const languages = langs.map((l) => ({ lang: l, short: l.toUpperCase(), name: l =
     padding: 0.7rem 0;
     font-weight: 600;
     font-size: 1.2rem;
-    color: var(--color-ink);
+    color: var(--color-fg);
     text-decoration: none;
   }
   .m-link[aria-current='page'] {
-    color: var(--color-teal-700);
+    color: var(--color-link);
   }
   .m-home {
     display: flex;
@@ -282,13 +286,66 @@ const languages = langs.map((l) => ({ lang: l, short: l.toUpperCase(), name: l =
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-ink-soft);
+    color: var(--color-fg-soft);
   }
   /* Ruimte voor de taalwisselaar naast het menu op schermen van 1280–1535 px. */
   @media (min-width: 1280px) and (max-width: 1535.98px) {
     .nav-link {
       padding-inline: 0.75rem;
     }
+  }
+  .theme-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    color: var(--color-fg);
+    background: var(--color-sand);
+  }
+  .theme-toggle[hidden] {
+    display: none;
+  }
+  /* In de balk alleen vanaf sm (mobiel: in het uitklapmenu); anders past het niet naast logo en knop. */
+  .bar-theme {
+    display: none;
+  }
+  @media (min-width: 640px) {
+    .bar-theme:not([hidden]) {
+      display: inline-grid;
+    }
+  }
+  .m-theme-btn {
+    width: auto;
+    height: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+    padding: 0.5rem 1.1rem;
+    font-weight: 600;
+  }
+  .m-theme-btn[hidden] {
+    display: none;
+  }
+  .theme-toggle:hover {
+    background: var(--color-card);
+  }
+  .theme-toggle .icon-sun {
+    display: none;
+  }
+  :global(:root[data-theme='dark']) .theme-toggle .icon-sun {
+    display: block;
+  }
+  :global(:root[data-theme='dark']) .theme-toggle .icon-moon {
+    display: none;
+  }
+  .logo-link {
+    display: block;
+    padding: 0.15rem 0.5rem;
+    margin-inline: -0.5rem; /* de lichte plaat in donker mag in de marge staan */
+    border-radius: 0.9rem;
+    background: var(--logo-bg, transparent);
   }
   .lang-switch {
     align-items: center;
@@ -306,11 +363,11 @@ const languages = langs.map((l) => ({ lang: l, short: l.toUpperCase(), name: l =
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.06em;
-    color: var(--color-ink);
+    color: var(--color-fg);
     text-decoration: none;
   }
   .lang-switch a:hover {
-    background: #fff;
+    background: var(--color-card);
   }
   .lang-switch a[aria-current='true'] {
     background: var(--color-teal-700);
@@ -325,7 +382,7 @@ const languages = langs.map((l) => ({ lang: l, short: l.toUpperCase(), name: l =
     padding: 0.5rem 1.1rem;
     border-radius: 999px;
     font-weight: 600;
-    color: var(--color-ink);
+    color: var(--color-fg);
     text-decoration: none;
     background: var(--color-sand);
   }
@@ -390,4 +447,39 @@ const languages = langs.map((l) => ({ lang: l, short: l.toUpperCase(), name: l =
     }
   });
   matchMedia('(min-width: 1280px)').addEventListener('change', (e) => e.matches && setPanel(false));
+
+  // Thema: knop wisselt licht/donker en onthoudt de keuze (de start-waarde zet het script in <head>, zie Layout.astro).
+  const themeBtns = [...header.querySelectorAll<HTMLButtonElement>('.theme-toggle')];
+  const root = document.documentElement;
+  const syncTheme = () => {
+    const dark = root.dataset.theme === 'dark';
+    themeBtns.forEach((b) => {
+      const label = (dark ? b.dataset.labelLight : b.dataset.labelDark) ?? 'Theme';
+      b.setAttribute('aria-label', label);
+      const text = b.querySelector('.theme-label');
+      if (text) text.textContent = label;
+    });
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#12181f' : '#fbf6ec');
+  };
+  themeBtns.forEach((b) => (b.hidden = false));
+  syncTheme();
+  const flip = () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('theme', next);
+    } catch {}
+    syncTheme();
+  };
+  themeBtns.forEach((b) => b.addEventListener('click', flip));
+  // Zonder eigen keuze het systeem blijven volgen.
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    let saved: string | null = null;
+    try {
+      saved = localStorage.getItem('theme');
+    } catch {}
+    if (saved) return;
+    root.dataset.theme = e.matches ? 'dark' : 'light';
+    syncTheme();
+  });
 </script>

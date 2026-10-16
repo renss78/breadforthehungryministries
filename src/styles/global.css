@@ -23,7 +23,7 @@
   src: url('../../node_modules/@fontsource-variable/figtree/files/figtree-latin-wght-normal.woff2') format('woff2-variations');
 }
 
-@theme {
+@theme static {
   --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
   --font-sans: 'Figtree Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
@@ -41,9 +41,61 @@
   --color-clay: #b4532a;
   --color-clay-dark: #98421d;
 
+  /* Thema-afhankelijke kleuren (licht hier; donker onder "Donker thema" hieronder). */
+  --color-fg: #2b3a4a; /* lopende tekst en koppen */
+  --color-fg-soft: #4a5866;
+  --color-card: #ffffff; /* kaarten, invoervelden, tabellen */
+  --color-link: #0f6b63; /* links en accenttekst op het paginavlak */
+  --color-link-hover: #0a423d;
+  --color-line: rgb(43 58 74 / 0.1);
+  --color-line-strong: rgb(43 58 74 / 0.25);
+  --glow-1: rgb(246 235 211 / 0.9);
+  --glow-2: rgb(217 239 236 / 0.45);
+
   --shadow-card: 0 1px 1px rgb(60 45 25 / 0.04), 0 4px 10px -2px rgb(60 45 25 / 0.06), 0 22px 44px -18px rgb(60 45 25 / 0.22);
   --shadow-lift: 0 2px 2px rgb(60 45 25 / 0.05), 0 12px 24px -6px rgb(60 45 25 / 0.12), 0 36px 64px -20px rgb(60 45 25 / 0.3);
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+ * Donker thema: volgt standaard het systeem (`color-scheme: light dark`); de knop in de header zet
+ * `data-theme="light|dark"` op <html> (zie Layout.astro/Header.astro) en onthoudt de keuze.
+ * `ink` (voettekst, hero, kaartoverlays) en de merkkleuren blijven vast; paginavlakken en tekst wisselen.
+ */
+:root {
+  color-scheme: light dark;
+}
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+@supports (color: light-dark(#000, #fff)) {
+  :root {
+    --color-cream: light-dark(#fbf6ec, #12181f);
+    --color-sand: light-dark(#f1e7d3, #1b2530);
+    --color-ink: light-dark(#2b3a4a, #0b1015);
+    --color-teal-100: light-dark(#d9efec, #173f3b);
+    --color-fg: light-dark(#2b3a4a, #ece6da);
+    --color-fg-soft: light-dark(#4a5866, #aeb8c3);
+    --color-card: light-dark(#ffffff, #202b37);
+    --color-link: light-dark(#0f6b63, #4fd1bf);
+    --color-link-hover: light-dark(#0a423d, #8ee8da);
+    --color-line: light-dark(rgb(43 58 74 / 0.1), rgb(255 255 255 / 0.12));
+    --color-line-strong: light-dark(rgb(43 58 74 / 0.25), rgb(255 255 255 / 0.28));
+    --glow-1: light-dark(rgb(246 235 211 / 0.9), rgb(38 52 66 / 0.7));
+    --glow-2: light-dark(rgb(217 239 236 / 0.45), rgb(16 90 82 / 0.22));
+    --sh-1: light-dark(rgb(60 45 25 / 0.04), rgb(0 0 0 / 0.3));
+    --sh-2: light-dark(rgb(60 45 25 / 0.06), rgb(0 0 0 / 0.35));
+    --sh-3: light-dark(rgb(60 45 25 / 0.22), rgb(0 0 0 / 0.6));
+    --sh-4: light-dark(rgb(60 45 25 / 0.05), rgb(0 0 0 / 0.3));
+    --sh-5: light-dark(rgb(60 45 25 / 0.12), rgb(0 0 0 / 0.4));
+    --sh-6: light-dark(rgb(60 45 25 / 0.3), rgb(0 0 0 / 0.65));
+    --shadow-card: 0 1px 1px var(--sh-1), 0 4px 10px -2px var(--sh-2), 0 22px 44px -18px var(--sh-3);
+    --shadow-lift: 0 2px 2px var(--sh-4), 0 12px 24px -6px var(--sh-5), 0 36px 64px -20px var(--sh-6);
+    --logo-bg: light-dark(transparent, #fbf6ec); /* het logo heeft donkere letters: in donker op een lichte plaat */
+  }
 }
 
 @layer base {
@@ -59,11 +111,11 @@
   }
   body {
     background:
-      radial-gradient(60rem 36rem at 100% 0%, rgb(246 235 211 / 0.9), transparent 70%),
-      radial-gradient(50rem 30rem at 0% 40%, rgb(217 239 236 / 0.45), transparent 70%),
+      radial-gradient(60rem 36rem at 100% 0%, var(--glow-1), transparent 70%),
+      radial-gradient(50rem 30rem at 0% 40%, var(--glow-2), transparent 70%),
       var(--color-cream);
     background-attachment: fixed;
-    color: var(--color-ink);
+    color: var(--color-fg);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
     line-height: 1.7;
@@ -78,7 +130,7 @@
     font-variation-settings: 'SOFT' 100;
     line-height: 1.15;
     letter-spacing: -0.015em;
-    color: var(--color-ink);
+    color: var(--color-fg);
     text-wrap: balance;
   }
   h1 {
@@ -120,7 +172,7 @@
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--color-teal-700);
+    color: var(--color-link);
   }
   .btn {
     display: inline-flex;
@@ -180,13 +232,13 @@
   }
   .link-arrow {
     font-weight: 700;
-    color: var(--color-teal-700);
+    color: var(--color-link);
     text-decoration: none;
     border-bottom: 2px solid var(--color-gold-300);
     transition: border-color 0.2s;
   }
   .link-arrow:hover {
-    border-color: var(--color-teal-700);
+    border-color: var(--color-link);
   }
 
   /* Long-form text */
@@ -200,11 +252,11 @@
     margin-top: 1.8em;
   }
   .prose a {
-    color: var(--color-teal-700);
+    color: var(--color-link);
     font-weight: 600;
   }
   .prose a:hover {
-    color: var(--color-teal-900);
+    color: var(--color-link-hover);
   }
   .prose ul {
     list-style: disc;
@@ -240,7 +292,7 @@
   /* Soft cards */
   .soft-card {
     border-radius: 1.75rem;
-    background: #fff;
+    background: var(--color-card);
     box-shadow: var(--shadow-card);
     transition:
       transform 0.5s var(--ease-smooth),
