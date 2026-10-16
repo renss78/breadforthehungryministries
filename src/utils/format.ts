@@ -1,11 +1,6 @@
-const dateFormatter = new Intl.DateTimeFormat('nl-NL', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-  timeZone: 'Europe/Amsterdam',
-});
+import { formatDateLang, type Lang } from '../i18n';
 
-export const formatDate = (date: Date) => dateFormatter.format(date);
+export const formatDate = (date: Date, lang: Lang = 'nl') => formatDateLang(date, lang);
 
 /** Adds an ellipsis when an excerpt was cut off mid-sentence. */
 export const tidyExcerpt = (text: string) => (/[.!?…]$/.test(text) ? text : `${text}…`);

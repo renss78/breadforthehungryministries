@@ -2,40 +2,44 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import CTA from '../components/CTA.astro';
+import { getLang, pick } from '../i18n';
 import hero from '../assets/images/2025-09-5.png';
 
+const lang = getLang(Astro.url);
+const l = pick(lang);
+
 const algemeen: [string, string][] = [
-  ['Rechtsvorm', 'Stichting'],
-  ['Statutaire naam', 'Stichting Bread for the Hungry Ministries'],
-  ['Statutaire zetel', 'Zwijndrecht'],
-  ['Land', 'Nederland'],
-  ['KvK nummer', '68179901'],
+  [l('Rechtsvorm', 'Legal form'), l('Stichting', 'Foundation (stichting)')],
+  [l('Statutaire naam', 'Statutory name'), 'Stichting Bread for the Hungry Ministries'],
+  [l('Statutaire zetel', 'Registered office'), 'Zwijndrecht'],
+  [l('Land', 'Country'), l('Nederland', 'The Netherlands')],
+  [l('KvK nummer', 'Chamber of Commerce (KvK) number'), '68179901'],
   ['RSIN', '857334591'],
-  ['Eerste inschrijving handelsregister', '28-02-2017'],
-  ['Datum akte van oprichting', '24-02-2017'],
+  [l('Eerste inschrijving handelsregister', 'First registration in the trade register'), '28-02-2017'],
+  [l('Datum akte van oprichting', 'Date of deed of incorporation'), '24-02-2017'],
 ];
 const activiteiten: [string, string][] = [
-  ['Activiteiten', 'Die stichting met name gericht op het ondersteunen van NGO’s (non-gouvernementele organisatie) in Kenia en Oeganda.'],
-  ['Duidelijke beschrijving van doelstellingen', 'De stichting heeft als doel: een bron van inspiratie te zijn op het gebied van geestelijke en praktische ondersteuning aan mensen in de armste regionen in deze wereld en het verrichten van al wat hiermee verband houdt of daartoe bevorderlijk kan zijn.'],
-  ['Subcategorie I', 'Godsdienstig'],
-  ['Subcategorie II', 'Ontwikkelingswerk'],
-  ['Subcategorie III', 'Volksgezondheid'],
+  [l('Activiteiten', 'Activities'), l('Die stichting met name gericht op het ondersteunen van NGO’s (non-gouvernementele organisatie) in Kenia en Oeganda.', 'The foundation is mainly aimed at supporting NGOs (non-governmental organisations) in Kenya and Uganda.')],
+  [l('Duidelijke beschrijving van doelstellingen', 'Clear description of objectives'), l('De stichting heeft als doel: een bron van inspiratie te zijn op het gebied van geestelijke en praktische ondersteuning aan mensen in de armste regionen in deze wereld en het verrichten van al wat hiermee verband houdt of daartoe bevorderlijk kan zijn.', 'The foundation’s objective is to be a source of inspiration in the field of spiritual and practical support to people in the poorest regions of the world, and to do everything connected with this or conducive to it.')],
+  [l('Subcategorie I', 'Subcategory I'), l('Godsdienstig', 'Religious')],
+  [l('Subcategorie II', 'Subcategory II'), l('Ontwikkelingswerk', 'Development work')],
+  [l('Subcategorie III', 'Subcategory III'), l('Volksgezondheid', 'Public health')],
 ];
 const organisatie: [string, string][] = [
-  ['Is er een directie / dagelijks bestuur', 'Nee'],
-  ['Is er een persoon in dienst?', 'Nee'],
-  ['Is er een raad van commissarissen/toezicht?', 'Nee'],
+  [l('Is er een directie / dagelijks bestuur', 'Is there an executive board / day-to-day management'), l('Nee', 'No')],
+  [l('Is er een persoon in dienst?', 'Is anyone employed?'), l('Nee', 'No')],
+  [l('Is er een raad van commissarissen/toezicht?', 'Is there a supervisory board?'), l('Nee', 'No')],
 ];
 const bestuurders = [
-  ['Bert de Haan', 'Voorzitter'],
-  ['Vincent van Geerestein', 'Penningmeester'],
-  ['Dick Pieterman', 'Secretaris'],
-].map(([naam, functie]) => ({ naam, functie, beloning: 'Beloning beperkt tot onkostenvergoeding' }));
+  ['Bert de Haan', l('Voorzitter', 'Chairman')],
+  ['Vincent van Geerestein', l('Penningmeester', 'Treasurer')],
+  ['Dick Pieterman', l('Secretaris', 'Secretary')],
+].map(([naam, functie]) => ({ naam, functie, beloning: l('Beloning beperkt tot onkostenvergoeding', 'Remuneration limited to expense allowance') }));
 const contact: [string, string, string?][] = [
-  ['E-mailadres', 'info@breadforthehungryministries.nl', 'mailto:info@breadforthehungryministries.nl'],
-  ['WWW adres', 'https://breadforthehungryministries.nl', 'https://breadforthehungryministries.nl'],
-  ['Contactpersoon', 'Vincent van Geerestein'],
-  ['IBAN rekeningnummer', 'NL11RABO0317228463'],
+  [l('E-mailadres', 'Email address'), 'info@breadforthehungryministries.nl', 'mailto:info@breadforthehungryministries.nl'],
+  [l('WWW adres', 'Website'), 'https://breadforthehungryministries.nl', 'https://breadforthehungryministries.nl'],
+  [l('Contactpersoon', 'Contact person'), 'Vincent van Geerestein'],
+  [l('IBAN rekeningnummer', 'IBAN account number'), 'NL11RABO0317228463'],
 ];
 const publicaties = [
   ['2026', 'Hoofdlijnen beleidsplan', '2026-Beleidsplan-Bread-for-the-Hungry', '2026-Beleidsplan-Bread-for-the-Hungry-Ministries-1.pdf'],
@@ -45,34 +49,46 @@ const publicaties = [
   ['2024', 'Actueel verslag activiteiten', '2024-Actueel-Verslag-Activiteiten-Bread-for-the-Hungry', '2024-Verslag-Bread-for-the-Hungry-Ministries.pdf'],
   ['2024', 'Hoofdlijnen beleidsplan', '2024-Beleidsplan-Bread-for-the-Hungry', '2024-Beleidsplan-Bread-for-the-Hungry-Ministries.pdf'],
 ];
+const typeLabel: Record<string, string> = {
+  'Hoofdlijnen beleidsplan': l('Hoofdlijnen beleidsplan', 'Outline of policy plan'),
+  'Standaardformulier publicatieplicht': l('Standaardformulier publicatieplicht', 'Standard publication-duty form'),
+  'Actueel verslag activiteiten': l('Actueel verslag activiteiten', 'Current report of activities'),
+};
 ---
 
-<Layout title="ANBI Profiel" seoTitle="ANBI Profiel | Stichting Bread for the Hungry Ministries" description="ANBI-profiel van Stichting Bread for the Hungry Ministries (KvK 68179901, RSIN 857334591): doelstelling, bestuur, beleidsplannen en jaarverslagen.">
-  <Hero title="ANBI Profiel" eyebrow="Over ons" image={hero} imageAlt="Gestapelde Bijbels voor de studenten" position="50% 50%" />
+<Layout
+  title={l('ANBI Profiel', 'ANBI profile')}
+  seoTitle={l('ANBI Profiel | Stichting Bread for the Hungry Ministries', 'ANBI profile | Stichting Bread for the Hungry Ministries')}
+  description={l(
+    'ANBI-profiel van Stichting Bread for the Hungry Ministries (KvK 68179901, RSIN 857334591): doelstelling, bestuur, beleidsplannen en jaarverslagen.',
+    'ANBI profile (Dutch public benefit organisation status) of Stichting Bread for the Hungry Ministries (KvK 68179901, RSIN 857334591): objectives, board, policy plans and annual reports.',
+  )}
+>
+  <Hero title={l('ANBI Profiel', 'ANBI profile')} eyebrow={l('Over ons', 'About us')} image={hero} imageAlt={l('Gestapelde Bijbels voor de studenten', 'Stacked Bibles for the students')} position="50% 50%" />
 
   <div class="container-prose section space-y-14">
     <section aria-labelledby="algemeen">
-      <h2 id="algemeen">Algemene informatie</h2>
+      <h2 id="algemeen">{l('Algemene informatie', 'General information')}</h2>
       <dl class="rows mt-6">
         {algemeen.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
       </dl>
     </section>
 
     <section aria-labelledby="activiteiten">
-      <h2 id="activiteiten">Activiteiten</h2>
+      <h2 id="activiteiten">{l('Activiteiten', 'Activities')}</h2>
       <dl class="rows mt-6">
         {activiteiten.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
       </dl>
     </section>
 
     <section aria-labelledby="organisatie">
-      <h2 id="organisatie">Organisatie / Bestuurders</h2>
+      <h2 id="organisatie">{l('Organisatie / Bestuurders', 'Organisation / Board members')}</h2>
       <dl class="rows mt-6">
         {organisatie.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
       </dl>
       <div class="table-wrap mt-6">
         <table>
-          <thead><tr><th scope="col">Naam</th><th scope="col">Titel / Functie</th><th scope="col">Beloning</th></tr></thead>
+          <thead><tr><th scope="col">{l('Naam', 'Name')}</th><th scope="col">{l('Titel / Functie', 'Title / Function')}</th><th scope="col">{l('Beloning', 'Remuneration')}</th></tr></thead>
           <tbody>
             {bestuurders.map((b) => <tr><th scope="row">{b.naam}</th><td>{b.functie}</td><td>{b.beloning}</td></tr>)}
           </tbody>
@@ -81,19 +97,20 @@ const publicaties = [
     </section>
 
     <section aria-labelledby="contact-info">
-      <h2 id="contact-info">Contact informatie</h2>
+      <h2 id="contact-info">{l('Contact informatie', 'Contact information')}</h2>
       <dl class="rows mt-6">
         {contact.map(([k, v, href]) => <div><dt>{k}</dt><dd>{href ? <a href={href}>{v}</a> : v}</dd></div>)}
       </dl>
     </section>
 
     <section aria-labelledby="publicatie">
-      <h2 id="publicatie">Publicatieplicht</h2>
+      <h2 id="publicatie">{l('Publicatieplicht', 'Publication duty')}</h2>
+      {lang === 'en' && <p class="mt-3 text-ink-soft">The linked documents are published in Dutch.</p>}
       <div class="table-wrap mt-6">
         <table>
-          <thead><tr><th scope="col">Jaar</th><th scope="col">Type document</th><th scope="col">Link</th></tr></thead>
+          <thead><tr><th scope="col">{l('Jaar', 'Year')}</th><th scope="col">{l('Type document', 'Document type')}</th><th scope="col">Link</th></tr></thead>
           <tbody>
-            {publicaties.map(([jaar, type, label, file]) => <tr><td>{jaar}</td><td>{type}</td><td><a href={`/documenten/${file}`}>{label}</a></td></tr>)}
+            {publicaties.map(([jaar, type, label, file]) => <tr><td>{jaar}</td><td>{typeLabel[type] ?? type}</td><td><a href={`/documenten/${file}`}>{label}</a></td></tr>)}
           </tbody>
         </table>
       </div>

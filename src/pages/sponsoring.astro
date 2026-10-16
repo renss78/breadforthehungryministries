@@ -11,46 +11,63 @@ import p5 from '../assets/images/2025-11-5.png';
 import p6 from '../assets/images/2025-11-6.png';
 import p7 from '../assets/images/2025-11-7.png';
 import { site } from '../data/site';
+import { getLang, pick } from '../i18n';
 
+const lang = getLang(Astro.url);
+const l = pick(lang);
 const betaalverzoek = 'https://betaalverzoek.rabobank.nl/betaalverzoek/?id=A32z94V-T5GHTy6VJt83Ww';
-// De prijzen staan in de afbeeldingen zelf; de alt-teksten geven die tekst weer.
+// De prijzen staan in de afbeeldingen zelf (Nederlandstalig); de alt-teksten geven die tekst weer, ook in het Engels.
 const projects = [
-  { src: p2, alt: 'Bijbels (productie in Oeganda): 10st. € 59,- / 20st. € 118,- / 50st. € 295,- / 100st. € 590,-' },
-  { src: p3, alt: 'Toilet € 1.750,-' },
-  { src: p4, alt: 'Kerk en Kerkdak € 4.200,- / € 1.100' },
-  { src: p5, alt: 'Waterpomp € 2.000,-' },
-  { src: p6, alt: 'Doopbad € 2.000,-' },
-  { src: p7, alt: 'Keuken voor ondersteuning mensen € 900,-' },
+  { src: p2, alt: l('Bijbels (productie in Oeganda): 10st. € 59,- / 20st. € 118,- / 50st. € 295,- / 100st. € 590,-', 'Bibles (produced in Uganda): 10 pcs. € 59 / 20 pcs. € 118 / 50 pcs. € 295 / 100 pcs. € 590') },
+  { src: p3, alt: l('Toilet € 1.750,-', 'Toilet € 1,750') },
+  { src: p4, alt: l('Kerk en Kerkdak € 4.200,- / € 1.100', 'Church and church roof € 4,200 / € 1,100') },
+  { src: p5, alt: l('Waterpomp € 2.000,-', 'Water pump € 2,000') },
+  { src: p6, alt: l('Doopbad € 2.000,-', 'Baptismal pool € 2,000') },
+  { src: p7, alt: l('Keuken voor ondersteuning mensen € 900,-', 'Kitchen to support people € 900') },
 ];
 ---
 
-<Layout title="Sponsoring" seoTitle="Doneren & student sponsoren (€35) | Bread for the Hungry" description="Doneer of sponsor een student of aankomend pastor voor €35 per maand (tien maanden), of steun projecten als waterputten, toiletten en Bijbels in Oeganda." image={hero}>
-  <Hero title="Sponsoring" eyebrow="Steun ons" image={hero} imageAlt="Gemeenschap rond een waterpomp in Kenia" position="50% 60%" />
+<Layout
+  title={l('Sponsoring', 'Sponsorship')}
+  seoTitle={l('Doneren & student sponsoren (€35) | Bread for the Hungry', 'Donate & sponsor a student (€35) | Bread for the Hungry')}
+  description={l(
+    'Doneer of sponsor een student of aankomend pastor voor €35 per maand (tien maanden), of steun projecten als waterputten, toiletten en Bijbels in Oeganda.',
+    'Donate, or sponsor a student or future pastor for €35 per month (ten months), or support projects such as water wells, toilets and Bibles in Uganda.',
+  )}
+  image={hero}
+>
+  <Hero title={l('Sponsoring', 'Sponsorship')} eyebrow={l('Steun ons', 'Support us')} image={hero} imageAlt={l('Gemeenschap rond een waterpomp in Kenia', 'A community around a water pump in Kenya')} position="50% 60%" />
 
   <section class="container-prose prose section" aria-labelledby="geven">
-    <h2 id="geven" class="!mt-0">Geven</h2>
-    <p>Wij zijn op zoek naar donateurs om dit prachtige werk te kunnen continueren, U kunt bijvoorbeeld een student of potentiële pastor adopteren voor € 35 per maand voor de periode van tien maanden. Daarnaast zoeken wij sponsors voor de jaarlijkse pastorconferentie en de andere projecten. Wordt u één van onze partners die bereid is mee te helpen? Wij staan borg dat elke euro goed wordt besteed!</p>
+    <h2 id="geven" class="!mt-0">{l('Geven', 'Giving')}</h2>
+    <p>{l(
+      'Wij zijn op zoek naar donateurs om dit prachtige werk te kunnen continueren, U kunt bijvoorbeeld een student of potentiële pastor adopteren voor € 35 per maand voor de periode van tien maanden. Daarnaast zoeken wij sponsors voor de jaarlijkse pastorconferentie en de andere projecten. Wordt u één van onze partners die bereid is mee te helpen? Wij staan borg dat elke euro goed wordt besteed!',
+      'We are looking for donors to be able to continue this wonderful work. You can, for example, adopt a student or prospective pastor for € 35 per month for a period of ten months. We are also looking for sponsors for the annual pastors’ conference and the other projects. Will you become one of our partners who is willing to help? We guarantee that every euro is spent well!',
+    )}</p>
   </section>
 
   <section class="container-page pb-16" aria-labelledby="bank">
     <div class="mx-auto grid max-w-4xl items-center gap-8 rise rounded-[2rem] bg-teal-700 p-7 text-white shadow-lift sm:p-10 md:grid-cols-[1fr_auto]">
       <div>
-        <h2 id="bank" class="!text-white !text-3xl">Bankgegevens Bread for The Hungry Ministries:</h2>
+        <h2 id="bank" class="!text-white !text-3xl">{l('Bankgegevens Bread for The Hungry Ministries:', 'Bank details Bread for The Hungry Ministries:')}</h2>
         <dl class="mt-6 space-y-3">
-          <div><dt class="text-sm font-bold uppercase tracking-[0.14em] text-gold-300">Naam</dt><dd class="text-lg">Bread for the Hungry Ministries</dd></div>
+          <div><dt class="text-sm font-bold uppercase tracking-[0.14em] text-gold-300">{l('Naam', 'Name')}</dt><dd class="text-lg">Bread for the Hungry Ministries</dd></div>
           <div><dt class="text-sm font-bold uppercase tracking-[0.14em] text-gold-300">IBAN</dt><dd class="font-display text-2xl tracking-wide sm:text-3xl">{site.iban}</dd></div>
         </dl>
-        <p class="mt-6">U kunt ook betalen via onderstaand betaalverzoek (QR code/Link):</p>
+        <p class="mt-6">{l('U kunt ook betalen via onderstaand betaalverzoek (QR code/Link):', 'You can also pay via the payment request below (QR code/link; Dutch Rabobank):')}</p>
         <p class="mt-2 break-all"><a href={betaalverzoek} rel="noopener" class="font-semibold text-gold-300 underline">{betaalverzoek}</a></p>
       </div>
-      <Image src={qr} alt="QR-code voor het Rabobank-betaalverzoek" width={220} height={220} class="mx-auto h-44 w-44 rounded-2xl bg-white p-3 sm:h-52 sm:w-52" loading="lazy" />
+      <Image src={qr} alt={l('QR-code voor het Rabobank-betaalverzoek', 'QR code for the Rabobank payment request')} width={220} height={220} class="mx-auto h-44 w-44 rounded-2xl bg-white p-3 sm:h-52 sm:w-52" loading="lazy" />
     </div>
   </section>
 
   <section class="bg-sand" aria-labelledby="zaaien">
     <div class="container-page section">
-      <h2 id="zaaien" class="text-center">Waar wil jij in zaaien?</h2>
-      <p class="mx-auto mt-5 max-w-3xl text-center text-lg">Onderstaand vind je een aantal projecten die wij nog graag willen realiseren met daarbij het kosten- plaatje. Wanneer je de QR-code scant kun je zelf een bedrag toekennen aan een project wat jou aan- spreekt* en help je mee om mensen in de derde wereld in hun eigen levensonderhoud te kunnen voorzien.</p>
+      <h2 id="zaaien" class="text-center">{l('Waar wil jij in zaaien?', 'What do you want to sow into?')}</h2>
+      <p class="mx-auto mt-5 max-w-3xl text-center text-lg">{l(
+        'Onderstaand vind je een aantal projecten die wij nog graag willen realiseren met daarbij het kosten- plaatje. Wanneer je de QR-code scant kun je zelf een bedrag toekennen aan een project wat jou aan- spreekt* en help je mee om mensen in de derde wereld in hun eigen levensonderhoud te kunnen voorzien.',
+        'Below you will find a number of projects we would still like to realise, together with their costs. When you scan the QR code you can assign an amount yourself to a project that appeals to you*, and you help people in the developing world to provide for their own livelihood.',
+      )}</p>
       <ul data-gallery class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {
           projects.map((p) => (

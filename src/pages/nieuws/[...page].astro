@@ -1,43 +1,51 @@
 ---
-import { getCollection } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import NewsCard from '../../components/NewsCard.astro';
 import CTA from '../../components/CTA.astro';
+import { getLang, pick, route } from '../../i18n';
+import { getNews } from '../../utils/news';
 import hero from '../../assets/images/2026-01-WhatsApp-Image-2026-01-21-at-22.18.09-3.jpeg';
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const posts = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-  return paginate(posts, { pageSize: 6 });
+  return paginate(await getNews('nl'), { pageSize: 6 });
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
-const title = page.currentPage > 1 ? `Nieuws — pagina ${page.currentPage}` : 'Nieuws';
-const pageHref = (n: number) => (n === 1 ? '/nieuws/' : `/nieuws/${n}/`);
+const lang = getLang(Astro.url);
+const l = pick(lang);
+const base = route('news', lang);
+const title = page.currentPage > 1 ? `${l('Nieuws', 'News')} — ${l('pagina', 'page')} ${page.currentPage}` : l('Nieuws', 'News');
+const pageHref = (n: number) => (n === 1 ? base : `${base}${n}/`);
 const pages = Array.from({ length: page.lastPage }, (_, i) => i + 1);
 ---
 
 <Layout
   title={title}
-  seoTitle={page.currentPage > 1 ? `Nieuws uit Oeganda en Kenia — pagina ${page.currentPage} | Bread for the Hungry` : 'Nieuws uit Oeganda en Kenia | Bread for the Hungry'}
-  description="Het laatste nieuws en de nieuwsupdates van het zendingswerk in Oeganda en Kenia: bekeringen, doopdiensten, bijbelscholen en Bijbeluitdeling."
+  seoTitle={page.currentPage > 1
+    ? `${l('Nieuws uit Oeganda en Kenia', 'News from Uganda and Kenya')} — ${l('pagina', 'page')} ${page.currentPage} | Bread for the Hungry`
+    : `${l('Nieuws uit Oeganda en Kenia', 'News from Uganda and Kenya')} | Bread for the Hungry`}
+  description={l(
+    'Het laatste nieuws en de nieuwsupdates van het zendingswerk in Oeganda en Kenia: bekeringen, doopdiensten, bijbelscholen en Bijbeluitdeling.',
+    'The latest news and updates from the mission work in Uganda and Kenya: conversions, baptism services, Bible schools and Bible distribution.',
+  )}
 >
-  <Hero title="Nieuws" eyebrow="Laatste nieuws" image={hero} imageAlt="Gelovigen met hun Bijbel en certificaat in Oeganda" position="50% 40%" />
+  <Hero title={l('Nieuws', 'News')} eyebrow={l('Laatste nieuws', 'Latest news')} image={hero} imageAlt={l('Gelovigen met hun Bijbel en certificaat in Oeganda', 'Believers with their Bible and certificate in Uganda')} position="50% 40%" />
   <section class="container-page section" aria-labelledby="berichten">
-    <h2 id="berichten" class="sr-only">Nieuwsberichten</h2>
+    <h2 id="berichten" class="sr-only">{l('Nieuwsberichten', 'News articles')}</h2>
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {page.data.map((post) => <NewsCard post={post} />)}
     </div>
 
     {
       page.lastPage > 1 && (
-        <nav aria-label="Paginering" class="mt-14 flex flex-wrap items-center justify-center gap-2">
-          {page.url.prev ? <a href={page.url.prev} rel="prev" class="pager">← Vorige</a> : <span class="pager pager-off" aria-hidden="true">← Vorige</span>}
+        <nav aria-label={l('Paginering', 'Pagination')} class="mt-14 flex flex-wrap items-center justify-center gap-2">
+          {page.url.prev ? <a href={page.url.prev} rel="prev" class="pager">← {l('Vorige', 'Previous')}</a> : <span class="pager pager-off" aria-hidden="true">← {l('Vorige', 'Previous')}</span>}
           {pages.map((n) => (
-            <a href={pageHref(n)} class="pager" aria-current={n === page.currentPage ? 'page' : undefined} aria-label={`Pagina ${n}`}>{n}</a>
+            <a href={pageHref(n)} class="pager" aria-current={n === page.currentPage ? 'page' : undefined} aria-label={`${l('Pagina', 'Page')} ${n}`}>{n}</a>
           ))}
-          {page.url.next ? <a href={page.url.next} rel="next" class="pager">Volgende →</a> : <span class="pager pager-off" aria-hidden="true">Volgende →</span>}
+          {page.url.next ? <a href={page.url.next} rel="next" class="pager">{l('Volgende', 'Next')} →</a> : <span class="pager pager-off" aria-hidden="true">{l('Volgende', 'Next')} →</span>}
         </nav>
       )
     }

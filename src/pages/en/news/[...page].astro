@@ -1,0 +1,12 @@
+---
+import type { GetStaticPaths } from 'astro';
+import NewsIndex from '../../nieuws/[...page].astro';
+import { getNews } from '../../../utils/news';
+
+// Zelfde pagina als /nieuws/, met de Engelse berichten. De taal volgt uit de URL (/en/…).
+export const getStaticPaths = (async ({ paginate }) => paginate(await getNews('en'), { pageSize: 6 })) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<NewsIndex page={page} />

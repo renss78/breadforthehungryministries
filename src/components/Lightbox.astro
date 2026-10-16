@@ -1,23 +1,27 @@
 ---
+import { getLang } from '../i18n';
+
+const lang = getLang(Astro.url);
+const en = lang === 'en';
 // Fotoviewer: klik op een foto in een galerij (`[data-gallery]`) of in een nieuwsbericht (`.prose`)
 // om te vergroten; bladeren met pijlen, toetsenbord of swipe. Zonder JS blijven fotolinks gewoon werken.
 ---
 
-<dialog class="lightbox" aria-label="Fotoviewer">
+<dialog class="lightbox" aria-label={en ? 'Photo viewer' : 'Fotoviewer'} data-photo={en ? 'Photo' : 'Foto'} data-enlarge={en ? 'Enlarge photo' : 'Vergroot foto'}>
   <div class="lb-top">
     <p class="lb-count" aria-live="polite"></p>
-    <button type="button" class="lb-btn lb-close" aria-label="Sluiten">
+    <button type="button" class="lb-btn lb-close" aria-label={en ? 'Close' : 'Sluiten'}>
       <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"></path></svg>
     </button>
   </div>
-  <button type="button" class="lb-btn lb-prev" aria-label="Vorige foto">
+  <button type="button" class="lb-btn lb-prev" aria-label={en ? 'Previous photo' : 'Vorige foto'}>
     <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
   </button>
   <figure class="lb-stage">
     <img class="lb-img" alt="" />
     <figcaption class="lb-caption" hidden></figcaption>
   </figure>
-  <button type="button" class="lb-btn lb-next" aria-label="Volgende foto">
+  <button type="button" class="lb-btn lb-next" aria-label={en ? 'Next photo' : 'Volgende foto'}>
     <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
   </button>
 </dialog>
@@ -220,7 +224,7 @@
     const apply = () => {
       imgEl.src = item.full;
       imgEl.alt = item.alt;
-      const caption = item.alt && !item.alt.startsWith('Foto bij') ? item.alt : '';
+      const caption = item.alt && !/^(Foto bij|Photo for)/.test(item.alt) ? item.alt : '';
       captionEl.textContent = caption;
       captionEl.hidden = !caption;
       countEl.textContent = `${index + 1} / ${items.length}`;
@@ -256,10 +260,11 @@
     if (img.hasAttribute('data-no-zoom')) return;
     img.setAttribute('data-zoomable', '');
     if (!img.closest('a')) {
-      if (!img.alt) img.alt = 'Foto';
+      if (!img.alt) img.alt = dialog.dataset.photo ?? 'Foto';
       img.setAttribute('role', 'button');
       img.tabIndex = 0;
-      img.setAttribute('aria-label', img.alt ? `Vergroot foto: ${img.alt}` : 'Vergroot foto');
+      const enlarge = dialog.dataset.enlarge ?? 'Vergroot foto';
+      img.setAttribute('aria-label', img.alt ? `${enlarge}: ${img.alt}` : enlarge);
     }
   });
 

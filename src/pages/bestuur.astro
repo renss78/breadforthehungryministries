@@ -3,25 +3,43 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import CTA from '../components/CTA.astro';
+import { getLang, pick } from '../i18n';
 import hero from '../assets/images/hero-sitefile.jpg';
 import bert from '../assets/images/2025-10-Foto-Bert-2019.jpg';
 import dick from '../assets/images/2025-10-Ontwerp-zonder-titel-4.png';
+
+const lang = getLang(Astro.url);
+const l = pick(lang);
 ---
 
-<Layout title="Het Bestuur" seoTitle="Het Bestuur | Bread for the Hungry Ministries" description="Maak kennis met het bestuur van Bread for the Hungry Ministries: Bert de Haan (voorzitter) en Dick Pieterman (secretaris)." image={hero}>
-  <Hero title="Het Bestuur" eyebrow="Over ons" image={hero} imageAlt="Bestuursleden in Oeganda" position="50% 30%" />
+<Layout
+  title={l('Het Bestuur', 'The Board')}
+  seoTitle={l('Het Bestuur | Bread for the Hungry Ministries', 'The Board | Bread for the Hungry Ministries')}
+  description={l(
+    'Maak kennis met het bestuur van Bread for the Hungry Ministries: Bert de Haan (voorzitter) en Dick Pieterman (secretaris).',
+    'Meet the board of Bread for the Hungry Ministries: Bert de Haan (chairman) and Dick Pieterman (secretary).',
+  )}
+  image={hero}
+>
+  <Hero title={l('Het Bestuur', 'The Board')} eyebrow={l('Over ons', 'About us')} image={hero} imageAlt={l('Bestuursleden in Oeganda', 'Board members in Uganda')} position="50% 30%" />
   <div class="container-page section grid gap-16 lg:gap-24">
     <article id="bertdehaan" class="grid items-start gap-8 md:grid-cols-[18rem_1fr] md:gap-12">
       <Image src={bert} alt="Bert de Haan" widths={[320, 576]} sizes="(min-width: 768px) 18rem, 100vw" class="aspect-[3/4] w-full max-w-sm rise rounded-[2rem] object-cover shadow-lift md:sticky md:top-28" loading="eager" />
       <div class="prose">
         <h2 class="!mt-0">Bert de Haan</h2>
-        <p>In de zomer van 1996 riep God mij op een bijzondere manier tot fulltime bediening. Tijdens een gebedsmoment in een park in Frankrijk ervoer ik intens de heerlijkheid van God en hoorde Zijn stem mij vragen mijn succesvolle carrière op te geven. Een droom diezelfde nacht bevestigde deze roeping: ik zag een man op het punt van executie – symbool voor een wereld zonder God. Toen hij uiteindelijk zijn leven aan Jezus gaf, werd mijn hart geraakt door Gods liefde voor het verlorene. De boodschap was duidelijk: “Bert, Ik roep jou om tussen beiden te komen en Mijn Woord te verkondigen.” In gehoorzaamheid zette ik alles opzij en stapte in geloof een gebroken gemeente binnen. De weg was zwaar, maar God was trouw. Ruim twintig jaar heb ik binnen Nehemia Ministries mogen dienen, totdat ik in 2015 alles moest loslaten en een diepe periode van rouw en gebrokenheid doormaakte. In die tijd heb ik God nog intenser leren kennen als de Vader die herstelt en nieuw leven geeft. Zijn woorden “Ik ben jouw hoopvolle toekomst” werden voor mij een levendige realiteit. Door Zijn genade ben ik weer opgestaan. Mijn hart is zachter, mijn bewogenheid dieper. In 2017 richtte ik samen met broeders de stichting Bread for the Hungry Ministries op, die onder meer actief is in Kenia. Vanuit mijn passie voor het Woord ontstond in 2019 Daily Bread Ministries om geestelijke honger te stillen met diepgaand onderwijs. Samen met mijn vrouw Nancy wil ik mijn roeping blijven uitleven, gedragen door de tekst: “Gij verjongt mijn jeugd als die van een arend.”</p>
+        <p>{l(
+          'In de zomer van 1996 riep God mij op een bijzondere manier tot fulltime bediening. Tijdens een gebedsmoment in een park in Frankrijk ervoer ik intens de heerlijkheid van God en hoorde Zijn stem mij vragen mijn succesvolle carrière op te geven. Een droom diezelfde nacht bevestigde deze roeping: ik zag een man op het punt van executie – symbool voor een wereld zonder God. Toen hij uiteindelijk zijn leven aan Jezus gaf, werd mijn hart geraakt door Gods liefde voor het verlorene. De boodschap was duidelijk: “Bert, Ik roep jou om tussen beiden te komen en Mijn Woord te verkondigen.” In gehoorzaamheid zette ik alles opzij en stapte in geloof een gebroken gemeente binnen. De weg was zwaar, maar God was trouw. Ruim twintig jaar heb ik binnen Nehemia Ministries mogen dienen, totdat ik in 2015 alles moest loslaten en een diepe periode van rouw en gebrokenheid doormaakte. In die tijd heb ik God nog intenser leren kennen als de Vader die herstelt en nieuw leven geeft. Zijn woorden “Ik ben jouw hoopvolle toekomst” werden voor mij een levendige realiteit. Door Zijn genade ben ik weer opgestaan. Mijn hart is zachter, mijn bewogenheid dieper. In 2017 richtte ik samen met broeders de stichting Bread for the Hungry Ministries op, die onder meer actief is in Kenia. Vanuit mijn passie voor het Woord ontstond in 2019 Daily Bread Ministries om geestelijke honger te stillen met diepgaand onderwijs. Samen met mijn vrouw Nancy wil ik mijn roeping blijven uitleven, gedragen door de tekst: “Gij verjongt mijn jeugd als die van een arend.”',
+          'In the summer of 1996, God called me to full-time ministry in a remarkable way. During a moment of prayer in a park in France, I intensely experienced the glory of God and heard His voice asking me to give up my successful career. A dream that same night confirmed this calling: I saw a man on the point of being executed – a symbol of a world without God. When he finally gave his life to Jesus, my heart was touched by God’s love for the lost. The message was clear: “Bert, I am calling you to stand in the gap and proclaim My Word.” In obedience I set everything aside and stepped in faith into a broken church. The road was hard, but God was faithful. For more than twenty years I was able to serve within Nehemia Ministries, until in 2015 I had to let go of everything and went through a deep period of mourning and brokenness. In that time I came to know God even more intensely as the Father who restores and gives new life. His words “I am your hopeful future” became a living reality to me. By His grace I have risen again. My heart is softer, my compassion deeper. In 2017, together with brothers, I founded the foundation Bread for the Hungry Ministries, which is active in Kenya, among other places. Out of my passion for the Word, Daily Bread Ministries came into being in 2019, to satisfy spiritual hunger with in-depth teaching. Together with my wife Nancy I want to keep living out my calling, carried by the words: “You renew my youth like the eagle’s.”',
+        )}</p>
       </div>
     </article>
     <article id="dickpieterman" class="grid items-start gap-8 md:grid-cols-[1fr_18rem] md:gap-12">
       <div class="prose md:order-1">
         <h2 class="!mt-0">Dick Pieterman</h2>
-        <p>Dick Pieterman trouwde op latere leeftijd met Ineke en samen hebben zij 25 jaar lang de Heer gediend in opvang- en zendingswerk in Zuid-Frankrijk. In 2000 keerden zij terug naar Nederland om leiding te geven aan de School for Harvest and Ministry, een fulltime dag-bijbelschool. Dick vervulde hier tot juni 2018 de rol van directeur en docent. Daarnaast is hij betrokken bij het opzetten van een fulltime bijbelschool in Kenia. Dick is een geliefd spreker en een begaafd bijbelleraar met een diep verlangen om de gemeente te bouwen en gebroken levens te herstellen door de liefde van God.</p>
+        <p>{l(
+          'Dick Pieterman trouwde op latere leeftijd met Ineke en samen hebben zij 25 jaar lang de Heer gediend in opvang- en zendingswerk in Zuid-Frankrijk. In 2000 keerden zij terug naar Nederland om leiding te geven aan de School for Harvest and Ministry, een fulltime dag-bijbelschool. Dick vervulde hier tot juni 2018 de rol van directeur en docent. Daarnaast is hij betrokken bij het opzetten van een fulltime bijbelschool in Kenia. Dick is een geliefd spreker en een begaafd bijbelleraar met een diep verlangen om de gemeente te bouwen en gebroken levens te herstellen door de liefde van God.',
+          'Dick Pieterman married Ineke later in life, and together they served the Lord for 25 years in shelter and mission work in the south of France. In 2000 they returned to the Netherlands to lead the School for Harvest and Ministry, a full-time day Bible school. Dick served there as director and teacher until June 2018. He is also involved in setting up a full-time Bible school in Kenya. Dick is a beloved speaker and a gifted Bible teacher with a deep desire to build up the church and to restore broken lives through the love of God.',
+        )}</p>
       </div>
       <Image src={dick} alt="Dick Pieterman" widths={[320, 576]} sizes="(min-width: 768px) 18rem, 100vw" class="aspect-[3/4] w-full max-w-sm rise rounded-[2rem] object-cover shadow-lift md:order-2 md:sticky md:top-28" loading="lazy" />
     </article>

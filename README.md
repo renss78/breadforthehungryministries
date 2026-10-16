@@ -22,18 +22,34 @@ npm run check    # Astro/TypeScript-controle
 src/
   assets/images/      alle afbeeldingen (via astro:assets geoptimaliseerd naar WebP/JPG)
   components/         Header, Footer, Hero, NewsCard, ProjectCard, CTA
-  content/news/       nieuwsberichten (Markdown)
-  data/site.ts        sitegegevens + menu
+  content/news/       nieuwsberichten, Nederlands (Markdown)
+  content/news-en/    dezelfde berichten in het Engels
+  data/site.ts        sitegegevens + menu (per taal)
+  i18n/index.ts       talen, routes (NL ↔ EN), vaste interface-teksten
   layouts/Layout.astro   <head>, SEO/Open Graph, header, footer
-  pages/              routes (oeganda, kenia, media, sponsoring, …)
+  pages/              Nederlandse routes (oeganda, kenia, media, sponsoring, …)
+  pages/en/           Engelse routes: dunne wrappers rond dezelfde pagina's
   styles/global.css   Tailwind + ontwerptokens (kleuren, lettertypen)
 public/
   _headers            beveiligings- en cache-headers
   _redirects          oude WordPress-URL's
   documenten/         ANBI-pdf's
   media/video/        video's (max. 25 MB per bestand!)
-functions/api/contact.ts   Pages Function voor het contactformulier (nu een stub)
+functions/api/contact.ts   Pages Function voor het contactformulier (verstuurt via Resend)
 ```
+
+## Tweetalig: Nederlands (hoofdtaal) en Engels
+
+Nederlands staat op de root (`/oeganda/`), Engels onder `/en/` (`/en/uganda/`). In de header staat een **NL | EN**-wisselaar
+(in het mobiele menu onder "Taal") die naar dezelfde pagina in de andere taal linkt; er is geen automatische doorverwijzing.
+
+- **De taal volgt uit de URL** (`getLang(Astro.url)` in `src/i18n/index.ts`). Pagina's, `Layout`, `Header`, `Footer` en de componenten kiezen daar hun teksten op.
+- **Pagina's:** de Nederlandse pagina in `src/pages/` bevat beide talen (`const l = pick(lang); l('Nederlands', 'English')`, of een `lang === 'nl' ? … : …`-blok voor lange teksten). `src/pages/en/<naam>.astro` is een dunne wrapper die dezelfde pagina onder een Engelse URL toont.
+- **Nieuwe pagina?** Voeg de route toe aan `routes` in `src/i18n/index.ts` (NL- en EN-pad), maak de NL-pagina en de wrapper in `src/pages/en/`, en zet de pagina in `getNav()` (`src/data/site.ts`) als hij in het menu moet.
+- **Vaste teksten** (menu, footer, knoppen, CTA) staan in `ui` in `src/i18n/index.ts`.
+- **SEO:** `<html lang>`, `hreflang` (nl-NL, en-GB, x-default), canonical per taal, `og:locale`, JSON-LD in de juiste taal, sitemap met `xhtml:link`-alternatieven en een aparte RSS-feed (`/en/feed.xml`) worden automatisch gezet.
+- **Het contactformulier** stuurt een verborgen veld `lang` mee; de antwoordpagina's van de Function volgen die taal. De e-mail zelf blijft Nederlands.
+- **Niet vertaald:** de prijsafbeeldingen op Sponsoring (de tekst zit in de plaatjes; alleen de alt-teksten zijn vertaald), de ANBI-pdf's in `public/documenten/` en de tekst in de video's.
 
 ## Een nieuwsbericht toevoegen
 
@@ -59,7 +75,8 @@ functions/api/contact.ts   Pages Function voor het contactformulier (nu een stub
 3. Meerdere foto's naast elkaar: zet ze in `<div class="gallery"> … </div>` met lege regels rond de afbeeldingen.
 4. Video's gaan in `public/media/video/` en mogen **niet groter zijn dan 25 MB** (limiet van Cloudflare Pages).
    Verkleinen kan met `ffmpeg -i in.mp4 -vf scale=1280:-2 -c:v libx264 -crf 28 -c:a aac -b:a 96k -movflags +faststart uit.mp4`.
-5. Controleer met `npm run dev`. De nieuwste 4 berichten komen vanzelf op de homepage; `/nieuws/` pagineert per 6.
+5. **Engelse versie:** maak `src/content/news-en/<engelse-slug>.md` (zelfde frontmatter en afbeeldingen; alt-tekst van foto's als `Photo for ‘<titel>’`) en koppel de slugs in `newsSlugs` in `src/i18n/index.ts` (Nederlandse slug → Engelse slug). De build faalt als een Engels bericht niet gekoppeld is. Zonder Engelse versie ontbreekt het bericht op de Engelse site en werkt de taalwisselaar op dat bericht niet (die valt terug op de Engelse homepage).
+6. Controleer met `npm run dev`. De nieuwste 4 berichten komen vanzelf op de homepage; `/nieuws/` pagineert per 6.
 
 ## Deployen naar Cloudflare Pages
 
@@ -107,22 +124,18 @@ videos:
 
 ## Contactformulier
 
-Het formulier op `/contact/` is nu een **dummy**: het POST naar `/api/contact`, maar
-[functions/api/contact.ts](functions/api/contact.ts) verstuurt nog niets en antwoordt met een nette
-"nog niet actief"-pagina (HTTP 501). Er zit een honeypot-veld (`website`) in.
-
-Bij het koppelen van een e-mail-API (bijv. Resend) en Cloudflare Turnstile:
+Het formulier op `/contact/` (en `/en/contact/`) POST naar `/api/contact`; [functions/api/contact.ts](functions/api/contact.ts)
+valideert de velden en mailt het bericht via [Resend](https://resend.com) (met `reply-to` = e-mailadres van de bezoeker).
+Spamwering: een honeypot-veld (`website`). Zet in Cloudflare onder *Settings → Variables and Secrets* (secrets als *Secret*) en lokaal in `.dev.vars`:
 
 | Variabele | Waar | Doel |
 |---|---|---|
-| `RESEND_API_KEY` | secret | API-sleutel van de e-mailprovider |
+| `RESEND_API_KEY` | secret | API-sleutel van Resend |
 | `CONTACT_TO` | variabele | ontvangeradres (bijv. `info@breadforthehungryministries.nl`) |
-| `CONTACT_FROM` | variabele | geverifieerd afzenderadres/-domein |
-| `TURNSTILE_SECRET_KEY` | secret | server-side verificatie van het Turnstile-token |
-| `PUBLIC_TURNSTILE_SITE_KEY` | variabele (build) | sitekey voor de widget in `contact.astro` |
+| `CONTACT_FROM` | variabele | afzenderadres op het in Resend geverifieerde domein |
 
-Zet ze in Cloudflare onder *Settings → Variables and Secrets* (secrets als *Secret*) en lokaal in `.dev.vars`.
-Verruim daarnaast de CSP in `public/_headers` voor Turnstile (`https://challenges.cloudflare.com` bij `script-src`, `frame-src` en `connect-src`).
+Variabelen gelden pas voor deploys ná het toevoegen. Fouten van Resend staan in Cloudflare onder *Pages → Functions → Real-time logs*.
+Meer spamwering nodig? Voeg Cloudflare Turnstile toe (widget in `contact.astro`, token controleren in de Function, CSP in `public/_headers` verruimen voor `https://challenges.cloudflare.com`).
 
 ## Vindbaarheid (SEO)
 
@@ -130,8 +143,8 @@ Wat de site automatisch doet:
 
 - Per pagina een zoekwoordgerichte `<title>` (≤ 60 tekens) en meta description (≤ 155 tekens), `seoTitle`/`description` in de `<Layout>`-aanroep van elke pagina. Nieuwsberichten gebruiken hun eigen titel en een ingekorte samenvatting.
 - Gestructureerde data (JSON-LD): `NGO`/`Organization` (met ANBI-gegevens, werkgebied Oeganda en Kenia, contactgegevens, `DonateAction`) en `WebSite` op de homepage, `BreadcrumbList` op elke pagina en `NewsArticle` bij elk nieuwsbericht (`src/data/schema.ts`).
-- `sitemap-index.xml` (met `lastmod` voor nieuwsberichten), `robots.txt`, canonical-URL's, `hreflang="nl-NL"`, Open Graph/Twitter-kaarten, RSS-feed op `/feed.xml` (oude `/feed/` verwijst hiernaartoe).
-- Snelle pagina's (Lighthouse ≥ 96), semantische koppen, `lang="nl"` en alt-teksten op afbeeldingen.
+- `sitemap-index.xml` (met `lastmod` voor nieuwsberichten), `robots.txt`, canonical-URL's, `hreflang` (nl-NL/en-GB/x-default), Open Graph/Twitter-kaarten, RSS-feeds op `/feed.xml` en `/en/feed.xml` (oude `/feed/` verwijst naar de eerste).
+- Snelle pagina's (Lighthouse ≥ 96), semantische koppen, `lang` per taal en alt-teksten op afbeeldingen.
 
 **Wat jij nog moet doen** (kan ik niet vanuit de code regelen):
 
