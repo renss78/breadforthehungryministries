@@ -13,7 +13,7 @@ const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(wh
   <Hero title="Contact" eyebrow="Neem contact op" image={hero} imageAlt="Een gezelschap aan tafel in Oeganda" position="50% 45%" />
 
   <div class="container-page section grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
-    <!-- Dummy-formulier: functions/api/contact.ts is nog een stub (zie README). -->
+    <!-- Verstuurt via functions/api/contact.ts (Resend). -->
     <form action="/api/contact" method="post" class="grid gap-5" aria-labelledby="form-titel">
       <h2 id="form-titel" class="sr-only">Contactformulier</h2>
       <label class="field">
