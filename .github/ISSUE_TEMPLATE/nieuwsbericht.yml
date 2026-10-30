@@ -1,0 +1,39 @@
+name: Nieuwsbericht
+description: Lever een nieuwsbericht aan; Claude maakt de Nederlandse en Engelse versie op een aparte branch.
+title: "Nieuwsbericht: "
+labels: [nieuwsbericht]
+body:
+  - type: input
+    id: titel
+    attributes:
+      label: Titel
+      description: De Nederlandse titel van het bericht.
+    validations:
+      required: true
+  - type: input
+    id: datum
+    attributes:
+      label: Datum
+      description: De publicatiedatum van het bericht.
+      placeholder: "2026-03-12"
+    validations:
+      required: true
+  - type: textarea
+    id: tekst
+    attributes:
+      label: Tekst
+      description: De Nederlandse tekst. Claude neemt deze over en verzint er niets bij.
+    validations:
+      required: true
+  - type: textarea
+    id: fotos
+    attributes:
+      label: Foto's
+      description: Sleep hier de foto's in (jpg, png of webp, maximaal 10). De eerste foto wordt de omslag.
+    validations:
+      required: true
+  - type: textarea
+    id: opmerkingen
+    attributes:
+      label: Opmerkingen
+      description: Optioneel, bijvoorbeeld de gewenste volgorde van de foto's.
