@@ -24,11 +24,15 @@ Er staan nog drie fases gepland: eerst de muren, deuren en ramen (inclusief een 
 
 </div>
 
-<video controls preload="none" playsinline src="/media/video/WhatsApp%20Video%202026-10-29%20at%2021.04.04.mp4"></video>
+<div class="gallery">
 
-<video controls preload="none" playsinline src="/media/video/WhatsApp%20Video%202026-10-29%20at%2021.04.04%20(1).mp4"></video>
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp%20Video%202026-10-29%20at%2021.04.04.mp4#t=0.1"></video>
 
-<video controls preload="none" playsinline src="/media/video/WhatsApp%20Video%202026-10-29%20at%2021.04.05.mp4"></video>
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp%20Video%202026-10-29%20at%2021.04.04%20(1).mp4#t=0.1"></video>
+
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp%20Video%202026-10-29%20at%2021.04.05.mp4#t=0.1"></video>
+
+</div>
 
 Het gebouw wordt een plek voor seminars, trainingen en pastorconferenties. Ons verlangen is om hier, via een satellietverbinding, duizenden gelovigen toe te rusten. In een gebied dat eeuwenlang onder hekserij leefde, verspreidt het evangelie zich nu razendsnel. De deur staat open, het is oogsttijd!
 

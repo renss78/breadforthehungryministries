@@ -24,11 +24,15 @@ Three more phases are planned: first the walls, doors and windows (including a t
 
 </div>
 
-<video controls preload="none" playsinline src="/media/video/WhatsApp%20Video%202026-10-29%20at%2021.04.04.mp4"></video>
+<div class="gallery">
 
-<video controls preload="none" playsinline src="/media/video/WhatsApp%20Video%202026-10-29%20at%2021.04.04%20(1).mp4"></video>
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp%20Video%202026-10-29%20at%2021.04.04.mp4#t=0.1"></video>
 
-<video controls preload="none" playsinline src="/media/video/WhatsApp%20Video%202026-10-29%20at%2021.04.05.mp4"></video>
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp%20Video%202026-10-29%20at%2021.04.04%20(1).mp4#t=0.1"></video>
+
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp%20Video%202026-10-29%20at%2021.04.05.mp4#t=0.1"></video>
+
+</div>
 
 The building will be a place for seminars, training and pastor conferences. Our desire is to equip thousands of believers here, via a satellite link. In an area that lived under witchcraft for centuries, the gospel is now spreading rapidly. The door is open, it is harvest time!
 
