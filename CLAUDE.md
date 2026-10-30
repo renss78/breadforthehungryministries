@@ -21,7 +21,7 @@ Een issue met het label `nieuwsbericht` bevat de aanlevering. De workflow heeft 
    Het Engelse bericht is een getrouwe vertaling: vertaal `title`, `excerpt`, de tekst, de alt-teksten en de slug.
 4. `issue-<nr>-1` is de omslag; de overige foto's komen in de tekst, bij meerdere in een `<div class="gallery">`.
    Gebruik elke foto. Alt-tekst: `Foto bij ‘<titel>’` in het Nederlands, `Photo for ‘<title>’` in het Engels.
-5. Gebruik als `date` de opgegeven datum, leid de slug af van de titel en maak `excerpt` een korte samenvatting
+5. Gebruik als `date` de opgegeven datum in de vorm `JJJJ-MM-DD`, of de aanmaakdatum van het issue als er geen datum is opgegeven. Leid de slug af van de titel en maak `excerpt` een korte samenvatting
    uit de aangeleverde tekst.
 6. Draai `npm run check` en `npm run build` en los fouten op.
 7. Meld in de reactie op het issue wat is gemaakt, welke keuzes in de vertaling opvallen en wat ontbreekt.

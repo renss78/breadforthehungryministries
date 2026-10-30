@@ -14,10 +14,9 @@ body:
     id: datum
     attributes:
       label: Datum
-      description: De publicatiedatum van het bericht.
-      placeholder: "2026-03-12"
+      description: Optioneel. Laat leeg voor de datum van vandaag, of schrijf bijvoorbeeld 12 maart 2026.
     validations:
-      required: true
+      required: false
   - type: textarea
     id: tekst
     attributes:
