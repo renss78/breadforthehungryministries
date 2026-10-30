@@ -1,5 +1,5 @@
 name: Nieuwsbericht
-description: Lever een nieuwsbericht aan; Claude maakt de Nederlandse en Engelse versie op een aparte branch.
+description: Lever een nieuwsbericht aan in het Nederlands; Claude maakt de Nederlandse en Engelse versie op een aparte branch.
 title: "Nieuwsbericht: "
 labels: [nieuwsbericht]
 body:
@@ -7,7 +7,7 @@ body:
     id: titel
     attributes:
       label: Titel
-      description: De Nederlandse titel van het bericht.
+      description: Alleen in het Nederlands; de Engelse titel wordt automatisch vertaald.
     validations:
       required: true
   - type: input
@@ -22,7 +22,7 @@ body:
     id: tekst
     attributes:
       label: Tekst
-      description: De Nederlandse tekst. Claude neemt deze over en verzint er niets bij.
+      description: Alleen in het Nederlands. Claude neemt deze over, verzint er niets bij en maakt zelf de Engelse vertaling.
     validations:
       required: true
   - type: textarea

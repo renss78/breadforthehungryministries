@@ -17,7 +17,8 @@ Een issue met het label `nieuwsbericht` bevat de aanlevering. De workflow heeft 
    een Engels bericht in `src/content/news-en/` en de koppeling in `newsSlugs` (`src/i18n/index.ts`).
 2. Neem de aangeleverde Nederlandse tekst ongewijzigd over, op opmaak en duidelijke typefouten na.
    Verzin geen feiten, namen, aantallen of citaten en vul de tekst niet inhoudelijk aan.
-3. Het Engelse bericht is een getrouwe vertaling.
+3. De aanlevering is altijd Nederlands; vertaal die zelf naar het Engels, ook als het issue alleen Nederlands bevat.
+   Het Engelse bericht is een getrouwe vertaling: vertaal `title`, `excerpt`, de tekst, de alt-teksten en de slug.
 4. `issue-<nr>-1` is de omslag; de overige foto's komen in de tekst, bij meerdere in een `<div class="gallery">`.
    Gebruik elke foto. Alt-tekst: `Foto bij ‘<titel>’` in het Nederlands, `Photo for ‘<title>’` in het Engels.
 5. Gebruik als `date` de opgegeven datum, leid de slug af van de titel en maak `excerpt` een korte samenvatting
