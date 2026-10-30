@@ -26,12 +26,12 @@ We zijn stil en dankbaar wat er gebeurt als Gods Geest de ruimte krijgt In het o
 
 ![Foto bij ‘Nieuwsupdate van 8 februari – Op de terugweg uit Entebbe: massale bekeringen en genezingen zetten door’](../../assets/images/2026-02-WhatsApp-Image-2026-02-09-at-06.18.41.jpeg)
 
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.20.mp4#t=0.1"></video>
+
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.21.mp4#t=0.1"></video>
+
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.23.mp4#t=0.1"></video>
+
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.24.mp4#t=0.1"></video>
+
 </div>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.20.mp4"></video>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.21.mp4"></video>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.23.mp4"></video>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.24.mp4"></video>

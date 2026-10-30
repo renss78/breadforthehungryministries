@@ -52,10 +52,10 @@ The photos take you along and give a wonderful picture of today. Enjoy with us w
 
 ![Photo for ‘News update of 6 February – A Day of Breakthrough and Grace’](../../assets/images/2026-02-WhatsApp-Image-2026-02-07-at-06.27.57.jpeg)
 
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-07-at-06.29.39.mp4#t=0.1"></video>
+
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-07-at-06.36.36.mp4#t=0.1"></video>
+
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-07-at-06.45.51.mp4#t=0.1"></video>
+
 </div>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-07-at-06.29.39.mp4"></video>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-07-at-06.36.36.mp4"></video>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-07-at-06.45.51.mp4"></video>

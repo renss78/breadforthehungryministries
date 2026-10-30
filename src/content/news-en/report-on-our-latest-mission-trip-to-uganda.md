@@ -20,6 +20,12 @@ Next we travelled to a new cell group. Besides the seven churches there are very
 
 Our bodies were pushed to the limit and we are grateful for the strength we received. The photos give a good impression of these days.
 
+Finally we travelled to Entebbe. At 21:00 we flew from Entebbe to Nairobi and at 23:59 from Nairobi to Amsterdam, where we landed on Thursday at 7:45.
+
+We are very grateful for all the visible blessings, and the rest will follow. Thank you for all the prayers.
+
+Warm greetings from all of us
+
 <div class="gallery">
 
 ![Photo 1 for the report on our latest mission trip to Uganda](../../assets/images/oeganda-2026-sept-01.jpeg)
@@ -39,9 +45,3 @@ Our bodies were pushed to the limit and we are grateful for the strength we rece
 ![Photo 8 for the report on our latest mission trip to Uganda](../../assets/images/oeganda-2026-sept/IMG20260913133708.jpg)
 
 </div>
-
-Finally we travelled to Entebbe. At 21:00 we flew from Entebbe to Nairobi and at 23:59 from Nairobi to Amsterdam, where we landed on Thursday at 7:45.
-
-We are very grateful for all the visible blessings, and the rest will follow. Thank you for all the prayers.
-
-Warm greetings from all of us

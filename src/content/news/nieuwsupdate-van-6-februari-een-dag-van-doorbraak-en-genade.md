@@ -52,10 +52,10 @@ De foto’s nemen je mee en geven een prachtig beeld van vandaag. Geniet mee wat
 
 ![Foto bij ‘Nieuwsupdate van 6 februari – Een Dag van Doorbraak en Genade’](../../assets/images/2026-02-WhatsApp-Image-2026-02-07-at-06.27.57.jpeg)
 
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-07-at-06.29.39.mp4#t=0.1"></video>
+
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-07-at-06.36.36.mp4#t=0.1"></video>
+
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-07-at-06.45.51.mp4#t=0.1"></video>
+
 </div>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-07-at-06.29.39.mp4"></video>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-07-at-06.36.36.mp4"></video>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-07-at-06.45.51.mp4"></video>

@@ -10,16 +10,16 @@ Op 26 januari start een nieuwe bijbelschool in het woestijngebied op de grens va
 
 Pastor John — een oud-student van onze bijbelschool in Webuye — heeft inmiddels zes gemeenten gesticht in Sudan (Kakuma vluchtelingenkamp) en achtentwintig gemeenten in het noordelijke grensgebied van Kenia (Turkana Land). Met zijn pioniershart en onze ondersteuning zet hij nu de volgende stap: de oprichting van een nieuw trainingscentrum voor toekomstige bedieningen.
 
-![Foto bij ‘Nieuwsupdate vanuit Kenia’](../../assets/images/2025-11-WhatsApp-Image-2025-11-06-at-19.12.53-1.jpeg)
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2025-11-06-at-19.13.00.mp4"></video>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2025-11-06-at-19.15.26.mp4"></video>
+Evangelisatie in het vluchtelingenkamp in Sudan
 
 <div class="gallery">
 
+![Foto bij ‘Nieuwsupdate vanuit Kenia’](../../assets/images/2025-11-WhatsApp-Image-2025-11-06-at-19.12.53-1.jpeg)
+
 ![Foto bij ‘Nieuwsupdate vanuit Kenia’](../../assets/images/2025-11-PHOTO-2025-11-27-14-40-30.jpg)
 
-</div>
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2025-11-06-at-19.13.00.mp4#t=0.1"></video>
 
-Evangelisatie in het vluchtelingenkamp in Sudan
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2025-11-06-at-19.15.26.mp4#t=0.1"></video>
+
+</div>

@@ -46,8 +46,8 @@ We zegenen jullie met liefde en Gods nabijheid.
 
 ![Foto bij ‘Nieuwsupdate van 7 februari – Gods Werk Vandaag in Volle Kracht’](../../assets/images/2026-02-WhatsApp-Image-2026-02-08-at-16.15.43.jpeg)
 
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-08-at-16.27.46.mp4#t=0.1"></video>
+
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-08-at-16.31.43.mp4#t=0.1"></video>
+
 </div>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-08-at-16.27.46.mp4"></video>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-08-at-16.31.43.mp4"></video>

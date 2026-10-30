@@ -46,8 +46,8 @@ We bless you with love and God’s nearness.
 
 ![Photo for ‘News update of 7 February – God’s Work Today in Full Power’](../../assets/images/2026-02-WhatsApp-Image-2026-02-08-at-16.15.43.jpeg)
 
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-08-at-16.27.46.mp4#t=0.1"></video>
+
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-08-at-16.31.43.mp4#t=0.1"></video>
+
 </div>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-08-at-16.27.46.mp4"></video>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-08-at-16.31.43.mp4"></video>

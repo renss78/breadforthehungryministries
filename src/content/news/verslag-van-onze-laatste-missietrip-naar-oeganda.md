@@ -20,6 +20,12 @@ Vervolgens reisden we naar een nieuwe celgroep. Naast de zeven gemeenten zijn er
 
 Onze lichamen werden maximaal belast en we zijn dankbaar voor de kracht die we ontvingen. De foto's geven een goede impressie van deze dagen.
 
+Tot slot reisden we naar Entebbe. Om 21.00 uur vlogen we van Entebbe naar Nairobi en om 23.59 uur van Nairobi naar Amsterdam, waar we donderdag om 7.45 uur landden.
+
+We zijn zeer dankbaar voor alle zichtbare zegeningen, en de rest volgt. Dank voor alle gebeden.
+
+Een lieve groet van ons allen
+
 <div class="gallery">
 
 ![Foto 1 bij het verslag van onze missietrip naar Oeganda](../../assets/images/oeganda-2026-sept-01.jpeg)
@@ -39,9 +45,3 @@ Onze lichamen werden maximaal belast en we zijn dankbaar voor de kracht die we o
 ![Foto 8 bij het verslag van onze missietrip naar Oeganda](../../assets/images/oeganda-2026-sept/IMG20260913133708.jpg)
 
 </div>
-
-Tot slot reisden we naar Entebbe. Om 21.00 uur vlogen we van Entebbe naar Nairobi en om 23.59 uur van Nairobi naar Amsterdam, waar we donderdag om 7.45 uur landden.
-
-We zijn zeer dankbaar voor alle zichtbare zegeningen, en de rest volgt. Dank voor alle gebeden.
-
-Een lieve groet van ons allen

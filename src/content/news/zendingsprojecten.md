@@ -26,16 +26,6 @@ Het multifunctionele gebouw zal ook worden gebruikt voor seminars over huwelijk,
 
 Onze visie is dat in het nieuwe gebouw een groot scherm zal worden geplaatst en wij hier via een satellietverbinding duizenden gelovigen kunnen gaan trainen. Ook het vertonen van films zoals de film van Jezus zal de omgeving doen schudden op haar grondvesten. Vergeet niet dat het gebied vele honderden jaren onder hekserij heeft geleefd en het licht van het evangelie zich nu razendsnel verspreidt. De deur staat open, het is nu de (oogst)tijd.
 
-<div class="gallery">
-
-![Arbeiders dragen stenen op de bouwplaats van het nieuwe gebouw](../../assets/images/2026-10-zendingsprojecten-2.jpg)
-
-![Het fundament van het nieuwe gebouw in aanbouw](../../assets/images/2026-10-zendingsprojecten-3.jpg)
-
-</div>
-
-![Arbeiders leggen het fundament van het nieuwe gebouw](../../assets/images/2026-10-zendingsprojecten-4.jpg)
-
 ## We zijn op zoek naar sponsors
 
 We beseffen dat het neerzetten van zo’n multifunctioneel gebouw een geloofsstap inhoudt. We hebben echter geleerd vanuit Gods Woord om te gaan bewegen als God Zijn visie in onze harten plant. Tot nu toe heeft de Here machtig voorzien, de grond is eigendom, het fundament is bijna gereed gelegd en betaald en: ‘het volk heeft lust om te werken’.
@@ -47,3 +37,13 @@ Het krachtige woord uit het boek Nehemia wil ik als een belijdenis over dit proj
 We hebben in geloof de eerste stap gezet en dat bestaat uit het leggen van het fundament.
 
 Blijf bidden en geven voor onze dochtergemeenten en dit megaproject.
+
+<div class="gallery">
+
+![Arbeiders dragen stenen op de bouwplaats van het nieuwe gebouw](../../assets/images/2026-10-zendingsprojecten-2.jpg)
+
+![Het fundament van het nieuwe gebouw in aanbouw](../../assets/images/2026-10-zendingsprojecten-3.jpg)
+
+![Arbeiders leggen het fundament van het nieuwe gebouw](../../assets/images/2026-10-zendingsprojecten-4.jpg)
+
+</div>

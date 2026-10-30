@@ -14,6 +14,8 @@ Bert en Vincent hadden het voorrecht om – met Gods genade – aanwezig te zijn
 
 Hieronder een korte impresse, meer kan worden gevonden op de media pagina
 
+/med
+
 <div class="gallery">
 
 ![Foto bij ‘Bezoek Kenia November 2025’](../../assets/images/2025-12-WhatsApp-Image-2025-11-09-at-15.24.34.jpeg)
@@ -57,5 +59,3 @@ Hieronder een korte impresse, meer kan worden gevonden op de media pagina
 ![Foto bij ‘Bezoek Kenia November 2025’](../../assets/images/2025-12-WhatsApp-Image-2025-11-09-at-15.222224.32.jpeg)
 
 </div>
-
-/med

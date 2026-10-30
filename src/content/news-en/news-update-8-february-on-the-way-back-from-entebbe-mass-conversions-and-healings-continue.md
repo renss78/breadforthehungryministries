@@ -26,12 +26,12 @@ We are quiet and grateful for what happens when God’s Spirit is given room. In
 
 ![Photo for ‘News update of 8 February – On the way back from Entebbe: mass conversions and healings continue’](../../assets/images/2026-02-WhatsApp-Image-2026-02-09-at-06.18.41.jpeg)
 
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.20.mp4#t=0.1"></video>
+
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.21.mp4#t=0.1"></video>
+
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.23.mp4#t=0.1"></video>
+
+<video controls preload="metadata" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.24.mp4#t=0.1"></video>
+
 </div>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.20.mp4"></video>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.21.mp4"></video>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.23.mp4"></video>
-
-<video controls preload="none" playsinline src="/media/video/WhatsApp-Video-2026-02-09-at-06.34.24.mp4"></video>

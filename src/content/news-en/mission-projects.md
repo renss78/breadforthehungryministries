@@ -26,16 +26,6 @@ The multifunctional building will also be used for seminars on marriage, family,
 
 Our vision is that a large screen will be placed in the new building and that we will be able to train thousands of believers from here via a satellite connection. Showing films such as the film about Jesus will also shake the area to its foundations. Do not forget that the area has lived under witchcraft for many hundreds of years and that the light of the gospel is now spreading at lightning speed. The door is open; it is now the (harvest) time.
 
-<div class="gallery">
-
-![Workers carrying stones at the building site of the new building](../../assets/images/2026-10-zendingsprojecten-2.jpg)
-
-![The foundation of the new building under construction](../../assets/images/2026-10-zendingsprojecten-3.jpg)
-
-</div>
-
-![Workers laying the foundation of the new building](../../assets/images/2026-10-zendingsprojecten-4.jpg)
-
 ## We are looking for sponsors
 
 We realise that putting up such a multifunctional building is a step of faith. However, we have learned from God’s Word to start moving when God plants His vision in our hearts. So far the Lord has provided mightily: the land is owned, the foundation is almost laid and paid for, and: ‘the people have a mind to work’.
@@ -47,3 +37,13 @@ I want to pray out the powerful word from the book of Nehemiah as a confession o
 In faith we have taken the first step, and that consists of laying the foundation.
 
 Keep praying and giving for our daughter churches and this mega project.
+
+<div class="gallery">
+
+![Workers carrying stones at the building site of the new building](../../assets/images/2026-10-zendingsprojecten-2.jpg)
+
+![The foundation of the new building under construction](../../assets/images/2026-10-zendingsprojecten-3.jpg)
+
+![Workers laying the foundation of the new building](../../assets/images/2026-10-zendingsprojecten-4.jpg)
+
+</div>
