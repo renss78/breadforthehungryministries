@@ -9,7 +9,7 @@ import Wave from '../components/Wave.astro';
 import NewsCard from '../components/NewsCard.astro';
 import { formatDate } from '../utils/format';
 import { getNews } from '../utils/news';
-import { getLang, pick, postPath, route } from '../i18n';
+import { getLang, pick, postPath, route, ui } from '../i18n';
 import { site } from '../data/site';
 import { newsArticle } from '../data/schema';
 import { getImage } from 'astro:assets';
@@ -60,16 +60,9 @@ const articleLd = newsArticle({ title, description: excerpt, path: postPath(post
   <article>
     <div class="container-prose prose section">
       <Content />
-      <aside class="soft-card mt-12 p-6 sm:p-8" aria-labelledby="meeleven">
-        <h2 id="meeleven" class="!mt-0">{l('Leeft u met ons mee?', 'Will you stand with us?')}</h2>
-        <p>
-          {
-            l(
-              'Bedankt dat u dit bericht heeft gelezen. Bid met ons mee voor het werk in Oeganda en Kenia en voor iedereen die daar het evangelie hoort. Wilt u ook financieel bijdragen? Elke gift, groot of klein, helpt ons om deze missie voort te zetten.',
-              'Thank you for reading this update. Please pray with us for the work in Uganda and Kenya and for everyone who hears the gospel there. Would you also like to contribute financially? Every gift, large or small, helps us continue this mission.',
-            )
-          }
-        </p>
+      <aside class="soft-card mt-12 p-6 sm:p-8" aria-labelledby="slot-sponsoring">
+        <h2 id="slot-sponsoring" class="!mt-0">{ui[lang].ctaTitle}</h2>
+        <p>{ui[lang].ctaText}</p>
         <a href={route('sponsorship', lang)} class="btn btn-clay mt-2 !text-white !no-underline">{l('Naar Sponsoring', 'Go to Sponsorship')}</a>
       </aside>
     </div>
