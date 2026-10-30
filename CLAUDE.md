@@ -33,6 +33,7 @@ Een issue met het label `nieuwsbericht` bevat de aanlevering. De workflow heeft 
 
 Stop en meld het op het issue als er geen foto is (de omslag is verplicht) of als de tekst ontbreekt.
 Pdf's worden niet verwerkt: meld ze op het issue als ze zijn aangeleverd.
+Regels `telegram-file: <id>` komen van de Telegram-bot en zijn door de workflow al als bestand neergezet.
 Meld ook elke bijlage-link waarvoor geen bestand is neergezet; een video kan dan handmatig in `public/media/video/`
 worden geüpload en in Opmerkingen worden genoemd.
 Wijzig bij een nieuwsbericht geen andere bestanden en merge nooit zelf.

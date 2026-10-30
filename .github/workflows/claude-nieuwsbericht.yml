@@ -34,6 +34,7 @@ jobs:
         if: github.event_name == 'issues'
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_BODY: ${{ github.event.issue.body }}
         run: node .github/scripts/download-attachments.mjs
@@ -44,3 +45,17 @@ jobs:
           claude_args: |
             --max-turns 30
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(npm run check),Bash(npm run build)"
+      - name: Telegram-melding sturen
+        if: always()
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          STATUS: ${{ job.status }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+        run: |
+          if [ -n "$TELEGRAM_CHAT_ID" ]; then
+            curl -sS -o /dev/null "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+              --data-urlencode "chat_id=$TELEGRAM_CHAT_ID" \
+              --data-urlencode "text=Claude is klaar ($STATUS): $ISSUE_URL"
+          fi
