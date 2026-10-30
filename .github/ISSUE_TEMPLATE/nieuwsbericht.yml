@@ -27,8 +27,8 @@ body:
   - type: textarea
     id: fotos
     attributes:
-      label: Foto's
-      description: Sleep hier de foto's in (jpg, png of webp, maximaal 10). De eerste foto wordt de omslag.
+      label: Foto's en video's
+      description: Sleep hier de foto's (jpg, png, webp) en video's (mp4, maximaal 25 MB per stuk) in, maximaal 12 bestanden. De eerste foto wordt de omslag.
     validations:
       required: true
   - type: textarea
