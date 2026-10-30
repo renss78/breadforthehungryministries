@@ -289,6 +289,11 @@
     object-fit: cover;
   }
 
+  .prose .gallery video {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
   /* Soft cards */
   .soft-card {
     border-radius: 1.75rem;
