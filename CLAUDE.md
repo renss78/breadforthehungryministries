@@ -21,9 +21,10 @@ Een issue met het label `nieuwsbericht` bevat de aanlevering. De workflow heeft 
 3. De aanlevering is altijd Nederlands; vertaal die zelf naar het Engels, ook als het issue alleen Nederlands bevat.
    Het Engelse bericht is een getrouwe vertaling: vertaal `title`, `excerpt`, de tekst, de alt-teksten en de slug.
 4. `issue-<nr>-1` is de omslag, tenzij het veld Opmerkingen een andere foto aanwijst. De volgnummers volgen de volgorde
-   van de foto's in het issue. De overige foto's komen in de tekst, bij meerdere in een `<div class="gallery">`.
+   van de foto's in het issue. Zet eerst de volledige tekst en daarna, helemaal onderaan, één `<div class="gallery">` met
+   de overige foto's gevolgd door de video's, met lege regels rond elk item. Zet geen media tussen de tekst.
    Plaats elke video met `<video controls preload="metadata" playsinline src="/media/video/<bestand>#t=0.1"></video>`, in beide talen.
-   Meerdere video's komen samen in een eigen `<div class="gallery">`, direct onder de fotogalerij, met lege regels rond elke video.
+   Voeg geen afsluitende oproep toe: de slottekst staat vast in `src/pages/[slug].astro`.
    Noemt het veld Opmerkingen een bestand dat al in `public/media/video/` staat, plaats dat dan op dezelfde manier.
    Gebruik elke foto en video. Alt-tekst: `Foto bij ‘<titel>’` in het Nederlands, `Photo for ‘<title>’` in het Engels.
 5. Gebruik als `date` de opgegeven datum in de vorm `JJJJ-MM-DD`, of de aanmaakdatum van het issue als er geen datum is opgegeven. Leid de slug af van de titel en maak `excerpt` een korte samenvatting

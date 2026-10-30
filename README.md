@@ -81,7 +81,7 @@ Een klein inline script in `<head>` (`Layout.astro`) zet `data-theme` op `<html>
    <video controls preload="none" playsinline src="/media/video/mijn-video.mp4"></video>
    ```
 
-3. Meerdere foto's naast elkaar: zet ze in `<div class="gallery"> … </div>` met lege regels rond de afbeeldingen.
+3. Vaste opbouw: eerst de tekst, dan onderaan één `<div class="gallery"> … </div>` met eerst de foto's en daarna de video's, met lege regels rond elk item. Alles in de galerij krijgt hetzelfde vierkant. De slottekst daaronder staat vast in `src/pages/[slug].astro`.
 4. Video's gaan in `public/media/video/` en mogen **niet groter zijn dan 25 MB** (limiet van Cloudflare Pages).
    Verkleinen kan met `ffmpeg -i in.mp4 -vf scale=1280:-2 -c:v libx264 -crf 28 -c:a aac -b:a 96k -movflags +faststart uit.mp4`.
 5. **Engelse versie:** maak `src/content/news-en/<engelse-slug>.md` (zelfde frontmatter en afbeeldingen; alt-tekst van foto's als `Photo for ‘<titel>’`) en koppel de slugs in `newsSlugs` in `src/i18n/index.ts` (Nederlandse slug → Engelse slug). De build faalt als een Engels bericht niet gekoppeld is. Zonder Engelse versie ontbreekt het bericht op de Engelse site en werkt de taalwisselaar op dat bericht niet (die valt terug op de Engelse homepage).
