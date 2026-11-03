@@ -8,6 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "test": "node --no-warnings --test telegram/bot.test.mjs telegram/route.test.mjs",
+    "telegram:koppel": "node telegram/koppel.mjs",
     "cf:dev": "astro build && wrangler pages dev dist"
   },
   "dependencies": {

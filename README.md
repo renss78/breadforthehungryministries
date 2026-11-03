@@ -36,6 +36,8 @@ public/
   documenten/         ANBI-pdf's
   media/video/        video's (max. 25 MB per bestand!)
 functions/api/contact.ts   Pages Function voor het contactformulier (verstuurt via Resend)
+functions/api/telegram.js  webhook van de Telegram-bot voor nieuwsberichten
+telegram/                  de bot zelf, zijn tests en het D1-schema — zie telegram/README.md
 ```
 
 ## Tweetalig: Nederlands (hoofdtaal) en Engels

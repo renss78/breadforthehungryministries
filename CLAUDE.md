@@ -9,6 +9,14 @@ Structuur, commando's en werkwijzen staan in [README.md](README.md); lees die ee
 - Controleer wijzigingen met `npm run check` en `npm run build`.
 - Secrets horen nooit in de repo (`.dev.vars`, GitHub- of Cloudflare-secrets).
 
+## Telegram-bot
+De bot die nieuwsberichten als issue aanlevert staat in `telegram/` en draait als Pages Function op
+`/api/telegram`; zie [telegram/README.md](telegram/README.md), vooral het contract met de workflow.
+- Draai `npm test` na elke wijziging aan de bot.
+- Wijzig je het contract (labels, koppen in de issue-body, `telegram-file:`-regels), pas dan ook
+  `.github/workflows/claude-nieuwsbericht.yml` en `.github/scripts/download-attachments.mjs` aan.
+- De bot mag niets zelf publiceren: mergen blijft een handeling op GitHub.
+
 ## Nieuwsbericht vanuit een GitHub-issue
 Een issue met het label `nieuwsbericht` bevat de aanlevering. De workflow heeft de foto's al als
 `src/assets/images/issue-<issuenummer>-<volgnummer>.<ext>` en de video's als
