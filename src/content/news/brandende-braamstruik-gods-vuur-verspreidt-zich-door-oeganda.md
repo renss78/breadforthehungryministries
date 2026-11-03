@@ -1,7 +1,8 @@
 ---
 title: "Brandende braamstruik: Gods vuur verspreidt zich door Oeganda"
 date: 2026-11-03
-cover: "../../assets/images/issue-10-kop.jpg"
+cover: "../../assets/images/issue-10-5.jpg"
+header: "../../assets/images/issue-10-kop.jpg"
 coverAlt: "Foto bij ‘Brandende braamstruik: Gods vuur verspreidt zich door Oeganda’"
 excerpt: "Na ons bezoek is de outpouring van Gods Geest als een ‘brandende braamstruik’ door het gebied gegaan. Elke dag worden gelovigen gedoopt, de bouw van de grote multifunctionele hal is in volle gang en er zijn nog twee termijnen van 30.000,- nodig."
 ---

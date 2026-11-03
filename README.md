@@ -73,6 +73,7 @@ Een klein inline script in `<head>` (`Layout.astro`) zet `data-theme` op `<html>
    date: 2026-03-12
    cover: "../../assets/images/mijn-omslag.jpg"
    coverAlt: ""          # leeg laten als de foto puur decoratief is
+   # header: "../../assets/images/mijn-kop.jpg"   # optioneel: andere foto voor de kop van het bericht (omslag blijft voor de nieuwskaart)
    excerpt: "Korte samenvatting voor de kaart en de zoekresultaten."
    ---
 

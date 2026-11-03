@@ -8,6 +8,8 @@ const schema = ({ image }: SchemaContext) =>
     date: z.coerce.date(),
     cover: image(),
     coverAlt: z.string().default(''),
+    /** Optionele andere afbeelding voor de kop van het bericht (bijv. als de omslag een poster met tekst is). */
+    header: image().optional(),
     excerpt: z.string(),
     /** Optional YouTube videos, shown under the header (click-to-play). */
     videos: z.array(z.object({ id: z.string(), title: z.string(), poster: image() })).default([]),
