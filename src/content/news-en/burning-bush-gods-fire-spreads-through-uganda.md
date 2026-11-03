@@ -1,7 +1,7 @@
 ---
 title: "Burning bush: God’s fire spreads through Uganda"
 date: 2026-11-03
-cover: "../../assets/images/issue-10-5.jpg"
+cover: "../../assets/images/issue-10-kop.jpg"
 coverAlt: "Photo for ‘Burning bush: God’s fire spreads through Uganda’"
 excerpt: "Since our visit, the outpouring of God’s Spirit has swept through the region like a ‘burning bush’. Believers are baptized every day, construction of the large multipurpose hall is in full swing, and two more instalments of 30,000 are needed."
 ---
