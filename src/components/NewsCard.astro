@@ -10,6 +10,7 @@ interface Props {
 
 const { post } = Astro.props;
 const { title, date, cover, coverAlt, excerpt } = post.data;
+const portrait = cover.height > cover.width;
 const lang = getLang(Astro.url);
 const href = postPath(post.id, lang);
 ---
@@ -21,7 +22,7 @@ const href = postPath(post.id, lang);
       alt={coverAlt}
       widths={[320, 480, 640]}
       sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 100vw"
-      class="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+      class:list={['aspect-[4/3] h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100', portrait ? 'object-contain' : 'object-cover']}
       loading="lazy"
     />
   </a>

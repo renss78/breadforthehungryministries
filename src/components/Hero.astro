@@ -18,6 +18,7 @@ interface Props {
 
 const { title, eyebrow, image, imageAlt = '', size = 'page', position = '50% 40%', wave = 'text-cream' } = Astro.props;
 const full = size === 'full';
+const portrait = !!image && image.height > image.width;
 ---
 
 <section class:list={['relative isolate overflow-hidden bg-ink text-white', full ? 'min-h-[min(58svh,32rem)]' : 'min-h-[22rem] sm:min-h-[26rem]']}>
@@ -25,15 +26,26 @@ const full = size === 'full';
   <>
   <Image
     src={image}
-    alt={imageAlt}
+    alt={portrait ? '' : imageAlt}
     widths={[480, 768, 1024, 1600, 2000]}
     quality={70}
     sizes="100vw"
     loading="eager"
     fetchpriority="high"
-    class="kenburns absolute inset-0 -z-10 h-full w-full object-cover will-change-transform"
+    class:list={['kenburns absolute inset-0 -z-10 h-full w-full object-cover will-change-transform', portrait && 'blur-xl lg:blur-2xl']}
     style={`object-position:${position}`}
   />
+  {portrait && (
+  <Image
+    src={image}
+    alt={imageAlt}
+    widths={[480, 768, 1024]}
+    quality={70}
+    sizes="(min-width: 1024px) 28rem, 0px"
+    loading="eager"
+    class="absolute inset-y-6 right-4 -z-10 hidden h-[calc(100%-3rem)] w-auto max-w-[40%] rounded-2xl object-contain shadow-lift lg:right-[max(1rem,calc((100vw-72rem)/2))] lg:block"
+  />
+  )}
   <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink/90 via-ink/60 to-ink/25"></div>
   <div class="absolute inset-0 -z-10 bg-gradient-to-br from-teal-900/35 via-transparent to-transparent"></div>
   </>
