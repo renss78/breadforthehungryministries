@@ -16,6 +16,8 @@ export const site = {
   kvk: '68179901',
   rsin: '857334591',
   locale: 'nl_NL',
+  /** Openbare site key van de Cloudflare Turnstile-widget op het contactformulier (secret staat in Cloudflare). */
+  turnstileSiteKey: '0x4AAAAAAFyOBe1pvqTnA4Sn',
 };
 
 export const siteDescription = (lang: Lang) => (lang === 'en' ? site.descriptionEn : site.description);

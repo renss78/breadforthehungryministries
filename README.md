@@ -137,16 +137,21 @@ videos:
 
 Het formulier op `/contact/` (en `/en/contact/`) POST naar `/api/contact`; [functions/api/contact.ts](functions/api/contact.ts)
 valideert de velden en mailt het bericht via [Resend](https://resend.com) (met `reply-to` = e-mailadres van de bezoeker).
-Spamwering: een honeypot-veld (`website`). Zet in Cloudflare onder *Settings → Variables and Secrets* (secrets als *Secret*) en lokaal in `.dev.vars`:
+Spamwering: een honeypot-veld (`website`) en [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/)
+(widget in `contact.astro` met action `contact`; de openbare site key staat in `src/data/site.ts`; de CSP in `public/_headers` staat
+`https://challenges.cloudflare.com` toe). De Function vereist een geldig token met action `contact` en een goedgekeurde hostname;
+zonder Turnstile-instellingen verstuurt hij niets. Zet in Cloudflare onder *Settings → Variables and Secrets* (secrets als *Secret*) en lokaal in `.dev.vars`:
 
 | Variabele | Waar | Doel |
 |---|---|---|
 | `RESEND_API_KEY` | secret | API-sleutel van Resend |
 | `CONTACT_TO` | variabele | ontvangeradres (bijv. `info@breadforthehungryministries.nl`) |
 | `CONTACT_FROM` | variabele | afzenderadres op het in Resend geverifieerde domein |
+| `TURNSTILE_SECRET_KEY` | secret | geheime sleutel van de Turnstile-widget (Cloudflare → Turnstile → widget → Settings) |
+| `TURNSTILE_HOSTNAMES` | variabele | hostnamen waarvan tokens geldig zijn: `breadforthehungryministries.nl,www.breadforthehungryministries.nl` (productie nooit `localhost`) |
 
-Variabelen gelden pas voor deploys ná het toevoegen. Fouten van Resend staan in Cloudflare onder *Pages → Functions → Real-time logs*.
-Meer spamwering nodig? Voeg Cloudflare Turnstile toe (widget in `contact.astro`, token controleren in de Function, CSP in `public/_headers` verruimen voor `https://challenges.cloudflare.com`).
+Lokaal (`npm run cf:dev`) zet je in `.dev.vars` `TURNSTILE_HOSTNAMES=localhost`; `localhost` moet dan ook als domein op de widget staan.
+Variabelen gelden pas voor deploys ná het toevoegen. Fouten van Resend en afgewezen Turnstile-tokens staan in Cloudflare onder *Pages → Functions → Real-time logs*.
 
 ## Vindbaarheid (SEO)
 
