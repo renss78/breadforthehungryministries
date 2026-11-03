@@ -50,6 +50,7 @@ export const newsSlugs: Record<string, string> = {
   zendingsprojecten: 'mission-projects',
   'de-bouw-in-oost-oeganda-is-in-volle-gang': 'construction-in-eastern-uganda-is-in-full-swing',
   '100-dekens-voor-de-gevluchte-gelovigen': '100-blankets-for-the-displaced-believers',
+  'dit-is-een-testbericht': 'this-is-a-test-message',
 };
 const newsSlugsEn = Object.fromEntries(Object.entries(newsSlugs).map(([nl, en]) => [en, nl]));
 
