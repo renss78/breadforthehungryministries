@@ -60,24 +60,12 @@ npx wrangler pages functions build --outdir $env:TEMP\bread-functions
 - `GITHUB_REPO` staat standaard in `functions/api/telegram.js`; een variabele in
   Pages gaat voor.
 
-## Overstap van de losse Worker
+## Webhook
 
-Eén keer, in deze volgorde. Tot stap 3 blijft de oude Worker gewoon werken.
+`npm run telegram:koppel` zet de webhook op `/api/telegram` van deze site. Het
+leest `TELEGRAM_BOT_TOKEN` en `TELEGRAM_WEBHOOK_SECRET` uit `.dev.vars` (staat
+in `.gitignore`); dat geheim moet gelijk zijn aan het secret in Pages. Nieuw
+geheim nodig? Zet het in allebei en voer het script opnieuw uit.
 
-1. Vul `.dev.vars` (staat in `.gitignore`): `TELEGRAM_BOT_TOKEN` (bij @BotFather
-   via */mybots → API Token*), `GITHUB_TOKEN` en `ALLOWED_USER_ID`.
-   `TELEGRAM_WEBHOOK_SECRET` staat er al en is ook al in Pages gezet.
-2. Zet de andere drie in Pages (elk commando vraagt om de waarde), of laat
-   ze uit `.dev.vars` overnemen.
-3. Push naar `main` en wacht tot Pages klaar is.
-4. `npm run telegram:koppel` — zet de webhook op deze site.
-5. Stuur `/status` naar de bot.
-
-Terug naar de oude Worker kan zolang die bestaat: zet de webhook weer op zijn
-`workers.dev`-adres met het oude geheim.
-
-Na een week of twee zonder problemen:
-
-6. Oude Worker weg (de database blijft, die gebruikt de site nu):
-   `npx wrangler delete bread-telegram-bot`, en trek het oude GitHub-token in.
-7. Repo `telegram-website-bot-breadforthehungry` archiveren op GitHub en de lokale map verwijderen.
+Sinds 3 november 2026 draait de bot hier; de losse Worker `bread-telegram-bot`
+is verwijderd. De database is dezelfde gebleven.
