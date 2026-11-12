@@ -157,6 +157,9 @@ Variabelen gelden pas voor deploys ná het toevoegen. Fouten van Resend en afgew
 
 ## Online doneren (Mollie)
 
+> **Staat nog uit.** Het formulier verschijnt pas als `onlineDonations` in `src/data/site.ts` op `true` staat. Zet dat
+> pas aan nadat `MOLLIE_API_KEY` in Cloudflare staat en een testbetaling is gelukt.
+
 Op `/sponsoring/` (en `/en/sponsorship/`) staat een donatieformulier (`src/components/DonateForm.astro`): een eenmalige gift van
 € 500, € 250, € 100, € 50 of een eigen bedrag (€ 5 – € 10.000, grenzen in `functions/api/doneren.ts`), met naam en e-mail.
 De bankgegevens en de QR-code van het Rabobank-betaalverzoek blijven daaronder staan.

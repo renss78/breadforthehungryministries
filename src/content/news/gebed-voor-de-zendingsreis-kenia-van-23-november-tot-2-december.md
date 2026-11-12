@@ -1,7 +1,7 @@
 ---
 title: "Gebed voor de Zendingsreis Kenia van 23 november tot 2 december"
 date: 2026-11-12
-cover: "../../assets/images/issue-12-1.jpg"
+cover: "../../assets/images/issue-12-1.png"
 coverAlt: "Foto bij ‘Gebed voor de Zendingsreis Kenia van 23 november tot 2 december’"
 excerpt: "Op maandag 23 november vliegen Vincent, Mark, Nancy en de schrijver naar Noord-Kenia, vlak bij de grens met Soedan, voor een pastorconferentie en de graduation van 50 studenten. Wilt u bidden voor deze reis?"
 ---
@@ -13,3 +13,10 @@ Hij heeft ons uitgenodigd voor een grote pastor conferentie in Noord-Kenia en de
 De reis erheen is nogal complex omdat het in een afgelegen regio ligt en de aansluitingen met vluchten daarheen niet zo op elkaar zijn afgestemd.
 
 Wilt u bidden voor deze reis, voor gezondheid, bescherming, impact en het thuisfront
+
+
+<div class="gallery">
+
+![Foto bij ‘Gebed voor de Zendingsreis Kenia van 23 november tot 2 december’](../../assets/images/issue-12-1.png)
+
+</div>

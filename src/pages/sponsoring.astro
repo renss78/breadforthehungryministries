@@ -47,16 +47,18 @@ const projects = [
     )}</p>
   </section>
 
-  <section class="container-page pb-12" aria-labelledby="doneren-titel">
-    <div class="mx-auto max-w-4xl rise rounded-[2rem] bg-card p-7 shadow-lift sm:p-10">
-      <h2 id="doneren-titel" class="!mt-0 !text-3xl">{l('Online doneren', 'Donate online')}</h2>
-      <p class="mt-3 mb-8 text-fg-soft">{l(
-        'Geef eenvoudig een eenmalige gift met iDEAL of een andere betaalmethode. Liever zelf overmaken? Gebruik dan de bankgegevens of de QR-code hieronder.',
-        'Make a one-off gift easily with iDEAL or another payment method. Prefer to transfer yourself? Use the bank details or the QR code below.',
-      )}</p>
-      <DonateForm />
-    </div>
-  </section>
+  {site.onlineDonations && (
+    <section class="container-page pb-12" aria-labelledby="doneren-titel">
+      <div class="mx-auto max-w-4xl rise rounded-[2rem] bg-card p-7 shadow-lift sm:p-10">
+        <h2 id="doneren-titel" class="!mt-0 !text-3xl">{l('Online doneren', 'Donate online')}</h2>
+        <p class="mt-3 mb-8 text-fg-soft">{l(
+          'Geef eenvoudig een eenmalige gift met iDEAL of een andere betaalmethode. Liever zelf overmaken? Gebruik dan de bankgegevens of de QR-code hieronder.',
+          'Make a one-off gift easily with iDEAL or another payment method. Prefer to transfer yourself? Use the bank details or the QR code below.',
+        )}</p>
+        <DonateForm />
+      </div>
+    </section>
+  )}
 
   <section class="container-page pb-16" aria-labelledby="bank">
     <div class="mx-auto grid max-w-4xl items-center gap-8 rise rounded-[2rem] bg-teal-700 p-7 text-white shadow-lift sm:p-10 md:grid-cols-[1fr_auto]">

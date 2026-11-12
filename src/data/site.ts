@@ -18,6 +18,11 @@ export const site = {
   locale: 'nl_NL',
   /** Openbare site key van de Cloudflare Turnstile-widget op het contactformulier (secret staat in Cloudflare). */
   turnstileSiteKey: '0x4AAAAAAFyOBe1pvqTnA4Sn',
+  /**
+   * Toont het online donatieformulier (Mollie) op de sponsoringpagina. Staat uit tot de Mollie-koppeling
+   * werkt (API-sleutel in Cloudflare + geslaagde testbetaling); zet dan op `true`.
+   */
+  onlineDonations: false,
 };
 
 export const siteDescription = (lang: Lang) => (lang === 'en' ? site.descriptionEn : site.description);
