@@ -1,0 +1,187 @@
+---
+/**
+ * Terugkeerpagina na een online donatie (Mollie). De status en gegevens komen van GET /api/doneren
+ * (functions/api/doneren.ts), dat de betaling uit een HttpOnly-cookie leest. Bij een geslaagde betaling
+ * toont de pagina een betalingsbewijs dat de gever kan printen of als pdf kan opslaan.
+ */
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+import { getLang, pick, route, bcp47 } from '../i18n';
+
+const lang = getLang(Astro.url);
+const l = pick(lang);
+---
+
+<Layout title={l('Bedankt voor uw gift', 'Thank you for your gift')} noindex>
+  <section class="container-prose section" data-receipt data-locale={bcp47[lang]}>
+    <!-- Laden (en zonder JavaScript): algemene tekst. -->
+    <div data-state="loading">
+      <p class="eyebrow">{l('Online doneren', 'Online donation')}</p>
+      <h1 class="mt-4">{l('Bedankt!', 'Thank you!')}</h1>
+      <p class="mt-6 text-lg">{l('We halen de gegevens van uw betaling op…', 'We are retrieving the details of your payment…')}</p>
+      <noscript><p class="mt-4 text-lg">{l(
+        'Schakel JavaScript in om uw betalingsbewijs te zien. Is de betaling gelukt, dan ziet u deze ook terug in uw bank-app.',
+        'Enable JavaScript to see your payment receipt. If the payment succeeded, you will also see it in your banking app.',
+      )}</p></noscript>
+    </div>
+
+    <div data-state="paid" hidden>
+      <div class="no-print">
+        <p class="eyebrow">{l('Betaling gelukt', 'Payment successful')}</p>
+        <h1 class="mt-4">{l('Hartelijk dank voor uw gift!', 'Thank you so much for your gift!')}</h1>
+        <p class="mt-6 text-lg">{l(
+          'Uw gift is ontvangen. Hieronder vindt u uw betalingsbewijs; u kunt het printen of als pdf bewaren.',
+          'Your gift has been received. Below is your payment receipt; you can print it or save it as a PDF.',
+        )}</p>
+      </div>
+
+      <article class="receipt mt-10 rounded-[2rem] bg-card p-7 shadow-lift sm:p-10" aria-labelledby="bewijs-titel">
+        <h2 id="bewijs-titel" class="!mt-0 !text-2xl">{l('Betalingsbewijs', 'Payment receipt')}</h2>
+        <p class="mt-2 text-fg-soft">{site.name} · KvK {site.kvk} · RSIN {site.rsin}</p>
+        <dl class="mt-6 grid gap-x-6 gap-y-3 sm:grid-cols-[auto_1fr]">
+          <dt>{l('Bedrag', 'Amount')}</dt><dd class="font-display text-2xl" data-field="amount"></dd>
+          <dt>{l('Omschrijving', 'Description')}</dt><dd data-field="description"></dd>
+          <dt>{l('Datum', 'Date')}</dt><dd data-field="date"></dd>
+          <dt>{l('Naam', 'Name')}</dt><dd data-field="naam"></dd>
+          <dt>{l('E-mail', 'Email')}</dt><dd class="break-all" data-field="email"></dd>
+          <dt>{l('Betaalmethode', 'Payment method')}</dt><dd data-field="method"></dd>
+          <dt>{l('Kenmerk', 'Reference')}</dt><dd class="break-all font-mono text-sm" data-field="id"></dd>
+        </dl>
+        <p class="mt-8 text-sm text-fg-soft">{l(
+          `${site.name} is door de Belastingdienst aangemerkt als ANBI (RSIN ${site.rsin}). Bewaar dit bewijs voor uw administratie of belastingaangifte.`,
+          `${site.name} is registered by the Dutch Tax Administration as an ANBI (public benefit organisation, RSIN ${site.rsin}). Keep this receipt for your records or tax return.`,
+        )}</p>
+      </article>
+
+      <div class="no-print mt-8 flex flex-wrap gap-3">
+        <button type="button" class="btn btn-teal" data-print>{l('Printen of opslaan als pdf', 'Print or save as PDF')}</button>
+        <a href={route('home', lang)} class="btn btn-light !border-fg/20">{l('Naar de homepage', 'Go to the homepage')}</a>
+      </div>
+    </div>
+
+    <div data-state="pending" hidden>
+      <p class="eyebrow">{l('Even geduld', 'Please wait')}</p>
+      <h1 class="mt-4">{l('Uw betaling wordt verwerkt', 'Your payment is being processed')}</h1>
+      <p class="mt-6 text-lg">{l(
+        'We hebben nog geen bevestiging van uw bank. Deze pagina werkt zichzelf bij; u kunt hem ook later verversen.',
+        'We have not yet received confirmation from your bank. This page updates itself; you can also refresh it later.',
+      )}</p>
+    </div>
+
+    <div data-state="failed" hidden>
+      <p class="eyebrow">{l('Niet gelukt', 'Not completed')}</p>
+      <h1 class="mt-4">{l('De betaling is niet voltooid', 'The payment was not completed')}</h1>
+      <p class="mt-6 text-lg">{l(
+        'Er is niets afgeschreven. U kunt het opnieuw proberen of uw gift rechtstreeks overmaken.',
+        'Nothing has been charged. You can try again or transfer your gift directly.',
+      )}</p>
+      <div class="mt-8"><a href={route('sponsorship', lang)} class="btn btn-clay">{l('Opnieuw proberen', 'Try again')}</a></div>
+    </div>
+
+    <div data-state="unknown" hidden>
+      <p class="eyebrow">{l('Online doneren', 'Online donation')}</p>
+      <h1 class="mt-4">{l('Geen betaling gevonden', 'No payment found')}</h1>
+      <p class="mt-6 text-lg">{l(
+        'We konden uw betaling hier niet terugvinden. Is er wel geld afgeschreven, neem dan contact met ons op via ',
+        'We could not find your payment here. If money has been charged, please contact us at ',
+      )}<a href={`mailto:${site.email}`} class="font-semibold text-link">{site.email}</a>.</p>
+      <div class="mt-8"><a href={route('sponsorship', lang)} class="btn btn-teal">{l('Naar de sponsoringpagina', 'Go to the sponsorship page')}</a></div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  type Payment = {
+    status: string;
+    id?: string;
+    amount?: string;
+    currency?: string;
+    description?: string;
+    createdAt?: string;
+    paidAt?: string | null;
+    method?: string | null;
+    naam?: string;
+    email?: string;
+  };
+
+  const METHODS: Record<string, string> = {
+    ideal: 'iDEAL',
+    creditcard: 'Creditcard',
+    bancontact: 'Bancontact',
+    paypal: 'PayPal',
+    applepay: 'Apple Pay',
+    googlepay: 'Google Pay',
+    directdebit: 'SEPA',
+    kbc: 'KBC/CBC',
+    belfius: 'Belfius',
+    eps: 'EPS',
+    przelewy24: 'Przelewy24',
+  };
+
+  const root = document.querySelector<HTMLElement>('[data-receipt]');
+  if (root) {
+    const locale = root.dataset.locale || 'nl-NL';
+    const show = (state: string) => {
+      for (const el of root.querySelectorAll<HTMLElement>('[data-state]')) el.hidden = el.dataset.state !== state;
+    };
+    const set = (name: string, value: string) => {
+      const el = root.querySelector(`[data-field="${name}"]`);
+      if (el) el.textContent = value;
+    };
+
+    const fill = (p: Payment) => {
+      set('amount', new Intl.NumberFormat(locale, { style: 'currency', currency: p.currency || 'EUR' }).format(Number(p.amount)));
+      set('description', p.description ?? '');
+      const date = new Date(p.paidAt || p.createdAt || Date.now());
+      set('date', new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeStyle: 'short', timeZone: 'Europe/Amsterdam' }).format(date));
+      set('naam', p.naam ?? '');
+      set('email', p.email ?? '');
+      set('method', (p.method && METHODS[p.method]) || p.method || '—');
+      set('id', p.id ?? '');
+    };
+
+    let tries = 0;
+    const load = async () => {
+      let p: Payment;
+      try {
+        const res = await fetch('/api/doneren', { credentials: 'same-origin', cache: 'no-store' });
+        p = (await res.json()) as Payment;
+      } catch {
+        p = { status: 'error' };
+      }
+      if (p.status === 'paid') {
+        fill(p);
+        show('paid');
+      } else if (['open', 'pending', 'authorized', 'error'].includes(p.status) && tries++ < 20) {
+        // Nog geen definitieve status (of tijdelijke fout): elke 3 seconden opnieuw, maximaal een minuut.
+        show('pending');
+        setTimeout(load, 3000);
+      } else if (['canceled', 'expired', 'failed'].includes(p.status)) {
+        show('failed');
+      } else if (p.status === 'unknown') {
+        show('unknown');
+      } else {
+        show('pending');
+      }
+    };
+    load();
+
+    root.querySelector('[data-print]')?.addEventListener('click', () => window.print());
+  }
+</script>
+
+<style is:global>
+  @media print {
+    .site-header,
+    body footer,
+    .no-print {
+      display: none !important;
+    }
+    .receipt {
+      box-shadow: none !important;
+      border: 1px solid #999;
+      background: #fff !important;
+      color: #000 !important;
+    }
+  }
+</style>

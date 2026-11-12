@@ -1,0 +1,154 @@
+---
+/**
+ * Donatieformulier: POST naar functions/api/doneren.ts, dat een Mollie-betaling aanmaakt en doorstuurt.
+ * Werkt zonder JavaScript; het scriptje onderaan maakt alleen "Anders" prettiger (aanvinken + verplicht maken).
+ */
+import { site } from '../data/site';
+import { getLang, pick } from '../i18n';
+
+const lang = getLang(Astro.url);
+const l = pick(lang);
+const presets = [500, 250, 100, 50];
+---
+
+<form action="/api/doneren" method="post" class="donate grid gap-6" aria-labelledby="doneren-titel" data-donate>
+  <input type="hidden" name="lang" value={lang} />
+
+  <fieldset class="grid gap-3">
+    <legend class="mb-3 font-bold">{l('Kies een bedrag', 'Choose an amount')}</legend>
+    <div class="amounts grid grid-cols-2 gap-3 sm:grid-cols-5">
+      {
+        presets.map((p, i) => (
+          <label class="amount">
+            <input type="radio" name="bedrag" value={String(p)} required={i === 0} />
+            <span>€ {p}</span>
+          </label>
+        ))
+      }
+      <label class="amount">
+        <input type="radio" name="bedrag" value="anders" data-other-radio />
+        <span>{l('Anders', 'Other')}</span>
+      </label>
+    </div>
+    <label class="field other">
+      <span>{l('Ander bedrag (€)', 'Other amount (€)')}</span>
+      <input type="text" name="bedrag_anders" inputmode="decimal" autocomplete="transaction-amount" maxlength="10" placeholder={l('bijv. 75', 'e.g. 75')} pattern="\s*€?\s*\d{1,6}([.,]\d{1,2})?\s*" data-other-input />
+    </label>
+  </fieldset>
+
+  <div class="grid gap-5 sm:grid-cols-2">
+    <label class="field">
+      <span>{l('Naam', 'Name')}</span>
+      <input type="text" name="naam" autocomplete="name" maxlength="200" required />
+    </label>
+    <label class="field">
+      <span>{l('E-mail', 'Email')}</span>
+      <input type="email" name="email" autocomplete="email" maxlength="254" required />
+    </label>
+  </div>
+
+  <!-- Honeypot tegen spam: echte bezoekers zien en vullen dit veld niet in. -->
+  <div class="absolute -left-[9999px]" aria-hidden="true">
+    <label>{l('Laat dit veld leeg', 'Leave this field empty')} <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+  </div>
+  <!-- Cloudflare Turnstile; het token wordt in functions/api/doneren.ts gecontroleerd (action "doneren"). -->
+  <div class="cf-turnstile" data-sitekey={site.turnstileSiteKey} data-action="doneren" data-language={lang} data-theme="light" data-size="flexible"></div>
+
+  <div class="flex flex-wrap items-center gap-x-5 gap-y-3">
+    <button type="submit" class="btn btn-clay">{l('Verder naar betalen', 'Continue to payment')}</button>
+    <p class="text-sm text-fg-soft">{l(
+      'U rondt de betaling veilig af bij onze betaalprovider Mollie. Daarna krijgt u een betalingsbewijs.',
+      'You complete the payment securely with our payment provider Mollie. Afterwards you will receive a payment receipt.',
+    )}</p>
+  </div>
+</form>
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<script>
+  for (const form of document.querySelectorAll<HTMLFormElement>('[data-donate]')) {
+    const radio = form.querySelector<HTMLInputElement>('[data-other-radio]');
+    const other = form.querySelector<HTMLInputElement>('[data-other-input]');
+    if (!radio || !other) continue;
+    const sync = () => (other.required = radio.checked);
+    form.addEventListener('change', (e) => {
+      sync();
+      if (e.target === radio) other.focus();
+    });
+    other.addEventListener('input', () => {
+      if (other.value.trim()) {
+        radio.checked = true;
+        sync();
+      }
+    });
+  }
+</script>
+
+<style>
+  .amount {
+    position: relative;
+    cursor: pointer;
+  }
+  .amount input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    cursor: pointer;
+  }
+  .amount span {
+    display: block;
+    padding: 0.85rem 0.5rem;
+    border: 2px solid var(--color-line-strong);
+    border-radius: 999px;
+    background: var(--color-card);
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.125rem;
+    transition:
+      background-color 0.2s,
+      border-color 0.2s,
+      color 0.2s;
+  }
+  .amount:hover span {
+    border-color: var(--color-fg-soft);
+  }
+  .amount input:checked + span {
+    background: var(--color-teal-700);
+    border-color: var(--color-teal-700);
+    color: #fff;
+  }
+  .amount input:focus-visible + span {
+    outline: 3px solid var(--color-teal-500);
+    outline-offset: 2px;
+  }
+  /* "Ander bedrag" alleen tonen als "Anders" gekozen is; zonder :has()-ondersteuning blijft het veld gewoon zichtbaar. */
+  @supports selector(:has(*)) {
+    .donate:not(:has([data-other-radio]:checked)) .other {
+      display: none;
+    }
+  }
+  .field {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .field > span {
+    font-weight: 700;
+  }
+  .field input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid var(--color-line-strong);
+    border-radius: 0.75rem;
+    background: var(--color-card);
+    font: inherit;
+    color: var(--color-fg);
+    transition: border-color 0.2s;
+  }
+  .field input:hover {
+    border-color: var(--color-fg-soft);
+  }
+  .field input:focus {
+    outline: 3px solid var(--color-teal-500);
+    outline-offset: 1px;
+    border-color: var(--color-link);
+  }
+</style>

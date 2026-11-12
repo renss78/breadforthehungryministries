@@ -24,6 +24,7 @@ export const routes = {
   board: { nl: '/bestuur/', en: '/en/board/' },
   anbi: { nl: '/anbi-profiel/', en: '/en/anbi-profile/' },
   contact: { nl: '/contact/', en: '/en/contact/' },
+  thanks: { nl: '/bedankt/', en: '/en/thank-you/' },
   feed: { nl: '/feed.xml', en: '/en/feed.xml' },
 } as const;
 export type RouteKey = keyof typeof routes;

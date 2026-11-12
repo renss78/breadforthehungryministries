@@ -36,6 +36,7 @@ public/
   documenten/         ANBI-pdf's
   media/video/        video's (max. 25 MB per bestand!)
 functions/api/contact.ts   Pages Function voor het contactformulier (verstuurt via Resend)
+functions/api/doneren.ts   Pages Function voor online doneren (Mollie)
 functions/api/telegram.js  webhook van de Telegram-bot voor nieuwsberichten
 telegram/                  de bot zelf, zijn tests en het D1-schema — zie telegram/README.md
 ```
@@ -153,6 +154,31 @@ zonder Turnstile-instellingen verstuurt hij niets. Zet in Cloudflare onder *Sett
 
 Lokaal (`npm run cf:dev`) zet je in `.dev.vars` `TURNSTILE_HOSTNAMES=localhost`; `localhost` moet dan ook als domein op de widget staan.
 Variabelen gelden pas voor deploys ná het toevoegen. Fouten van Resend en afgewezen Turnstile-tokens staan in Cloudflare onder *Pages → Functions → Real-time logs*.
+
+## Online doneren (Mollie)
+
+Op `/sponsoring/` (en `/en/sponsorship/`) staat een donatieformulier (`src/components/DonateForm.astro`): een eenmalige gift van
+€ 500, € 250, € 100, € 50 of een eigen bedrag (€ 5 – € 10.000, grenzen in `functions/api/doneren.ts`), met naam en e-mail.
+De bankgegevens en de QR-code van het Rabobank-betaalverzoek blijven daaronder staan.
+
+1. Het formulier POST naar `/api/doneren`. De Function controleert de velden, Turnstile (action `doneren`) en de honeypot,
+   maakt via de Mollie-API een betaling aan (naam, e-mail en taal als `metadata`) en stuurt door naar de betaalpagina van Mollie.
+   Het betalings-id gaat mee in een HttpOnly-cookie dat alleen naar `/api/doneren` wordt gestuurd.
+2. Na het betalen stuurt Mollie de gever naar `/bedankt/` (of `/en/thank-you/`); annuleren gaat terug naar de sponsoringpagina.
+3. De bedankpagina vraagt `GET /api/doneren` op en toont bij een geslaagde betaling een **betalingsbewijs** (bedrag, datum,
+   naam, e-mail, betaalmethode, kenmerk, KvK/RSIN/ANBI) dat de gever kan printen of als pdf kan opslaan. Bij een nog lopende
+   betaling ververst de pagina zichzelf; bij een geannuleerde of mislukte betaling volgt een knop "Opnieuw proberen".
+
+Mollie zelf mailt de gever geen bevestiging en er is geen webhook: alle betalingen (met naam en e-mail) staan in het Mollie-dashboard.
+De CSP in `public/_headers` staat `form-action` naar `mollie.com` toe; zonder dat blokkeert de browser de doorsturing.
+
+| Variabele | Waar | Doel |
+|---|---|---|
+| `MOLLIE_API_KEY` | secret | API-sleutel van het Mollie-websiteprofiel (Dashboard → Developers → API keys). `test_…` voor testbetalingen, `live_…` voor echt geld |
+| `TURNSTILE_SECRET_KEY`, `TURNSTILE_HOSTNAMES` | | dezelfde als bij het contactformulier |
+
+Lokaal testen: zet `MOLLIE_API_KEY=test_…` in `.dev.vars` en start `npm run cf:dev`. In testmodus kies je op de Mollie-pagina zelf
+de uitkomst (betaald, mislukt, geannuleerd …). Welke betaalmethodes de gever ziet, stel je in het Mollie-dashboard in.
 
 ## Vindbaarheid (SEO)
 

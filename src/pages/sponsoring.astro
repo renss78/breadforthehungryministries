@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import DonateForm from '../components/DonateForm.astro';
 import hero from '../assets/images/2025-09-2.png';
 import qr from '../assets/images/2025-10-qrcode_bread.png';
 import p2 from '../assets/images/2025-11-2.png';
@@ -44,6 +45,17 @@ const projects = [
       'Wij zijn op zoek naar donateurs om dit prachtige werk te kunnen continueren, U kunt bijvoorbeeld een student of potentiële pastor adopteren voor € 35 per maand voor de periode van tien maanden. Daarnaast zoeken wij sponsors voor de jaarlijkse pastorconferentie en de andere projecten. Wordt u één van onze partners die bereid is mee te helpen? Wij staan borg dat elke euro goed wordt besteed!',
       'We are looking for donors to be able to continue this wonderful work. You can, for example, adopt a student or prospective pastor for € 35 per month for a period of ten months. We are also looking for sponsors for the annual pastors’ conference and the other projects. Will you become one of our partners who is willing to help? We guarantee that every euro is spent well!',
     )}</p>
+  </section>
+
+  <section class="container-page pb-12" aria-labelledby="doneren-titel">
+    <div class="mx-auto max-w-4xl rise rounded-[2rem] bg-card p-7 shadow-lift sm:p-10">
+      <h2 id="doneren-titel" class="!mt-0 !text-3xl">{l('Online doneren', 'Donate online')}</h2>
+      <p class="mt-3 mb-8 text-fg-soft">{l(
+        'Geef eenvoudig een eenmalige gift met iDEAL of een andere betaalmethode. Liever zelf overmaken? Gebruik dan de bankgegevens of de QR-code hieronder.',
+        'Make a one-off gift easily with iDEAL or another payment method. Prefer to transfer yourself? Use the bank details or the QR code below.',
+      )}</p>
+      <DonateForm />
+    </div>
   </section>
 
   <section class="container-page pb-16" aria-labelledby="bank">

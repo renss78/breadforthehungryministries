@@ -31,7 +31,8 @@ export default defineConfig({
     sitemap({
       // Nederlands is de hoofdtaal (root); Engels staat onder /en/. Zorgt voor hreflang-koppelingen in de sitemap.
       i18n: { defaultLocale: 'nl', locales: { nl: 'nl-NL', en: 'en-GB' } },
-      filter: (page) => !page.includes('/404'),
+      // 404 en de bedankpagina na een donatie horen niet in de sitemap.
+      filter: (page) => !/\/(404|bedankt|thank-you)\//.test(page),
       serialize: (item) => {
         const lastmod = postDates.get(item.url);
         if (lastmod) item.lastmod = lastmod;
