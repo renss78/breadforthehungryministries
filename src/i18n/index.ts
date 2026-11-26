@@ -55,6 +55,7 @@ export const newsSlugs: Record<string, string> = {
   'gebed-voor-de-zendingsreis-kenia-van-23-november-tot-2-december': 'prayer-for-the-mission-trip-to-kenya-23-november-to-2-december',
   'diploma-uitreiking-op-de-bijbelschool-in-webuye-kenia': 'diploma-ceremony-at-the-bible-school-in-webuye-kenya',
   'voortgang-bouw': 'construction-progress',
+  'naties-in-beweging-update-van-onze-missiereis': 'nations-in-motion-an-update-from-our-mission-trip',
 };
 const newsSlugsEn = Object.fromEntries(Object.entries(newsSlugs).map(([nl, en]) => [en, nl]));
 
